@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "CharacterSO")]
+[CreateAssetMenu(menuName = "ScriptableObject/CharacterSO")]
 public class CharacterSO : ScriptableObject
 {
     [SerializeField] private int characterId;
@@ -8,7 +8,7 @@ public class CharacterSO : ScriptableObject
     [SerializeField] private int baseHp;
     [SerializeField] private int baseDefense;
     [SerializeField] private int baseAttack;
-    [SerializeField] private int attackCoolTime;
+    [SerializeField] private float attackCoolTime;
     [SerializeField] private int speed;
     [SerializeField] private float critRate;
     [SerializeField] private int passiveSkillId;
@@ -19,7 +19,7 @@ public class CharacterSO : ScriptableObject
     public int BaseHp => baseHp;
     public int BaseDefense => baseDefense;
     public int BaseAttack => baseAttack;
-    public int AttackCoolTime => attackCoolTime;
+    public float AttackCoolTime => attackCoolTime;
     public int Speed => speed;
     public float CritRate => critRate;
     public int PassiveSkillId => passiveSkillId;
@@ -33,7 +33,7 @@ public class CharacterSO : ScriptableObject
 //   hp        int         [not null]
 //   defense   int         [not null]
 //   attack    int         [not null]
-//   attack_cool_time int             [not null]
+//   attack_cool_time decimal(5,2)            [not null]
 //   speed int [not null]       // 0–100
 //   crit_rate decimal(5,2) [not null]       // 0–100
 

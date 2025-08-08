@@ -4,8 +4,8 @@ Enum effect_kind {
 }
 
 Enum skill_kind {
-  active
   passive
+  active
 }
 
 Enum item_kind {
@@ -37,7 +37,7 @@ Table Items {
   item_kind item_kimd [not null]
   stat_kind   stat_kind 
   effect_kind effect_kind
-  value          decimal(6,2) [not null]
+  value          int [not null]
   item_skill_id int [ref: > Skill.skill_id]
 }
 

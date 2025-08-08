@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "ItemSO")]
+[CreateAssetMenu(menuName = "ScriptableObject/ItemSO")]
 public class ItemSO : ScriptableObject
 {
     [SerializeField] private int itemId;
@@ -27,6 +27,6 @@ public class ItemSO : ScriptableObject
 //   item_kind item_kimd [not null]
 //   stat_type   tinyint 
 //   effect_kind effect_kind
-//   value          decimal(6,2) [not null]
+//   value          int [not null]
 //   item_skill_id int [ref: > Skill.skill_id]
 // }
