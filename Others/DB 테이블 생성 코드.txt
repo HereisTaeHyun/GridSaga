@@ -1,0 +1,80 @@
+Enum effect_kind {
+  flat
+  percent
+}
+
+Enum skill_kind {
+  active
+  passive
+}
+
+Enum item_kind {
+  consume
+  equip
+}
+
+/* ---------- 기본 엔티티 ---------- */
+
+Table Users {
+  user_id   int         [pk, increment]                     // PK
+  user_name varchar(50) [unique, not null]
+  password  char(95)    [not null]                          // Argon2id hash
+  fatigue int [not null]
+}
+
+Table Items {
+  item_id   int         [pk, increment]
+  item_name varchar(50) [unique, not null]
+  item_kind item_kimd [not null]
+  stat_type   tinyint 
+  effect_kind effect_kind
+  value          decimal(6,2) [not null]
+  item_skill_id int [ref: > Skill.skill_id]
+}
+
+
+/* ---------- N:M 세부 효과 ---------- */
+
+
+Table Skill {
+  skill_id   int         [pk, increment]
+  skill_name varchar(50) [unique, not null]
+  skill_cool_down int [not null]
+  skill_kind skill_kind [not null]
+  description text
+}
+
+/* ---------- 캐릭터 및 보유 관계 ---------- */
+
+Table Character {
+  char_id   int         [pk, increment]
+  char_name varchar(50) [unique, not null]
+  hp        int         [not null]
+  defense   int         [not null]
+  attack    int         [not null]
+  attack_cool_time int             [not null]
+  speed decimal(5,2) [not null]       // 0–100
+  crit_rate decimal(5,2) [not null]       // 0–100
+
+  passive_skill_id int [ref: > Skill.skill_id]
+  active_skill_id  int [ref: > Skill.skill_id]
+}
+
+Table Inventory {
+  inventory_id int  [pk, increment]
+  user_id      int  [not null, ref: > Users.user_id]
+  item_id      int  [not null, ref: > Items.item_id]
+  amount       int
+
+  Indexes { (user_id, item_id) [unique] }
+}
+
+Table User_Character {
+  user_id               int [pk, ref: > Users.user_id]
+  char_id               int [pk, ref: > Character.char_id]
+  level                 int
+  exp                   int
+  equipped_user_item_id int [ref: > Inventory.inventory_id]
+
+  Indexes { (user_id, char_id) [unique] }
+}
