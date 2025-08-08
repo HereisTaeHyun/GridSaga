@@ -9,13 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d61d9a7f2a559447b985c6f0ee9d95e, type: 3}
-  m_Name: ItemTestSO
+  m_Script: {fileID: 11500000, guid: f69224c395a6da54e8851de8bf6f500f, type: 3}
+  m_Name: CharBase
   m_EditorClassIdentifier: 
-  itemId: 0
-  itemName: ItemTest
-  itemKind: 0
-  statKind: 0
-  effectKind: 0
-  value: 10
-  itemSkillId: 0
+  characterId: 0
+  characterName: CharTest
+  baseHp: 100
+  baseDefense: 10
+  baseAttack: 10
+  attackCoolTime: 3
+  speed: 50
+  critRate: 0
+  passiveSkillId: 0
+  activeSkillId: 0

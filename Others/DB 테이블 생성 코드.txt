@@ -62,7 +62,7 @@ Table Character {
   defense   int         [not null]
   attack    int         [not null]
   attack_cool_time int             [not null]
-  speed decimal(5,2) [not null]       // 0–100
+  speed int [not null]       // 0–100
   crit_rate decimal(5,2) [not null]       // 0–100
 
   passive_skill_id int [ref: > Skill.skill_id]
