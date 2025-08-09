@@ -61,7 +61,7 @@ Table Character {
   hp        int         [not null]
   defense   int         [not null]
   attack    int         [not null]
-  attack_cool_time int             [not null]
+  attack_cool_time decimal(5,2)             [not null]
   speed int [not null]       // 0–100
   crit_rate decimal(5,2) [not null]       // 0–100
 
