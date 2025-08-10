@@ -48,7 +48,7 @@ Table Items {
 Table Skill {
   skill_id   int         [pk, increment]
   skill_name varchar(50) [unique, not null]
-  skill_cool_down int [not null]
+  skill_cool_down decimal(5, 2) [not null]
   skill_kind skill_kind [not null]
   description text
 }
