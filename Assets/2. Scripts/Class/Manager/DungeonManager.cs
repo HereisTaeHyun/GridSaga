@@ -6,8 +6,9 @@ public class DungeonManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> currentMonsters;
     public IReadOnlyList<GameObject> CurrentMonsters => currentMonsters;
-    
+
     [SerializeField] private GameObject board;
+    private Queue<CharacterBase> attackQueue = new Queue<CharacterBase>();
 
     // 보스 스테이지인지 아닌지를 GameManager가 체크하게 하여 스테이지 진행인지 보상 수령 및 계층 이동인지 참고 필요
     private bool isBoss;
@@ -33,14 +34,23 @@ public class DungeonManager : MonoBehaviour
     void Start()
     {
         var formation = board.transform.Find("RightFormation");
+        var unitOnStage = new List<CharacterBase>();
 
         for (int i = 0; i < currentMonsters.Count; i++)
         {
             var unit = currentMonsters[i];
             var unitPosition = formation.GetChild(i);
 
-            var instance = Instantiate(unit, unitPosition);
-            instance.transform.SetPositionAndRotation(unitPosition.position, unitPosition.rotation);
+            var instanceUnit = Instantiate(unit, unitPosition);
+            instanceUnit.transform.SetPositionAndRotation(unitPosition.position, unitPosition.rotation);
+            unitOnStage.Add(instanceUnit.GetComponent<CharacterBase>());
+        }
+
+        // speed에 따라 정렬해서 Queue에 넣기
+        unitOnStage.Sort((a, b) => b.CharacterData.Speed.CompareTo(a.CharacterData.Speed));
+        foreach (var elem in unitOnStage)
+        {
+            attackQueue.Enqueue(elem);
         }
     }
 }
