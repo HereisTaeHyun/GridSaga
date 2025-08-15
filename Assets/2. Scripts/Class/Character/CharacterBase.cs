@@ -2,5 +2,6 @@ using UnityEngine;
 
 public class CharacterBase : MonoBehaviour
 {
-    [SerializeField] CharacterSO characterData;
+    [SerializeField] private CharacterSO characterData;
+    public CharacterSO CharacterData => characterData;
 }

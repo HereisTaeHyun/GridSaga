@@ -743,41 +743,43 @@ namespace SmallScaleInc.CharacterCreatorFantasy
 
 
 
-    /// <summary>
-    /// Combines individual spritesheets for each animation into new, composite spritesheets.
-    /// It assumes a folder structure under "Spritesheets" where each gear item has a folder named
-    /// exactly as its stored name (from the UI) and that folder contains the 15 spritesheets.
-    /// The base layer ("NakedBody") is always used (and tinted by skin color).
-    /// The layering order is:
-    ///  0: NakedBody (with skin color), 1: Shoes, 2: Legs, 3: Chest, 4: belt, 5: hands 6: Shield, 7: Weapon, 8: Backpack, 9: Head.
-    /// The resulting combined spritesheets are saved into a new folder so as not to overwrite any originals.
-    /// </summary>
+        /// <summary>
+        /// Combines individual spritesheets for each animation into new, composite spritesheets.
+        /// It assumes a folder structure under "Spritesheets" where each gear item has a folder named
+        /// exactly as its stored name (from the UI) and that folder contains the 15 spritesheets.
+        /// The base layer ("NakedBody") is always used (and tinted by skin color).
+        /// The layering order is:
+        ///  0: NakedBody (with skin color), 1: Shoes, 2: Legs, 3: Chest, 4: belt, 5: hands 6: Shield, 7: Weapon, 8: Backpack, 9: Head.
+        /// The resulting combined spritesheets are saved into a new folder so as not to overwrite any originals.
+        /// </summary>
 
-//Works, DontChange
+        //Works, DontChange
 
-      public void StartCombineSpritesheets()
+        [System.Obsolete]
+        public void StartCombineSpritesheets()
     {
         StartCoroutine(CombineCharacterSpritesheetsCoroutine());
     }
 
-    /// <summary>
-    /// Combines individual spritesheets for each animation into new composite spritesheets.
-    /// Layering order:
-    /// 0: Shadow (tinted by its alpha),
-    /// 1: NakedBody (tinted by skin color; skipped if skinToggle is off),
-    /// 2: Shoes,
-    /// 3: Legs,
-    /// 4: Chest,
-    /// 5: belt,
-    /// 6: hands,
-    /// 7: Shield,
-    /// 8: Weapon,
-    /// 9: Backpack,
-    /// 10: Head.
-    /// 11: Slash.
-    /// 12: Effect.
-    /// </summary>
-private IEnumerator CombineCharacterSpritesheetsCoroutine()
+        /// <summary>
+        /// Combines individual spritesheets for each animation into new composite spritesheets.
+        /// Layering order:
+        /// 0: Shadow (tinted by its alpha),
+        /// 1: NakedBody (tinted by skin color; skipped if skinToggle is off),
+        /// 2: Shoes,
+        /// 3: Legs,
+        /// 4: Chest,
+        /// 5: belt,
+        /// 6: hands,
+        /// 7: Shield,
+        /// 8: Weapon,
+        /// 9: Backpack,
+        /// 10: Head.
+        /// 11: Slash.
+        /// 12: Effect.
+        /// </summary>
+        [System.Obsolete]
+        private IEnumerator CombineCharacterSpritesheetsCoroutine()
 {
     string rootPath = Application.isEditor
     ? Application.dataPath

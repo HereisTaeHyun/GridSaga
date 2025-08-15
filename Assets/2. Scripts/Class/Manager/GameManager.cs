@@ -9,4 +9,20 @@ public class GameManager : MonoBehaviour
     private int currentFloor;
     private bool isMove;
     private bool isAuto;
+
+
+    // 싱글톤 선언
+    public static GameManager gameManager = null;
+    void Awake()
+    {
+        if(gameManager == null)
+        {
+            gameManager = this;
+        }
+        else if(gameManager != this)
+        {
+            Destroy(this.gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject);
+    }
 }

@@ -7,18 +7,45 @@ public class CommandingPlayer : MonoBehaviour
     private string userName;
     [SerializeField] private List<GameObject> party;
     [SerializeField] private GameObject board;
+    private Queue<CharacterBase> attackQueue = new Queue<CharacterBase>();
+
+    
+    // 싱글톤 선언
+    public static CommandingPlayer commandingPlayer = null;
+    void Awake()
+    {
+        if(commandingPlayer == null)
+        {
+            commandingPlayer = this;
+        }
+        else if(commandingPlayer != this)
+        {
+            Destroy(this.gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     void Start()
     {
         var formation = board.transform.Find("LeftFormation");
+        var unitOnStage = new List<CharacterBase>();
 
         for (int i = 0; i < party.Count; i++)
         {
             var unit = party[i];
+
             var unitPosition = formation.GetChild(i);
 
-            var instance = Instantiate(unit, unitPosition);
-            instance.transform.SetPositionAndRotation(unitPosition.position, unitPosition.rotation);
+            var instanceUnit = Instantiate(unit, unitPosition);
+            instanceUnit.transform.SetPositionAndRotation(unitPosition.position, unitPosition.rotation);
+            unitOnStage.Add(instanceUnit.GetComponent<CharacterBase>());
+        }
+
+        // speed에 따라 정렬해서 Queue에 넣기
+        unitOnStage.Sort((a, b) => b.CharacterData.Speed.CompareTo(a.CharacterData.Speed));
+        foreach (var elem in unitOnStage)
+        {
+            attackQueue.Enqueue(elem);
         }
     }
 }
