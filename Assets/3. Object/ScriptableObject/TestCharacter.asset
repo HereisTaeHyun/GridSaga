@@ -15,7 +15,7 @@ MonoBehaviour:
   characterId: 0
   characterName: TestCharacter
   baseHp: 100
-  baseDefense: 0
+  baseDefense: 20
   baseAttack: 10
   baseSpeed: 2
   baseCritRate: 10

@@ -51,6 +51,21 @@ public class CommandingPlayer : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        var mons = DungeonManager.dungeonManager.unitOnStage;
+        if (mons == null || mons.Count == 0)
+            return;
+
+        for (int i = mons.Count - 1; i >= 0; i--)
+            if (mons[i] == null) mons.RemoveAt(i);
+
+        if (mons.Count == 0)
+            return;
+
+        CommandAttack();
+    }
+
     // 공격 타겟 지정 및 공격
     private void CommandAttack()
     {
