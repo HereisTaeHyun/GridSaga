@@ -5,7 +5,10 @@ public class CommandingPlayer : MonoBehaviour
 {
     private int userId;
     private string userName;
-    [SerializeField] private List<GameObject> party;
+
+    [SerializeField] private List<GameObject> partyPrefabs;
+    private List<CharacterBase> unitOnStage = new List<CharacterBase>();
+    
     [SerializeField] private GameObject board;
     private Queue<CharacterBase> attackQueue = new Queue<CharacterBase>();
 
@@ -28,11 +31,10 @@ public class CommandingPlayer : MonoBehaviour
     void Start()
     {
         var formation = board.transform.Find("LeftFormation");
-        var unitOnStage = new List<CharacterBase>();
 
-        for (int i = 0; i < party.Count; i++)
+        for (int i = 0; i < partyPrefabs.Count; i++)
         {
-            var unit = party[i];
+            var unit = partyPrefabs[i];
 
             var unitPosition = formation.GetChild(i);
 
@@ -45,21 +47,21 @@ public class CommandingPlayer : MonoBehaviour
         unitOnStage.Sort((a, b) => b.CurrentSpeed.CompareTo(a.CurrentSpeed));
         foreach (var elem in unitOnStage)
         {
-            Debug.Log(elem.CurrentSpeed);
             attackQueue.Enqueue(elem);
         }
-
-        CommandAttack();
     }
 
+    // 공격 타겟 지정 및 공격
     private void CommandAttack()
     {
+        // 공격자와 타겟 지정
         var attacker = attackQueue.Dequeue();
+        int targetIdx = Random.Range(0, DungeonManager.dungeonManager.unitOnStage.Count);
+        var target = DungeonManager.dungeonManager.unitOnStage[targetIdx].GetComponent<CharacterBase>();
 
-        int targetIdx = Random.Range(0, DungeonManager.dungeonManager.CurrentMonsters.Count);
-        var target = DungeonManager.dungeonManager.CurrentMonsters[targetIdx].GetComponent<CharacterBase>();
-
+        // 공격 실제 적용 후 다시 큐로
         attacker.Attack();
         GameManager.gameManager.ApplyDamage(attacker, target);
+        attackQueue.Enqueue(attacker);
     }
 }

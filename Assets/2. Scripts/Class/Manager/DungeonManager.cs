@@ -4,8 +4,8 @@ using UnityEngine;
 // 현재 스테이지 또는 계층에서 무슨 일이 벌어질지는 정의하는 매니저
 public class DungeonManager : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> currentMonsters;
-    public IReadOnlyList<GameObject> CurrentMonsters => currentMonsters;
+    [SerializeField] private List<GameObject> monsterPrefabs;
+    public List<CharacterBase> unitOnStage = new List<CharacterBase>();
 
     [SerializeField] private GameObject board;
     private Queue<CharacterBase> attackQueue = new Queue<CharacterBase>();
@@ -34,11 +34,11 @@ public class DungeonManager : MonoBehaviour
     void Start()
     {
         var formation = board.transform.Find("RightFormation");
-        var unitOnStage = new List<CharacterBase>();
+        unitOnStage = new List<CharacterBase>();
 
-        for (int i = 0; i < currentMonsters.Count; i++)
+        for (int i = 0; i < monsterPrefabs.Count; i++)
         {
-            var unit = currentMonsters[i];
+            var unit = monsterPrefabs[i];
             var unitPosition = formation.GetChild(i);
 
             var instanceUnit = Instantiate(unit, unitPosition);
@@ -50,7 +50,6 @@ public class DungeonManager : MonoBehaviour
         unitOnStage.Sort((a, b) => b.CurrentSpeed.CompareTo(a.CurrentSpeed));
         foreach (var elem in unitOnStage)
         {
-            // Debug.Log(elem);
             attackQueue.Enqueue(elem);
         }
     }

@@ -30,10 +30,22 @@ public class TestCharacter : CharacterBase
     public override void GetDamage(int damage)
     {
         Debug.Log($"{this.name} Get {damage} damage");
+
+        // 데미지는 음수 불가
+        int safeDamage = Mathf.Max(0, damage);
+
+        // hp 차감 후 0 이하면 사망
+        currentHp -= safeDamage;
+        if (currentHp <= 0)
+        {
+            Die();
+        }
     }
-    
+
     protected override void Die()
     {
         Debug.Log($"{this.name} died");
+        DungeonManager.dungeonManager.unitOnStage.Remove(this);
+        Destroy(gameObject);
     }
 }

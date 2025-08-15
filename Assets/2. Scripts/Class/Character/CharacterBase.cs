@@ -7,11 +7,11 @@ public class CharacterBase : MonoBehaviour
     [SerializeField] protected GameObject ActiveSkill;
     [SerializeField] protected GameObject PassiveSkill;
 
-    private int currentHp;
-    private int currentDefense;
-    private int currentAttack;
-    private int currentSpeed;
-    private float currentCritRate;
+    protected int currentHp;
+    protected int currentDefense;
+    protected int currentAttack;
+    protected int currentSpeed;
+    protected float currentCritRate;
 
     public int CurrentHp => currentHp; 
     public int CurrentDefense => currentDefense; 
