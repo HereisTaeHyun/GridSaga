@@ -17,7 +17,7 @@ MonoBehaviour:
   baseHp: 100
   baseDefense: 0
   baseAttack: 10
-  speed: 2
-  critRate: 0
+  baseSpeed: 2
+  baseCritRate: 10
   passiveSkillId: 0
   activeSkillId: 0

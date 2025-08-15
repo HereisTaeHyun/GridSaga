@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8941254380261884341}
   - component: {fileID: 7507439484789112011}
-  - component: {fileID: 3921444981476613177}
+  - component: {fileID: 142543343111328310}
   m_Layer: 0
   m_Name: TestEnemy_Fast
   m_TagString: Untagged
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3921444981476613177
+--- !u!114 &142543343111328310
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,7 +97,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3145162509506288120}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adcb56dc5e4784b44b77c53b323b8743, type: 3}
+  m_Script: {fileID: 11500000, guid: 3afbfa2ad8ab27f47bc6b9918c98111a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characterData: {fileID: 11400000, guid: cb625768b5a09c6409d06d6a4a70d862, type: 2}
+  ActiveSkill: {fileID: 0}
+  PassiveSkill: {fileID: 0}

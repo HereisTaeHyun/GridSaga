@@ -18,11 +18,11 @@ public class DungeonManager : MonoBehaviour
     public static DungeonManager dungeonManager = null;
     void Awake()
     {
-        if(dungeonManager == null)
+        if (dungeonManager == null)
         {
             dungeonManager = this;
         }
-        else if(dungeonManager != this)
+        else if (dungeonManager != this)
         {
             Destroy(this.gameObject);
         }
@@ -47,9 +47,10 @@ public class DungeonManager : MonoBehaviour
         }
 
         // speed에 따라 정렬해서 Queue에 넣기
-        unitOnStage.Sort((a, b) => b.CharacterData.Speed.CompareTo(a.CharacterData.Speed));
+        unitOnStage.Sort((a, b) => b.CurrentSpeed.CompareTo(a.CurrentSpeed));
         foreach (var elem in unitOnStage)
         {
+            // Debug.Log(elem);
             attackQueue.Enqueue(elem);
         }
     }

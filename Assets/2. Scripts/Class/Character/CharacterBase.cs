@@ -7,12 +7,31 @@ public class CharacterBase : MonoBehaviour
     [SerializeField] protected GameObject ActiveSkill;
     [SerializeField] protected GameObject PassiveSkill;
 
+    private int currentHp;
+    private int currentDefense;
+    private int currentAttack;
+    private int currentSpeed;
+    private float currentCritRate;
+
+    public int CurrentHp => currentHp; 
+    public int CurrentDefense => currentDefense; 
+    public int CurrentAttack => currentAttack; 
+    public int CurrentSpeed => currentSpeed; 
+    public float CurrentCritRate => currentCritRate; 
+
+    // init애서 스턋 배정은 이후 DB 권한으로 이전할 것
+    // 현재 구조는 클라이언트 로컬 개발에서만 이용
     protected virtual void Init()
     {
-
+        currentHp = characterData.BaseHp;
+        currentDefense = characterData.BaseDefense;
+        currentAttack = characterData.BaseAttack;
+        currentSpeed = characterData.BaseSpeed;
+        currentCritRate = characterData.BaseCritRate;
     }
 
-    protected virtual void Attack()
+
+    public virtual void Attack()
     {
 
     }
@@ -27,7 +46,7 @@ public class CharacterBase : MonoBehaviour
         
     }
 
-    protected virtual void GetDamage()
+    public virtual void GetDamage(int damage)
     {
 
     }

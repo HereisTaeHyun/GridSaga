@@ -8,8 +8,8 @@ public class CharacterSO : ScriptableObject
     [SerializeField] private int baseHp;
     [SerializeField] private int baseDefense;
     [SerializeField] private int baseAttack;
-    [SerializeField] private int speed;
-    [SerializeField] private float critRate;
+    [SerializeField] private int baseSpeed;
+    [SerializeField] private float baseCritRate;
     [SerializeField] private int passiveSkillId;
     [SerializeField] private int activeSkillId;
 
@@ -18,8 +18,8 @@ public class CharacterSO : ScriptableObject
     public int BaseHp => baseHp;
     public int BaseDefense => baseDefense;
     public int BaseAttack => baseAttack;
-    public int Speed => speed;
-    public float CritRate => critRate;
+    public int BaseSpeed => baseSpeed;
+    public float BaseCritRate => baseCritRate;
     public int PassiveSkillId => passiveSkillId;
     public int ActiveSkillId => activeSkillId;
 }
