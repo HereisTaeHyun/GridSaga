@@ -103,7 +103,7 @@ public class DungeonManager : MonoBehaviour
         for (int i = 0; i < enemies.Count; i++)
         {
             var enemy = enemies[i].GetComponent<CharacterBase>();
-            if (enemy != attacker && enemy.canTarget)
+            if (enemy != attacker && enemy.CanBeTarget)
             {
                 selected.Add(enemy);
             }

@@ -31,7 +31,7 @@ public class CharacterBase : MonoBehaviour
 
     // 왼쪽 = flase, 오른쪽 = true
     public bool formation;
-    public bool canTarget => characterState != CharacterState.Die && characterState != CharacterState.Attack;
+    public bool CanBeTarget => characterState != CharacterState.Die && characterState != CharacterState.Attack;
 
     // init애서 스턋 배정은 이후 DB 권한으로 이전할 것
     // 현재 구조는 클라이언트 로컬 개발에서만 이용

@@ -87,7 +87,7 @@ public class CommandingPlayer : MonoBehaviour
             yield return new WaitForSeconds(wait);
 
             // 공격 실제 적용 후 다시 큐로
-            StartCoroutine(attacker.Attack(target));
+            yield return StartCoroutine(attacker.Attack(target));
             GameManager.gameManager.ApplyDamage(attacker, target);
             attackQueue.Enqueue(attacker);
         }
@@ -100,11 +100,13 @@ public class CommandingPlayer : MonoBehaviour
         for (int i = 0; i < enemies.Count; i++)
         {
             var enemy = enemies[i].GetComponent<CharacterBase>();
-            if (enemy != attacker && enemy.canTarget)
+            if (enemy != attacker && enemy.CanBeTarget)
             {
                 selected.Add(enemy);
             }
         }
+
+        Debug.Log($"selected.Count : {selected.Count}");
 
         return selected[Random.Range(0, selected.Count)];
     }

@@ -15,8 +15,6 @@ public class TestCharacter : CharacterBase
 
     public override IEnumerator Attack(CharacterBase target)
     {
-        Debug.Log($"{this.name} attack");
-
         characterState = CharacterState.Attack;
         var originPos = transform.position;
 
@@ -31,7 +29,7 @@ public class TestCharacter : CharacterBase
         // 공격 모션 만큼의 시간이 지나면 원래 위치로
         yield return new WaitForSeconds(0.5f);
         transform.position = originPos;
-        characterState = CharacterState.Attack;
+        characterState = CharacterState.Idle;
     }
 
     protected override void UseActiveSkill()
@@ -46,8 +44,6 @@ public class TestCharacter : CharacterBase
 
     public override void GetDamage(int damage)
     {
-        Debug.Log($"{this.name} Get {damage} damage");
-
         // 데미지는 음수 불가
         int safeDamage = Mathf.Max(0, damage);
 
@@ -61,7 +57,6 @@ public class TestCharacter : CharacterBase
 
     protected override void Die()
     {
-        Debug.Log($"{this.name} died");
         characterState = CharacterState.Die;
         Destroy(gameObject);
     }
