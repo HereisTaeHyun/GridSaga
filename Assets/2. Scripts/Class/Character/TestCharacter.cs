@@ -19,9 +19,12 @@ public class TestCharacter : CharacterBase
 
         var originPos = transform.position;
 
+        float gap = 1.0f;
+        float dir = formation ? +1.0f : -1.0f;
+
         // 상대의 바로 앞으로 이동
-        var targetPos = target.transform.position;
-        var moveToPos = new Vector2(targetPos.x - 1.0f, targetPos.y);
+        var targetPos = (Vector2)target.transform.position;
+        var moveToPos = targetPos + new Vector2(dir * gap, 0f);
         transform.position = moveToPos;
 
         // 공격 모션 만큼의 시간이 지나면 원래 위치로

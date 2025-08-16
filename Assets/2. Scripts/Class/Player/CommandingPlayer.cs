@@ -8,13 +8,13 @@ public class CommandingPlayer : MonoBehaviour
     private string userName;
 
     [SerializeField] private List<GameObject> partyPrefabs;
-    private List<CharacterBase> unitOnStage = new List<CharacterBase>();
+    public List<CharacterBase> unitOnStage = new List<CharacterBase>();
 
     [SerializeField] private GameObject board;
     private Queue<CharacterBase> attackQueue = new Queue<CharacterBase>();
     private bool isBattle;
 
-    // 아군 공격 속도 제어
+    // 공격 속도 제어
     // 스피드 1 = 0.25초의 딜레이 경감을 가짐
     private float delayBySpeed = 0.25f;
     private float minDelay = 0.25f;
@@ -56,6 +56,7 @@ public class CommandingPlayer : MonoBehaviour
         unitOnStage.Sort((a, b) => b.CurrentSpeed.CompareTo(a.CurrentSpeed));
         foreach (var elem in unitOnStage)
         {
+            elem.formation = false;
             attackQueue.Enqueue(elem);
         }
     }
@@ -84,7 +85,7 @@ public class CommandingPlayer : MonoBehaviour
             // 스피드에 따른 딜레이 지정
             float wait = GetDelay(attacker.CurrentSpeed);
             yield return new WaitForSeconds(wait);
-            
+
             // 공격 실제 적용 후 다시 큐로
             StartCoroutine(attacker.Attack(target));
             GameManager.gameManager.ApplyDamage(attacker, target);

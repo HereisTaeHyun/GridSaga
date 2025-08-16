@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,14 @@ public class DungeonManager : MonoBehaviour
 
     [SerializeField] private GameObject board;
     private Queue<CharacterBase> attackQueue = new Queue<CharacterBase>();
+
+    private bool isBattle;
+
+    // 공격 속도 제어
+    // 스피드 1 = 0.25초의 딜레이 경감을 가짐
+    private float delayBySpeed = 0.25f;
+    private float minDelay = 0.25f;
+    private float maxDelay = 2.5f;
 
     // 보스 스테이지인지 아닌지를 GameManager가 체크하게 하여 스테이지 진행인지 보상 수령 및 계층 이동인지 참고 필요
     private bool isBoss;
@@ -50,7 +59,47 @@ public class DungeonManager : MonoBehaviour
         unitOnStage.Sort((a, b) => b.CurrentSpeed.CompareTo(a.CurrentSpeed));
         foreach (var elem in unitOnStage)
         {
+            elem.formation = true;
             attackQueue.Enqueue(elem);
         }
     }
+
+    // void Start()
+    // {
+    //     isBattle = true;
+    //     StartCoroutine(Battle());
+    // }
+
+    // private IEnumerator Battle()
+    // {
+    //     while (isBattle)
+    //     {
+    //         var enemies = CommandingPlayer.commandingPlayer.unitOnStage;
+    //         if (enemies == null || enemies.Count == 0)
+    //         {
+    //             isBattle = false;
+    //         }
+
+    //         // 공격자와 타겟 지정
+    //         var attacker = attackQueue.Dequeue();
+    //         int targetIdx = Random.Range(0, CommandingPlayer.commandingPlayer.unitOnStage.Count);
+    //         var target = CommandingPlayer.commandingPlayer.unitOnStage[targetIdx].GetComponent<CharacterBase>();
+
+    //         // 스피드에 따른 딜레이 지정
+    //         float wait = GetDelay(attacker.CurrentSpeed);
+    //         yield return new WaitForSeconds(wait);
+
+    //         // 공격 실제 적용 후 다시 큐로
+    //         StartCoroutine(attacker.Attack(target));
+    //         GameManager.gameManager.ApplyDamage(attacker, target);
+    //         attackQueue.Enqueue(attacker);
+    //     }
+    // }
+
+    // private float GetDelay(int speed)
+    // {
+    //     speed = Mathf.Max(0, speed);
+    //     float delay = maxDelay - (speed * delayBySpeed);
+    //     return Mathf.Max(minDelay, delay);
+    // }
 }
