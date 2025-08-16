@@ -10,8 +10,8 @@ public class CharacterBase : MonoBehaviour
     private enum CharacterState
     {
         Idle,
+        Move,
         Attack,
-        UseMagic,
     }
     protected int currentHp;
     protected int currentDefense;
