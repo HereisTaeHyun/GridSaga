@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class CharacterBase : MonoBehaviour
@@ -37,14 +38,21 @@ public class CharacterBase : MonoBehaviour
     }
 
 
-    public virtual void Attack()
-    {
+    // public virtual void Attack(CharacterBase target)
+    // {
 
+    // }
+
+    public virtual IEnumerator Attack(CharacterBase target)
+    {
+        Debug.Log("Base attack start");
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("Base attack end");
     }
 
     protected virtual void UseActiveSkill()
     {
-        
+
     }
 
     protected virtual void UsePassiveSkill()

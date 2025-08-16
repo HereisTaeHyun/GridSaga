@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class TestCharacter : CharacterBase
@@ -12,9 +13,20 @@ public class TestCharacter : CharacterBase
         Init();
     }
 
-    public override void Attack()
+    public override IEnumerator Attack(CharacterBase target)
     {
         Debug.Log($"{this.name} attack");
+
+        var originPos = transform.position;
+
+        // 상대의 바로 앞으로 이동
+        var targetPos = target.transform.position;
+        var moveToPos = new Vector2(targetPos.x - 1.0f, targetPos.y);
+        transform.position = moveToPos;
+
+        // 공격 모션 만큼의 시간이 지나면 원래 위치로
+        yield return new WaitForSeconds(0.5f);
+        transform.position = originPos;
     }
 
     protected override void UseActiveSkill()

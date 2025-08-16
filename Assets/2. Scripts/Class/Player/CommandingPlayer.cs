@@ -84,9 +84,9 @@ public class CommandingPlayer : MonoBehaviour
             // 스피드에 따른 딜레이 지정
             float wait = GetDelay(attacker.CurrentSpeed);
             yield return new WaitForSeconds(wait);
-
+            
             // 공격 실제 적용 후 다시 큐로
-            attacker.Attack();
+            StartCoroutine(attacker.Attack(target));
             GameManager.gameManager.ApplyDamage(attacker, target);
             attackQueue.Enqueue(attacker);
         }
