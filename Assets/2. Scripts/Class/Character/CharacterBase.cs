@@ -13,7 +13,10 @@ public class CharacterBase : MonoBehaviour
         Idle,
         Move,
         Attack,
+        Die,
     }
+
+    protected CharacterState characterState;
     protected int currentHp;
     protected int currentDefense;
     protected int currentAttack;
@@ -28,6 +31,7 @@ public class CharacterBase : MonoBehaviour
 
     // 왼쪽 = flase, 오른쪽 = true
     public bool formation;
+    public bool canTarget => characterState != CharacterState.Die && characterState != CharacterState.Attack;
 
     // init애서 스턋 배정은 이후 DB 권한으로 이전할 것
     // 현재 구조는 클라이언트 로컬 개발에서만 이용
@@ -38,19 +42,18 @@ public class CharacterBase : MonoBehaviour
         currentAttack = characterData.BaseAttack;
         currentSpeed = characterData.BaseSpeed;
         currentCritRate = characterData.BaseCritRate;
+
+        characterState = CharacterState.Idle;
     }
 
-
-    // public virtual void Attack(CharacterBase target)
-    // {
-
-    // }
 
     public virtual IEnumerator Attack(CharacterBase target)
     {
         Debug.Log("Base attack start");
+        characterState = CharacterState.Attack;
         yield return new WaitForSeconds(0.5f);
         Debug.Log("Base attack end");
+        characterState = CharacterState.Idle;
     }
 
     protected virtual void UseActiveSkill()
@@ -70,6 +73,6 @@ public class CharacterBase : MonoBehaviour
     
     protected virtual void Die()
     {
-        
+        characterState = CharacterState.Die;
     }
 }

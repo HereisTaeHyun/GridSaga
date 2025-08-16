@@ -75,12 +75,12 @@ public class CommandingPlayer : MonoBehaviour
             if (enemies == null || enemies.Count == 0)
             {
                 isBattle = false;
+                break;
             }
 
             // 공격자와 타겟 지정
             var attacker = attackQueue.Dequeue();
-            int targetIdx = Random.Range(0, DungeonManager.dungeonManager.unitOnStage.Count);
-            var target = DungeonManager.dungeonManager.unitOnStage[targetIdx].GetComponent<CharacterBase>();
+            var target = SetTarget(enemies, attacker);
 
             // 스피드에 따른 딜레이 지정
             float wait = GetDelay(attacker.CurrentSpeed);
@@ -91,6 +91,22 @@ public class CommandingPlayer : MonoBehaviour
             GameManager.gameManager.ApplyDamage(attacker, target);
             attackQueue.Enqueue(attacker);
         }
+    }
+
+    private CharacterBase SetTarget(List<CharacterBase> enemies, CharacterBase attacker)
+    {
+        var selected = new List<CharacterBase>();
+
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            var enemy = enemies[i].GetComponent<CharacterBase>();
+            if (enemy != attacker && enemy.canTarget)
+            {
+                selected.Add(enemy);
+            }
+        }
+
+        return selected[Random.Range(0, selected.Count)];
     }
 
     private float GetDelay(int speed)

@@ -64,42 +64,58 @@ public class DungeonManager : MonoBehaviour
         }
     }
 
-    // void Start()
-    // {
-    //     isBattle = true;
-    //     StartCoroutine(Battle());
-    // }
+    void Start()
+    {
+        isBattle = true;
+        StartCoroutine(Battle());
+    }
 
-    // private IEnumerator Battle()
-    // {
-    //     while (isBattle)
-    //     {
-    //         var enemies = CommandingPlayer.commandingPlayer.unitOnStage;
-    //         if (enemies == null || enemies.Count == 0)
-    //         {
-    //             isBattle = false;
-    //         }
+    private IEnumerator Battle()
+    {
+        while (isBattle)
+        {
+            var enemies = CommandingPlayer.commandingPlayer.unitOnStage;
+            if (enemies == null || enemies.Count == 0)
+            {
+                isBattle = false;
+                break;
+            }
 
-    //         // 공격자와 타겟 지정
-    //         var attacker = attackQueue.Dequeue();
-    //         int targetIdx = Random.Range(0, CommandingPlayer.commandingPlayer.unitOnStage.Count);
-    //         var target = CommandingPlayer.commandingPlayer.unitOnStage[targetIdx].GetComponent<CharacterBase>();
+            // 공격자와 타겟 지정
+            var attacker = attackQueue.Dequeue();
+            var target = SetTarget(enemies, attacker);
 
-    //         // 스피드에 따른 딜레이 지정
-    //         float wait = GetDelay(attacker.CurrentSpeed);
-    //         yield return new WaitForSeconds(wait);
+            // 스피드에 따른 딜레이 지정
+            float wait = GetDelay(attacker.CurrentSpeed);
+            yield return new WaitForSeconds(wait);
 
-    //         // 공격 실제 적용 후 다시 큐로
-    //         StartCoroutine(attacker.Attack(target));
-    //         GameManager.gameManager.ApplyDamage(attacker, target);
-    //         attackQueue.Enqueue(attacker);
-    //     }
-    // }
+            // 공격 실제 적용 후 다시 큐로
+            StartCoroutine(attacker.Attack(target));
+            GameManager.gameManager.ApplyDamage(attacker, target);
+            attackQueue.Enqueue(attacker);
+        }
+    }
 
-    // private float GetDelay(int speed)
-    // {
-    //     speed = Mathf.Max(0, speed);
-    //     float delay = maxDelay - (speed * delayBySpeed);
-    //     return Mathf.Max(minDelay, delay);
-    // }
+    private CharacterBase SetTarget(List<CharacterBase> enemies, CharacterBase attacker)
+    {
+        var selected = new List<CharacterBase>();
+
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            var enemy = enemies[i].GetComponent<CharacterBase>();
+            if (enemy != attacker && enemy.canTarget)
+            {
+                selected.Add(enemy);
+            }
+        }
+
+        return selected[Random.Range(0, selected.Count)];
+    }
+
+    private float GetDelay(int speed)
+    {
+        speed = Mathf.Max(0, speed);
+        float delay = maxDelay - (speed * delayBySpeed);
+        return Mathf.Max(minDelay, delay);
+    }
 }

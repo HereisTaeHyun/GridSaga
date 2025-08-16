@@ -17,6 +17,7 @@ public class TestCharacter : CharacterBase
     {
         Debug.Log($"{this.name} attack");
 
+        characterState = CharacterState.Attack;
         var originPos = transform.position;
 
         float gap = 1.0f;
@@ -30,6 +31,7 @@ public class TestCharacter : CharacterBase
         // 공격 모션 만큼의 시간이 지나면 원래 위치로
         yield return new WaitForSeconds(0.5f);
         transform.position = originPos;
+        characterState = CharacterState.Attack;
     }
 
     protected override void UseActiveSkill()
@@ -60,7 +62,7 @@ public class TestCharacter : CharacterBase
     protected override void Die()
     {
         Debug.Log($"{this.name} died");
-        DungeonManager.dungeonManager.unitOnStage.Remove(this);
+        characterState = CharacterState.Die;
         Destroy(gameObject);
     }
 }
