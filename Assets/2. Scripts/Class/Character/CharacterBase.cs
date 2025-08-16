@@ -7,6 +7,12 @@ public class CharacterBase : MonoBehaviour
     [SerializeField] protected GameObject ActiveSkill;
     [SerializeField] protected GameObject PassiveSkill;
 
+    private enum CharacterState
+    {
+        Idle,
+        Attack,
+        UseMagic,
+    }
     protected int currentHp;
     protected int currentDefense;
     protected int currentAttack;

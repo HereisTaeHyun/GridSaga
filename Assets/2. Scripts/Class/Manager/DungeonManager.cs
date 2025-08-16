@@ -29,9 +29,9 @@ public class DungeonManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    // 테스트용으로 Start에 뒀지만 이후 GameManager에서 StageChange 등 이벤트 트리거로 몬스터 배치 예정
+    // 테스트용으로 Enable, Start에 뒀지만 이후 GameManager에서 StageChange 등 이벤트 트리거로 몬스터 배치 예정
     // 방식도 즉시 생성 대신 미리 씬에 배치되어 있거나 걸어 오는 등의 방식으로 자연스럽게 스폰시킬 것
-    void Start()
+    void OnEnable()
     {
         var formation = board.transform.Find("RightFormation");
         unitOnStage = new List<CharacterBase>();
