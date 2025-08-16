@@ -92,35 +92,6 @@ public class CommandingPlayer : MonoBehaviour
         }
     }
 
-    // private void FixedUpdate()
-    // {
-    //     var mons = DungeonManager.dungeonManager.unitOnStage;
-    //     if (mons == null || mons.Count == 0)
-    //         return;
-
-    //     for (int i = mons.Count - 1; i >= 0; i--)
-    //         if (mons[i] == null) mons.RemoveAt(i);
-
-    //     if (mons.Count == 0)
-    //         return;
-
-    //     CommandAttack();
-    // }
-
-    // 공격 타겟 지정 및 공격
-    private void CommandAttack()
-    {
-        // 공격자와 타겟 지정
-        var attacker = attackQueue.Dequeue();
-        int targetIdx = Random.Range(0, DungeonManager.dungeonManager.unitOnStage.Count);
-        var target = DungeonManager.dungeonManager.unitOnStage[targetIdx].GetComponent<CharacterBase>();
-
-        // 공격 실제 적용 후 다시 큐로
-        attacker.Attack();
-        GameManager.gameManager.ApplyDamage(attacker, target);
-        attackQueue.Enqueue(attacker);
-    }
-
     private float GetDelay(int speed)
     {
         speed = Mathf.Max(0, speed);
