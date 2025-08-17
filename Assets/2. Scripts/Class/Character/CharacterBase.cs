@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -30,11 +31,12 @@ public class CharacterBase : MonoBehaviour
     public float CurrentCritRate => currentCritRate;
 
     // 왼쪽 = flase, 오른쪽 = true
-    public bool formation;
-    public bool CanAttack => characterState == CharacterState.Idle;
-    public bool CanBeTarget => characterState != CharacterState.Die && characterState != CharacterState.Attack;
+    [NonSerialized] public bool formation;
+    public bool IsAlive => currentHp > 0 && characterState != CharacterState.Die && gameObject.activeInHierarchy;
+    public virtual bool CanAttack => IsAlive && characterState == CharacterState.Idle;
+    public virtual bool CanBeTarget => IsAlive;
 
-    // init애서 스턋 배정은 이후 DB 권한으로 이전할 것
+    // init애서 스탯 배정은 이후 DB 권한으로 이전할 것
     // 현재 구조는 클라이언트 로컬 개발에서만 이용
     protected virtual void Init()
     {

@@ -76,42 +76,52 @@ public class DungeonManager : MonoBehaviour
     {
         while (isBattle)
         {
-            List<CharacterBase> enemies = CommandingPlayer.commandingPlayer.unitOnStage;
-            if (enemies == null || enemies.Count == 0)
+            var enemies = CommandingPlayer.commandingPlayer.unitOnStage;
+            if (enemies == null || enemies.Count == 0) { isBattle = false; break; }
+
+            // 공격자 설정
+            CharacterBase attacker = null;
+            while (attackQueue.Count > 0)
+            {
+                var candidate = attackQueue.Dequeue();
+                if (candidate != null && candidate.CanAttack)
+                {
+                    attacker = candidate;
+                    break;
+                }
+            }
+
+            if (attacker == null)
             {
                 isBattle = false;
                 break;
             }
 
-            // 공격자 지정
-            CharacterBase attacker = null;
-            while (attackQueue.Count > 0)
-            {
-                CharacterBase selectedAttacker = attackQueue.Dequeue();
-                if (selectedAttacker != null && selectedAttacker.CanAttack)
-                {
-                    attacker = selectedAttacker;
-                    break;
-                }
-                // 죽은 후보는 그냥 버림(재등록 X)
-            }
-
-            // 타겟 지정
+            // 타겟 선정
             CharacterBase target = SetTarget(enemies, attacker);
-            // null이 리턴되면 배틀 종료
             if (target == null)
             {
+                Debug.Log("BattleEnd");
                 break;
             }
 
-            // 스피드에 따른 딜레이 지정
             float wait = GetDelay(attacker.CurrentSpeed);
             yield return new WaitForSeconds(wait);
 
-            // 공격 실제 적용 후 다시 큐로
-            yield return StartCoroutine(attacker.Attack(target));
-            GameManager.gameManager.ApplyDamage(attacker, target);
-            attackQueue.Enqueue(attacker);
+            // 사망한 경우 체크
+            if (!attacker.IsAlive) continue;
+            if (!target.IsAlive) continue;
+
+            // 공격 및 데미지 적용
+            yield return attacker.StartCoroutine(attacker.Attack(target));
+            if (attacker.IsAlive && target.IsAlive)
+            {
+                GameManager.gameManager.ApplyDamage(attacker, target);
+            }
+            if (attacker.IsAlive && attacker.CanAttack)
+            {
+                attackQueue.Enqueue(attacker);
+            }
         }
     }
 
@@ -128,14 +138,12 @@ public class DungeonManager : MonoBehaviour
                 selected.Add(enemy);
             }
         }
-        Debug.Log($"Selected Count : {selected.Count}");
         if (selected.Count != 0)
         {
             return selected[Random.Range(0, selected.Count)];
         }
         else
         {
-            Debug.Log("BattleEnd");
             return null;
         }
     }

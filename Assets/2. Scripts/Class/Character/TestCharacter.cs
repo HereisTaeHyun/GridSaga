@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TestCharacter : CharacterBase
@@ -15,6 +16,11 @@ public class TestCharacter : CharacterBase
 
     public override IEnumerator Attack(CharacterBase target)
     {
+        if (characterState == CharacterState.Die)
+        {
+            yield break;
+        }
+
         characterState = CharacterState.Attack;
         var originPos = transform.position;
 
@@ -22,7 +28,6 @@ public class TestCharacter : CharacterBase
         float dir = formation ? +1.0f : -1.0f;
 
         // 상대의 바로 앞으로 이동
-        Debug.Log(target);
         var targetPos = (Vector2)target.transform.position;
         var moveToPos = targetPos + new Vector2(dir * gap, 0f);
         transform.position = moveToPos;
@@ -58,6 +63,7 @@ public class TestCharacter : CharacterBase
 
     protected override void Die()
     {
+        StopAllCoroutines();
         characterState = CharacterState.Die;
         gameObject.SetActive(false);
     }
