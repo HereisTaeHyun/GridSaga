@@ -34,7 +34,7 @@ public class CharacterBase : MonoBehaviour
     [NonSerialized] public bool formation;
     public bool IsAlive => currentHp > 0 && characterState != CharacterState.Die && gameObject.activeInHierarchy;
     public virtual bool CanAttack => IsAlive && characterState == CharacterState.Idle;
-    public virtual bool CanBeTarget => IsAlive;
+    public virtual bool CanBeTarget => IsAlive && characterState != CharacterState.Attack;
 
     // init애서 스탯 배정은 이후 DB 권한으로 이전할 것
     // 현재 구조는 클라이언트 로컬 개발에서만 이용
