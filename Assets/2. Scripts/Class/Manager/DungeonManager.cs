@@ -70,32 +70,52 @@ public class DungeonManager : MonoBehaviour
         StartCoroutine(Battle());
     }
 
+    // 스테이지 시작 시 전투 시작 코루틴
+    // 스테이지 시작 시 전투 시작 코루틴
     private IEnumerator Battle()
     {
         while (isBattle)
         {
-            var enemies = CommandingPlayer.commandingPlayer.unitOnStage;
+            List<CharacterBase> enemies = CommandingPlayer.commandingPlayer.unitOnStage;
             if (enemies == null || enemies.Count == 0)
             {
                 isBattle = false;
                 break;
             }
 
-            // 공격자와 타겟 지정
-            var attacker = attackQueue.Dequeue();
-            var target = SetTarget(enemies, attacker);
+            // 공격자 지정
+            CharacterBase attacker = null;
+            while (attackQueue.Count > 0)
+            {
+                CharacterBase selectedAttacker = attackQueue.Dequeue();
+                if (selectedAttacker != null && selectedAttacker.CanAttack)
+                {
+                    attacker = selectedAttacker;
+                    break;
+                }
+                // 죽은 후보는 그냥 버림(재등록 X)
+            }
+
+            // 타겟 지정
+            CharacterBase target = SetTarget(enemies, attacker);
+            // null이 리턴되면 배틀 종료
+            if (target == null)
+            {
+                break;
+            }
 
             // 스피드에 따른 딜레이 지정
             float wait = GetDelay(attacker.CurrentSpeed);
             yield return new WaitForSeconds(wait);
 
             // 공격 실제 적용 후 다시 큐로
-            StartCoroutine(attacker.Attack(target));
+            yield return StartCoroutine(attacker.Attack(target));
             GameManager.gameManager.ApplyDamage(attacker, target);
             attackQueue.Enqueue(attacker);
         }
     }
 
+    // 적 중 타겟 지정
     private CharacterBase SetTarget(List<CharacterBase> enemies, CharacterBase attacker)
     {
         var selected = new List<CharacterBase>();
@@ -108,8 +128,16 @@ public class DungeonManager : MonoBehaviour
                 selected.Add(enemy);
             }
         }
-
-        return selected[Random.Range(0, selected.Count)];
+        Debug.Log($"Selected Count : {selected.Count}");
+        if (selected.Count != 0)
+        {
+            return selected[Random.Range(0, selected.Count)];
+        }
+        else
+        {
+            Debug.Log("BattleEnd");
+            return null;
+        }
     }
 
     private float GetDelay(int speed)

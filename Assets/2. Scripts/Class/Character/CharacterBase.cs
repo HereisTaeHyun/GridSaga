@@ -16,7 +16,7 @@ public class CharacterBase : MonoBehaviour
         Die,
     }
 
-    protected CharacterState characterState;
+    public CharacterState characterState;
     protected int currentHp;
     protected int currentDefense;
     protected int currentAttack;
@@ -31,6 +31,7 @@ public class CharacterBase : MonoBehaviour
 
     // 왼쪽 = flase, 오른쪽 = true
     public bool formation;
+    public bool CanAttack => characterState == CharacterState.Idle;
     public bool CanBeTarget => characterState != CharacterState.Die && characterState != CharacterState.Attack;
 
     // init애서 스턋 배정은 이후 DB 권한으로 이전할 것

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterId: 0
   characterName: TestCharacter
-  baseHp: 100
+  baseHp: 20
   baseDefense: 20
   baseAttack: 10
   baseSpeed: 2

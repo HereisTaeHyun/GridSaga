@@ -67,20 +67,38 @@ public class CommandingPlayer : MonoBehaviour
         StartCoroutine(Battle());
     }
 
+    // 스테이지 시작 시 전투 시작 코루틴
     private IEnumerator Battle()
     {
         while (isBattle)
         {
-            var enemies = DungeonManager.dungeonManager.unitOnStage;
+            List<CharacterBase> enemies = DungeonManager.dungeonManager.unitOnStage;
             if (enemies == null || enemies.Count == 0)
             {
                 isBattle = false;
                 break;
             }
 
-            // 공격자와 타겟 지정
-            var attacker = attackQueue.Dequeue();
-            var target = SetTarget(enemies, attacker);
+            // 공격자 지정
+            CharacterBase attacker = null;
+            while (attackQueue.Count > 0)
+            {
+                CharacterBase selectedAttacker = attackQueue.Dequeue();
+                if (selectedAttacker != null && selectedAttacker.CanAttack)
+                {
+                    attacker = selectedAttacker;
+                    break;
+                }
+                // 죽은 후보는 그냥 버림(재등록 X)
+            }
+
+            // 타겟 지정
+            CharacterBase target = SetTarget(enemies, attacker);
+            // null이 리턴되면 배틀 종료
+            if (target == null)
+            {
+                break;
+            }
 
             // 스피드에 따른 딜레이 지정
             float wait = GetDelay(attacker.CurrentSpeed);
@@ -93,24 +111,31 @@ public class CommandingPlayer : MonoBehaviour
         }
     }
 
+    // 적 중 타겟 지정
     private CharacterBase SetTarget(List<CharacterBase> enemies, CharacterBase attacker)
     {
-        var selected = new List<CharacterBase>();
+        var selectedTarget = new List<CharacterBase>();
 
         for (int i = 0; i < enemies.Count; i++)
         {
             var enemy = enemies[i].GetComponent<CharacterBase>();
             if (enemy != attacker && enemy.CanBeTarget)
             {
-                selected.Add(enemy);
+                selectedTarget.Add(enemy);
             }
         }
-
-        Debug.Log($"selected.Count : {selected.Count}");
-
-        return selected[Random.Range(0, selected.Count)];
+        if (selectedTarget.Count != 0)
+        {
+            return selectedTarget[Random.Range(0, selectedTarget.Count)];
+        }
+        else
+        {
+            Debug.Log("BattleEnd");
+            return null;
+        }
     }
 
+    // 스피드에 따른 딜레이 처리
     private float GetDelay(int speed)
     {
         speed = Mathf.Max(0, speed);
