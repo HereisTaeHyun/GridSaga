@@ -1,11 +1,21 @@
-using UnityEngine;
-using System.Collections.Generic;
 using System.Collections;
-
-public class CommandingPlayer : MonoBehaviour
+using System.Collections.Generic;
+using UnityEngine;
+public enum FactionId
 {
+    A,
+    B,
+}
+public class Faction : MonoBehaviour
+{
+    // 유저 id 이후 DB를 통해 배치할 것
     private int userId;
     private string userName;
+
+    // 현재 스테이지 상에서의 faction 일반적으로 pve 상에서는 왼쪽이 플레이어
+    [SerializeField] private FactionId factionId;
+    public FactionId FactionId => factionId;
+    private Faction enemyFaction;
 
     [SerializeField] private List<GameObject> partyPrefabs;
     public List<CharacterBase> unitOnStage = new List<CharacterBase>();
@@ -20,43 +30,54 @@ public class CommandingPlayer : MonoBehaviour
     private float minDelay = 0.25f;
     private float maxDelay = 2.5f;
 
-
-    // 싱글톤 선언
-    public static CommandingPlayer commandingPlayer = null;
-    void Awake()
-    {
-        if (commandingPlayer == null)
-        {
-            commandingPlayer = this;
-        }
-        else if (commandingPlayer != this)
-        {
-            Destroy(this.gameObject);
-        }
-        DontDestroyOnLoad(this.gameObject);
-    }
-
     // 테스트 용으로 OnEnable, Start 등에 뒀지만 이후 StageChange 등으로 분기할 것
     void OnEnable()
     {
-        var formation = board.transform.Find("LeftFormation");
+        // Faction 선택
+        var factions = GameObject.FindGameObjectsWithTag("Faction");
+        foreach (var elem in factions)
+        {
+            var selected = elem.GetComponent<Faction>();
+            if (selected.FactionId != this.factionId)
+            {
+                enemyFaction = selected;       
+            }
+        }
+
+        // 유닛 위치 설정 및 스폰
+        Transform formation = null;
+        if (factionId == FactionId.A)
+        {
+            formation = board.transform.Find("LeftFormation");
+        }
+        else
+        {
+            formation = board.transform.Find("RightFormation");
+        }
 
         for (int i = 0; i < partyPrefabs.Count; i++)
-        {
-            var unit = partyPrefabs[i];
+            {
+                var unit = partyPrefabs[i];
 
-            var unitPosition = formation.GetChild(i);
+                var unitPosition = formation.GetChild(i);
 
-            var instanceUnit = Instantiate(unit, unitPosition);
-            instanceUnit.transform.SetPositionAndRotation(unitPosition.position, unitPosition.rotation);
-            unitOnStage.Add(instanceUnit.GetComponent<CharacterBase>());
-        }
+                var instanceUnit = Instantiate(unit, unitPosition);
+                instanceUnit.transform.SetPositionAndRotation(unitPosition.position, unitPosition.rotation);
+                unitOnStage.Add(instanceUnit.GetComponent<CharacterBase>());
+            }
 
         // speed에 따라 정렬해서 Queue에 넣기
         unitOnStage.Sort((a, b) => b.CurrentSpeed.CompareTo(a.CurrentSpeed));
         foreach (var elem in unitOnStage)
         {
-            elem.formation = false;
+            if (factionId == FactionId.A)
+            {
+                elem.formation = false;
+            }
+            else
+            {
+                elem.formation = true;
+            }
             attackQueue.Enqueue(elem);
         }
     }
@@ -72,7 +93,7 @@ public class CommandingPlayer : MonoBehaviour
     {
         while (isBattle)
         {
-            var enemies = DungeonManager.dungeonManager.unitOnStage;
+            var enemies = enemyFaction.unitOnStage;
             if (enemies == null || enemies.Count == 0) { isBattle = false; break; }
 
             // 공격자 설정
