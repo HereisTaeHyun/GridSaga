@@ -78,6 +78,7 @@ public class Faction : MonoBehaviour
             {
                 elem.formation = true;
             }
+            elem.SetFormation(factionId != FactionId.A);
             attackQueue.Enqueue(elem);
         }
     }

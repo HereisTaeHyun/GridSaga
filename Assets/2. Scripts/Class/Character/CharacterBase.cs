@@ -24,11 +24,21 @@ public class CharacterBase : MonoBehaviour
     protected int currentSpeed;
     protected float currentCritRate;
 
-    public int CurrentHp => currentHp; 
-    public int CurrentDefense => currentDefense; 
-    public int CurrentAttack => currentAttack; 
-    public int CurrentSpeed => currentSpeed; 
+    public int CurrentHp => currentHp;
+    public int CurrentDefense => currentDefense;
+    public int CurrentAttack => currentAttack;
+    public int CurrentSpeed => currentSpeed;
     public float CurrentCritRate => currentCritRate;
+
+    protected Animator anim;
+    protected readonly int factionHash = Animator.StringToHash("Faction");
+    protected readonly int moveHash = Animator.StringToHash("Move");
+    protected readonly int attackHash = Animator.StringToHash("Attack");
+    protected readonly int usePassiveSkillHash = Animator.StringToHash("UsePassiveSkill");
+    protected readonly int useActiveSkillHash = Animator.StringToHash("UseActiveSkill");
+    protected readonly int dieHash = Animator.StringToHash("Die");
+    protected readonly int isBuffHash = Animator.StringToHash("IsBuff");
+    protected readonly int takeDamageHash = Animator.StringToHash("TakeDamage");
 
     // 왼쪽 = flase, 오른쪽 = true
     [NonSerialized] public bool formation;
@@ -47,6 +57,8 @@ public class CharacterBase : MonoBehaviour
         currentCritRate = characterData.BaseCritRate;
 
         characterState = CharacterState.Idle;
+
+        anim = GetComponent<Animator>();
     }
 
 
@@ -66,16 +78,22 @@ public class CharacterBase : MonoBehaviour
 
     protected virtual void UsePassiveSkill()
     {
-        
+
     }
 
     public virtual void GetDamage(int damage)
     {
 
     }
-    
+
     protected virtual void Die()
     {
         characterState = CharacterState.Die;
+    }
+    
+    public void SetFormation(bool isLeftSide)
+    {
+        formation = isLeftSide;
+        anim.SetFloat(factionHash, isLeftSide ? 1.0f : 0.0f);
     }
 }

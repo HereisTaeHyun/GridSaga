@@ -144,7 +144,7 @@ Transform:
   m_GameObject: {fileID: 49725168}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.39, y: -3.13, z: 0}
+  m_LocalPosition: {x: 5.61, y: -3.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -175,7 +175,7 @@ Transform:
   m_GameObject: {fileID: 85097987}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.19, y: -0.2, z: 0}
+  m_LocalPosition: {x: 7.41, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -883,7 +883,7 @@ Transform:
   m_GameObject: {fileID: 754873703}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.35, y: -1.59, z: 0}
+  m_LocalPosition: {x: -6.5699997, y: -1.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -914,7 +914,7 @@ Transform:
   m_GameObject: {fileID: 844797310}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.35, y: -1.59, z: 0}
+  m_LocalPosition: {x: 6.57, y: -1.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -976,7 +976,7 @@ Transform:
   m_GameObject: {fileID: 935590954}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.39, y: -3.13, z: 0}
+  m_LocalPosition: {x: -5.6099997, y: -3.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1072,7 +1072,7 @@ Transform:
   m_GameObject: {fileID: 1293208843}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.235396, y: -0.6580532, z: 0.03803995}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1092,12 +1092,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   factionId: 0
   partyPrefabs:
-  - {fileID: 3145162509506288120, guid: 16f95f5b515579e4aa46fe2e8a341078, type: 3}
-  - {fileID: 3145162509506288120, guid: 9eecce8c37293a043aca04316e2329ef, type: 3}
-  - {fileID: 3145162509506288120, guid: 16f95f5b515579e4aa46fe2e8a341078, type: 3}
-  - {fileID: 3145162509506288120, guid: 9eecce8c37293a043aca04316e2329ef, type: 3}
-  - {fileID: 3145162509506288120, guid: 091d2d72738f5b041a25739f7c67d212, type: 3}
-  - {fileID: 3145162509506288120, guid: 091d2d72738f5b041a25739f7c67d212, type: 3}
+  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
+  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
+  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
+  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
+  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
+  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
   unitOnStage: []
   board: {fileID: 1216142193}
 --- !u!1 &1424194523
@@ -1238,7 +1238,7 @@ Transform:
   m_GameObject: {fileID: 1614661321}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.235396, y: -0.6580532, z: 0.03803995}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1258,12 +1258,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   factionId: 1
   partyPrefabs:
-  - {fileID: 3145162509506288120, guid: e0476855af24aea48a4f302395105902, type: 3}
-  - {fileID: 3145162509506288120, guid: fe930286c591bd04f8459c17009aca9b, type: 3}
-  - {fileID: 3145162509506288120, guid: fe930286c591bd04f8459c17009aca9b, type: 3}
-  - {fileID: 3145162509506288120, guid: fe930286c591bd04f8459c17009aca9b, type: 3}
-  - {fileID: 3145162509506288120, guid: bb9175bb6a2377748a210ce5f49f37c8, type: 3}
-  - {fileID: 3145162509506288120, guid: e0476855af24aea48a4f302395105902, type: 3}
+  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
+  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
+  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
+  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
+  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
+  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
   unitOnStage: []
   board: {fileID: 1216142193}
 --- !u!1 &1812999344
@@ -1291,7 +1291,7 @@ Transform:
   m_GameObject: {fileID: 1812999344}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.19, y: -0.2, z: 0}
+  m_LocalPosition: {x: -7.41, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
