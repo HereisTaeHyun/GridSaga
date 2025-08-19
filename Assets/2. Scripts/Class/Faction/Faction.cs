@@ -22,7 +22,7 @@ public class Faction : MonoBehaviour
     public List<CharacterBase> UnitOnStage => unitOnStage;
 
     [SerializeField] private GameObject board;
-    private bool isBattle;
+    // private bool isBattle;
 
     // 테스트 용으로 OnEnable, Start 등에 뒀지만 이후 StageChange 등으로 분기할 것
     void OnEnable()
@@ -66,37 +66,18 @@ public class Faction : MonoBehaviour
         }
 
         // 유닛들에게 팩션 주입
-        foreach (var elem in unitOnStage)
-        {
-            if (factionId == FactionId.A)
-            {
-                elem.faction = false;
-            }
-            else
-            {
-                elem.faction = true;
-            }
-            elem.SetFaction(factionId != FactionId.A);
-        }
+foreach (var elem in unitOnStage)
+{
+    elem.SetFaction(factionId);   // ✅ 직접 대입 금지, 메서드만 호출
+}
 
-        isBattle = true;
-        StartCoroutine(Battle());
+        // isBattle = true;
+        // StartCoroutine(Battle());
     }
 
     // 스테이지 시작 시 전투 시작 코루틴
     private IEnumerator Battle()
     {
-        while (isBattle)
-        {
-            if (enemyFaction.unitOnStage.Count == 0)
-            {
-                Debug.Log("Win");
-            }
-            else if (unitOnStage.Count == 0)
-            {
-                Debug.Log("Defeat");
-            }
-        }
         yield break;
     }
 

@@ -40,8 +40,7 @@ public class CharacterBase : MonoBehaviour
     protected readonly int isBuffHash = Animator.StringToHash("IsBuff");
     protected readonly int takeDamageHash = Animator.StringToHash("TakeDamage");
 
-    // 왼쪽 = flase, 오른쪽 = true
-    [NonSerialized] public bool faction;
+
     public bool IsAlive => currentHp > 0 && characterState != CharacterState.Die && gameObject.activeInHierarchy;
     public virtual bool CanAttack => IsAlive && characterState == CharacterState.Idle;
     public virtual bool CanBeTarget => IsAlive && characterState != CharacterState.Attack;
@@ -57,6 +56,8 @@ public class CharacterBase : MonoBehaviour
     private float delayBySpeed = 0.25f;
     private float minDelay = 0.25f;
     private float maxDelay = 2.5f;
+
+    public FactionId faction;
 
     // init애서 스탯 배정은 이후 DB 권한으로 이전할 것
     // 현재 구조는 클라이언트 로컬 개발에서만 이용
@@ -116,10 +117,19 @@ public class CharacterBase : MonoBehaviour
     }
 
     // 팩션 어디인지 처리
-    public void SetFaction(bool isLeftSide)
+    public void SetFaction(FactionId factionId)
     {
-        faction = isLeftSide;
-        anim.SetFloat(factionHash, isLeftSide ? 1.0f : 0.0f);
+        bool isLeftSide = true;
+        if (factionId == FactionId.A)
+        {
+            faction = FactionId.A;
+        }
+        else if (factionId == FactionId.B)
+        {
+            faction = FactionId.B;
+            isLeftSide = false;
+        }
+        anim.SetFloat(factionHash, isLeftSide ? 0.0f : 1.0f);
     }
 
     protected void SetTarget(CharacterBase target)

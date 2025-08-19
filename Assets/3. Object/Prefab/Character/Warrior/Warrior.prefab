@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4018502027342716680}
   - component: {fileID: -4338256863595976453}
   - component: {fileID: 254886058362001781}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Warrior
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,3 +127,4 @@ MonoBehaviour:
   ActiveSkill: {fileID: 0}
   PassiveSkill: {fileID: 0}
   characterState: 0
+  faction: 0
