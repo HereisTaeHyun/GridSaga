@@ -73,21 +73,26 @@ public class CharacterBase : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    // 타겟을 향해 이동
     protected virtual void Move(CharacterBase target)
     {
 
     }
 
-
+    // 공격
     public virtual IEnumerator Attack(CharacterBase attacker, CharacterBase target)
     {
         Debug.Log("Base attack start");
         characterState = CharacterState.Attack;
-        yield return new WaitForSeconds(0.5f);
+
+        float wait = GetDelay(attacker.CurrentSpeed);
+        yield return new WaitForSeconds(wait);
+
         Debug.Log("Base attack end");
         characterState = CharacterState.Idle;
     }
 
+    // 스킬 사용
     protected virtual void UseActiveSkill()
     {
 
@@ -98,21 +103,30 @@ public class CharacterBase : MonoBehaviour
 
     }
 
+    // 데미지 입음
     public virtual void GetDamage(int damage)
     {
 
     }
 
+    // 사망 처리
     protected virtual IEnumerator Die()
     {
         yield break;
     }
 
-    public void SetFormation(bool isLeftSide)
+    // 팩션 어디인지 처리
+    public void SetFaction(bool isLeftSide)
     {
         formation = isLeftSide;
         anim.SetFloat(factionHash, isLeftSide ? 1.0f : 0.0f);
     }
+
+    protected void SetTarget(CharacterBase target)
+    {
+
+    }
+
     
     // 스피드에 따른 딜레이 처리
     protected float GetDelay(int speed)

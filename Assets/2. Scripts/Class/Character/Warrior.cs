@@ -31,25 +31,15 @@ public class Warrior : CharacterBase
             yield break;
         }
 
-        characterState = CharacterState.Attack;
-        var originPos = transform.position;
-
-        float dir = formation ? +1.0f : -1.0f;
-
-        // 상대의 바로 앞으로 이동
-        var targetPos = (Vector2)target.transform.position;
-        var moveToPos = targetPos + new Vector2(dir * attackRange, 0f);
-        transform.position = moveToPos;
+        // 공격 딜레이 적용
+        float wait = GetDelay(attacker.CurrentSpeed);
+        yield return new WaitForSeconds(wait);
 
         // 공격 적용
         anim.SetTrigger(attackHash);
         yield return new WaitForSeconds(attackActiveTime);
         GameManager.gameManager.ApplyDamage(attacker, target);
         yield return new WaitForSeconds(returnAfterAttackTime);
-
-        // 공격 모션 만큼의 시간이 지나면 원래 위치로
-        transform.position = originPos;
-        characterState = CharacterState.Idle;
     }
 
     protected override void Move(CharacterBase target)

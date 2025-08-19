@@ -18,7 +18,8 @@ public class Faction : MonoBehaviour
     private Faction enemyFaction;
 
     [SerializeField] private List<GameObject> partyPrefabs;
-    public List<CharacterBase> unitOnStage = new List<CharacterBase>();
+    private List<CharacterBase> unitOnStage = new List<CharacterBase>();
+    public List<CharacterBase> UnitOnStage => unitOnStage;
 
     [SerializeField] private GameObject board;
     private bool isBattle;
@@ -33,7 +34,7 @@ public class Faction : MonoBehaviour
             var selected = elem.GetComponent<Faction>();
             if (selected.FactionId != this.factionId)
             {
-                enemyFaction = selected;       
+                enemyFaction = selected;
             }
         }
 
@@ -49,15 +50,29 @@ public class Faction : MonoBehaviour
         }
 
         for (int i = 0; i < partyPrefabs.Count; i++)
+        {
+            var unit = partyPrefabs[i];
+
+            var unitPosition = formation.GetChild(i);
+
+            var instanceUnit = Instantiate(unit, unitPosition);
+            instanceUnit.transform.SetPositionAndRotation(unitPosition.position, unitPosition.rotation);
+            unitOnStage.Add(instanceUnit.GetComponent<CharacterBase>());
+        }
+
+        // 유닛들에게 팩션 주입
+        foreach (var elem in unitOnStage)
+        {
+            if (factionId == FactionId.A)
             {
-                var unit = partyPrefabs[i];
-
-                var unitPosition = formation.GetChild(i);
-
-                var instanceUnit = Instantiate(unit, unitPosition);
-                instanceUnit.transform.SetPositionAndRotation(unitPosition.position, unitPosition.rotation);
-                unitOnStage.Add(instanceUnit.GetComponent<CharacterBase>());
+                elem.formation = false;
             }
+            else
+            {
+                elem.formation = true;
+            }
+            elem.SetFaction(factionId != FactionId.A);
+        }
     }
 
     void Start()
@@ -70,28 +85,5 @@ public class Faction : MonoBehaviour
     private IEnumerator Battle()
     {
         yield break;
-    }
-
-    // 적 중 타겟 지정
-    private CharacterBase SetTarget(List<CharacterBase> enemies)
-    {
-        var selectedTarget = new List<CharacterBase>();
-
-        for (int i = 0; i < enemies.Count; i++)
-        {
-            var enemy = enemies[i].GetComponent<CharacterBase>();
-            if (enemy.CanBeTarget)
-            {
-                selectedTarget.Add(enemy);
-            }
-        }
-        if (selectedTarget.Count != 0)
-        {
-            return selectedTarget[Random.Range(0, selectedTarget.Count)];
-        }
-        else
-        {
-            return null;
-        }
     }
 }
