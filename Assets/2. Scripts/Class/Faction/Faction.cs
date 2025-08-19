@@ -105,6 +105,7 @@ public class Faction : MonoBehaviour
                 if (candidate != null && candidate.CanAttack)
                 {
                     attacker = candidate;
+                    attacker.characterState = CharacterBase.CharacterState.Attack;
                     break;
                 }
             }
@@ -112,14 +113,15 @@ public class Faction : MonoBehaviour
             if (attacker == null)
             {
                 isBattle = false;
+                Debug.Log("Defeat");
                 break;
             }
 
             // 타겟 선정
-            CharacterBase target = SetTarget(enemies, attacker);
+            CharacterBase target = SetTarget(enemies);
             if (target == null)
             {
-                Debug.Log("BattleEnd");
+                Debug.Log("Win");
                 break;
             }
 
@@ -143,14 +145,14 @@ public class Faction : MonoBehaviour
     }
 
     // 적 중 타겟 지정
-    private CharacterBase SetTarget(List<CharacterBase> enemies, CharacterBase attacker)
+    private CharacterBase SetTarget(List<CharacterBase> enemies)
     {
         var selectedTarget = new List<CharacterBase>();
 
         for (int i = 0; i < enemies.Count; i++)
         {
             var enemy = enemies[i].GetComponent<CharacterBase>();
-            if (enemy != attacker && enemy.CanBeTarget)
+            if (enemy.CanBeTarget)
             {
                 selectedTarget.Add(enemy);
             }
