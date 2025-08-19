@@ -39,21 +39,21 @@ public class Faction : MonoBehaviour
         }
 
         // 유닛 위치 설정 및 스폰
-        Transform formation = null;
+        Transform faction = null;
         if (factionId == FactionId.A)
         {
-            formation = board.transform.Find("LeftFormation");
+            faction = board.transform.Find("Leftfaction");
         }
         else
         {
-            formation = board.transform.Find("RightFormation");
+            faction = board.transform.Find("Rightfaction");
         }
 
         for (int i = 0; i < partyPrefabs.Count; i++)
         {
             var unit = partyPrefabs[i];
 
-            var unitPosition = formation.GetChild(i);
+            var unitPosition = faction.GetChild(i);
 
             var instanceUnit = Instantiate(unit, unitPosition);
             instanceUnit.transform.SetPositionAndRotation(unitPosition.position, unitPosition.rotation);
@@ -65,11 +65,11 @@ public class Faction : MonoBehaviour
         {
             if (factionId == FactionId.A)
             {
-                elem.formation = false;
+                elem.faction = false;
             }
             else
             {
-                elem.formation = true;
+                elem.faction = true;
             }
             elem.SetFaction(factionId != FactionId.A);
         }
@@ -85,5 +85,10 @@ public class Faction : MonoBehaviour
     private IEnumerator Battle()
     {
         yield break;
+    }
+
+    public void RemoveDiedUnit(CharacterBase diedUnit)
+    {
+        unitOnStage.Remove(diedUnit);
     }
 }

@@ -19,6 +19,11 @@ public class Warrior : CharacterBase
         Init();
     }
 
+    void Start()
+    {
+        
+    }
+
     void FixedUpdate()
     {
         

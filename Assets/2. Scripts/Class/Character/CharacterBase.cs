@@ -41,7 +41,7 @@ public class CharacterBase : MonoBehaviour
     protected readonly int takeDamageHash = Animator.StringToHash("TakeDamage");
 
     // 왼쪽 = flase, 오른쪽 = true
-    [NonSerialized] public bool formation;
+    [NonSerialized] public bool faction;
     public bool IsAlive => currentHp > 0 && characterState != CharacterState.Die && gameObject.activeInHierarchy;
     public virtual bool CanAttack => IsAlive && characterState == CharacterState.Idle;
     public virtual bool CanBeTarget => IsAlive && characterState != CharacterState.Attack;
@@ -118,7 +118,7 @@ public class CharacterBase : MonoBehaviour
     // 팩션 어디인지 처리
     public void SetFaction(bool isLeftSide)
     {
-        formation = isLeftSide;
+        faction = isLeftSide;
         anim.SetFloat(factionHash, isLeftSide ? 1.0f : 0.0f);
     }
 
