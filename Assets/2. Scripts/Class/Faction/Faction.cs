@@ -27,6 +27,11 @@ public class Faction : MonoBehaviour
     // 테스트 용으로 OnEnable, Start 등에 뒀지만 이후 StageChange 등으로 분기할 것
     void OnEnable()
     {
+
+    }
+
+    void Start()
+    {
         // Faction 선택
         var factions = GameObject.FindGameObjectsWithTag("Faction");
         foreach (var elem in factions)
@@ -42,11 +47,11 @@ public class Faction : MonoBehaviour
         Transform faction = null;
         if (factionId == FactionId.A)
         {
-            faction = board.transform.Find("Leftfaction");
+            faction = board.transform.Find("LeftFaction");
         }
         else
         {
-            faction = board.transform.Find("Rightfaction");
+            faction = board.transform.Find("RightFaction");
         }
 
         for (int i = 0; i < partyPrefabs.Count; i++)
@@ -73,10 +78,7 @@ public class Faction : MonoBehaviour
             }
             elem.SetFaction(factionId != FactionId.A);
         }
-    }
 
-    void Start()
-    {
         isBattle = true;
         StartCoroutine(Battle());
     }
