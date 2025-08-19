@@ -3,13 +3,15 @@ using UnityEngine;
 
 public class Warrior : CharacterBase
 {
-    // 공격 처리 자연스럽게 하기 위한 변수
-    private float attackTime = 0.75f;
-    private float gap = 2.0f;
 
     protected override void Init()
     {
         base.Init();
+
+        attackActiveTime = 0.25f;
+        returnAfterAttackTime = 0.75f;
+        dieTime = 1.5f;
+        gap = 2.0f;
     }
 
     private void Awake()
@@ -17,7 +19,7 @@ public class Warrior : CharacterBase
         Init();
     }
 
-    public override IEnumerator Attack(CharacterBase target)
+    public override IEnumerator Attack(CharacterBase attacker, CharacterBase target)
     {
         if (characterState == CharacterState.Die)
         {
@@ -34,11 +36,13 @@ public class Warrior : CharacterBase
         var moveToPos = targetPos + new Vector2(dir * gap, 0f);
         transform.position = moveToPos;
 
-        // 공격애니메이션 재생
+        // 공격 적용
         anim.SetTrigger(attackHash);
+        yield return new WaitForSeconds(attackActiveTime);
+        GameManager.gameManager.ApplyDamage(attacker, target);
+        yield return new WaitForSeconds(returnAfterAttackTime);
 
         // 공격 모션 만큼의 시간이 지나면 원래 위치로
-        yield return new WaitForSeconds(attackTime);
         transform.position = originPos;
         characterState = CharacterState.Idle;
     }
@@ -68,15 +72,16 @@ public class Warrior : CharacterBase
         }
         else if (currentHp <= 0)
         {
-            Die();
+            StartCoroutine(Die());
         }
     }
 
-    protected override void Die()
+    protected override IEnumerator Die()
     {
-        StopAllCoroutines();
-        anim.SetTrigger(dieHash);
         characterState = CharacterState.Die;
+        anim.SetTrigger(dieHash);
+        yield return new WaitForSeconds(dieTime);
+        StopAllCoroutines();
         gameObject.SetActive(false);
     }
 }

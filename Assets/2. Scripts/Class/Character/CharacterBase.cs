@@ -46,6 +46,12 @@ public class CharacterBase : MonoBehaviour
     public virtual bool CanAttack => IsAlive && characterState == CharacterState.Idle;
     public virtual bool CanBeTarget => IsAlive && characterState != CharacterState.Attack;
 
+    // 공격 처리 자연스럽게 하기 위한 변수
+    protected float attackActiveTime;
+    protected float returnAfterAttackTime;
+    protected float dieTime;
+    protected float gap;
+
     // init애서 스탯 배정은 이후 DB 권한으로 이전할 것
     // 현재 구조는 클라이언트 로컬 개발에서만 이용
     protected virtual void Init()
@@ -62,7 +68,7 @@ public class CharacterBase : MonoBehaviour
     }
 
 
-    public virtual IEnumerator Attack(CharacterBase target)
+    public virtual IEnumerator Attack(CharacterBase attacker, CharacterBase target)
     {
         Debug.Log("Base attack start");
         characterState = CharacterState.Attack;
@@ -86,9 +92,9 @@ public class CharacterBase : MonoBehaviour
 
     }
 
-    protected virtual void Die()
+    protected virtual IEnumerator Die()
     {
-        characterState = CharacterState.Die;
+        yield break;
     }
     
     public void SetFormation(bool isLeftSide)

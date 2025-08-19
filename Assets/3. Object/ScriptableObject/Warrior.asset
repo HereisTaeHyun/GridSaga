@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterId: 1
   characterName: Warrior
-  baseHp: 50
+  baseHp: 20
   baseDefense: 10
   baseAttack: 10
   baseSpeed: 2

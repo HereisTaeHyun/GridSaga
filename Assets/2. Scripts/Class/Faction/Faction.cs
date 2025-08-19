@@ -131,12 +131,11 @@ public class Faction : MonoBehaviour
             if (!target.IsAlive) continue;
 
             // 공격 및 데미지 적용
-            yield return attacker.StartCoroutine(attacker.Attack(target));
             if (attacker.IsAlive && target.IsAlive)
             {
-                GameManager.gameManager.ApplyDamage(attacker, target);
+                yield return attacker.StartCoroutine(attacker.Attack(attacker, target));
             }
-            if (attacker.IsAlive && attacker.CanAttack)
+            if (attacker.IsAlive)
             {
                 attackQueue.Enqueue(attacker);
             }
