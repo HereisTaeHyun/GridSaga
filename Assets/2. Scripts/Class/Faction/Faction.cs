@@ -86,6 +86,17 @@ public class Faction : MonoBehaviour
     // 스테이지 시작 시 전투 시작 코루틴
     private IEnumerator Battle()
     {
+        while (isBattle)
+        {
+            if (enemyFaction.unitOnStage.Count == 0)
+            {
+                Debug.Log("Win");
+            }
+            else if (unitOnStage.Count == 0)
+            {
+                Debug.Log("Defeat");
+            }
+        }
         yield break;
     }
 

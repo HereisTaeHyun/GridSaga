@@ -831,7 +831,7 @@ GameObject:
   m_Component:
   - component: {fileID: 658760705}
   m_Layer: 0
-  m_Name: LeftFormation
+  m_Name: LeftFaction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1098,7 +1098,6 @@ MonoBehaviour:
   - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
   - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
   - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
-  unitOnStage: []
   board: {fileID: 1216142193}
 --- !u!1 &1424194523
 GameObject:
@@ -1185,7 +1184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1589135080}
   m_Layer: 0
-  m_Name: RightFormation
+  m_Name: RightFaction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1264,7 +1263,6 @@ MonoBehaviour:
   - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
   - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
   - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
-  unitOnStage: []
   board: {fileID: 1216142193}
 --- !u!1 &1812999344
 GameObject:

@@ -80,12 +80,12 @@ public class CharacterBase : MonoBehaviour
     }
 
     // 공격
-    public virtual IEnumerator Attack(CharacterBase attacker, CharacterBase target)
+    public virtual IEnumerator Attack(CharacterBase target)
     {
         Debug.Log("Base attack start");
         characterState = CharacterState.Attack;
 
-        float wait = GetDelay(attacker.CurrentSpeed);
+        float wait = GetDelay(CurrentSpeed);
         yield return new WaitForSeconds(wait);
 
         Debug.Log("Base attack end");
