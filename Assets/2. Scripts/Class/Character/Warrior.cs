@@ -29,7 +29,7 @@ public class Warrior : CharacterBase
         
     }
 
-    public override IEnumerator Attack(CharacterBase attacker, CharacterBase target)
+    public override IEnumerator Attack(CharacterBase target)
     {
         if (characterState == CharacterState.Die)
         {
@@ -37,14 +37,11 @@ public class Warrior : CharacterBase
         }
 
         // 공격 딜레이 적용
-        float wait = GetDelay(attacker.CurrentSpeed);
+        float wait = GetDelay(CurrentSpeed);
         yield return new WaitForSeconds(wait);
 
         // 공격 적용
         anim.SetTrigger(attackHash);
-        yield return new WaitForSeconds(attackActiveTime);
-        GameManager.gameManager.ApplyDamage(attacker, target);
-        yield return new WaitForSeconds(returnAfterAttackTime);
     }
 
     protected override void Move(CharacterBase target)
