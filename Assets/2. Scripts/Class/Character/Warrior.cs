@@ -11,12 +11,17 @@ public class Warrior : CharacterBase
         attackActiveTime = 0.25f;
         returnAfterAttackTime = 0.75f;
         dieTime = 1.5f;
-        gap = 2.0f;
+        attackRange = 2.0f;
     }
 
     private void Awake()
     {
         Init();
+    }
+
+    void FixedUpdate()
+    {
+        
     }
 
     public override IEnumerator Attack(CharacterBase attacker, CharacterBase target)
@@ -33,7 +38,7 @@ public class Warrior : CharacterBase
 
         // 상대의 바로 앞으로 이동
         var targetPos = (Vector2)target.transform.position;
-        var moveToPos = targetPos + new Vector2(dir * gap, 0f);
+        var moveToPos = targetPos + new Vector2(dir * attackRange, 0f);
         transform.position = moveToPos;
 
         // 공격 적용
@@ -45,6 +50,14 @@ public class Warrior : CharacterBase
         // 공격 모션 만큼의 시간이 지나면 원래 위치로
         transform.position = originPos;
         characterState = CharacterState.Idle;
+    }
+
+    protected override void Move(CharacterBase target)
+    {
+        if (Vector2.Distance(transform.position, target.transform.position) > attackRange)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, currentSpeed * Time.deltaTime);
+        }
     }
 
     protected override void UseActiveSkill()

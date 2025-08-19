@@ -21,14 +21,7 @@ public class Faction : MonoBehaviour
     public List<CharacterBase> unitOnStage = new List<CharacterBase>();
 
     [SerializeField] private GameObject board;
-    private Queue<CharacterBase> attackQueue = new Queue<CharacterBase>();
     private bool isBattle;
-
-    // 공격 속도 제어
-    // 스피드 1 = 0.25초의 딜레이 경감을 가짐
-    private float delayBySpeed = 0.25f;
-    private float minDelay = 0.25f;
-    private float maxDelay = 2.5f;
 
     // 테스트 용으로 OnEnable, Start 등에 뒀지만 이후 StageChange 등으로 분기할 것
     void OnEnable()
@@ -65,22 +58,6 @@ public class Faction : MonoBehaviour
                 instanceUnit.transform.SetPositionAndRotation(unitPosition.position, unitPosition.rotation);
                 unitOnStage.Add(instanceUnit.GetComponent<CharacterBase>());
             }
-
-        // speed에 따라 정렬해서 Queue에 넣기
-        unitOnStage.Sort((a, b) => b.CurrentSpeed.CompareTo(a.CurrentSpeed));
-        foreach (var elem in unitOnStage)
-        {
-            if (factionId == FactionId.A)
-            {
-                elem.formation = false;
-            }
-            else
-            {
-                elem.formation = true;
-            }
-            elem.SetFormation(factionId != FactionId.A);
-            attackQueue.Enqueue(elem);
-        }
     }
 
     void Start()
@@ -92,56 +69,7 @@ public class Faction : MonoBehaviour
     // 스테이지 시작 시 전투 시작 코루틴
     private IEnumerator Battle()
     {
-        while (isBattle)
-        {
-            var enemies = enemyFaction.unitOnStage;
-            if (enemies == null || enemies.Count == 0) { isBattle = false; break; }
-
-            // 공격자 설정
-            CharacterBase attacker = null;
-            while (attackQueue.Count > 0)
-            {
-                var candidate = attackQueue.Dequeue();
-                if (candidate != null && candidate.CanAttack)
-                {
-                    attacker = candidate;
-                    attacker.characterState = CharacterBase.CharacterState.Attack;
-                    break;
-                }
-            }
-
-            if (attacker == null)
-            {
-                isBattle = false;
-                Debug.Log("Defeat");
-                break;
-            }
-
-            // 타겟 선정
-            CharacterBase target = SetTarget(enemies);
-            if (target == null)
-            {
-                Debug.Log("Win");
-                break;
-            }
-
-            float wait = GetDelay(attacker.CurrentSpeed);
-            yield return new WaitForSeconds(wait);
-
-            // 사망한 경우 체크
-            if (!attacker.IsAlive) continue;
-            if (!target.IsAlive) continue;
-
-            // 공격 및 데미지 적용
-            if (attacker.IsAlive && target.IsAlive)
-            {
-                yield return attacker.StartCoroutine(attacker.Attack(attacker, target));
-            }
-            if (attacker.IsAlive)
-            {
-                attackQueue.Enqueue(attacker);
-            }
-        }
+        yield break;
     }
 
     // 적 중 타겟 지정
@@ -165,13 +93,5 @@ public class Faction : MonoBehaviour
         {
             return null;
         }
-    }
-
-    // 스피드에 따른 딜레이 처리
-    private float GetDelay(int speed)
-    {
-        speed = Mathf.Max(0, speed);
-        float delay = maxDelay - (speed * delayBySpeed);
-        return Mathf.Max(minDelay, delay);
     }
 }

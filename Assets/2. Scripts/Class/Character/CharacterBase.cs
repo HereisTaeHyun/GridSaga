@@ -50,7 +50,13 @@ public class CharacterBase : MonoBehaviour
     protected float attackActiveTime;
     protected float returnAfterAttackTime;
     protected float dieTime;
-    protected float gap;
+    protected float attackRange;
+
+    // 공격 속도 제어
+    // 스피드 1 = 0.25초의 딜레이 경감을 가짐
+    private float delayBySpeed = 0.25f;
+    private float minDelay = 0.25f;
+    private float maxDelay = 2.5f;
 
     // init애서 스탯 배정은 이후 DB 권한으로 이전할 것
     // 현재 구조는 클라이언트 로컬 개발에서만 이용
@@ -65,6 +71,11 @@ public class CharacterBase : MonoBehaviour
         characterState = CharacterState.Idle;
 
         anim = GetComponent<Animator>();
+    }
+
+    protected virtual void Move(CharacterBase target)
+    {
+
     }
 
 
@@ -96,10 +107,18 @@ public class CharacterBase : MonoBehaviour
     {
         yield break;
     }
-    
+
     public void SetFormation(bool isLeftSide)
     {
         formation = isLeftSide;
         anim.SetFloat(factionHash, isLeftSide ? 1.0f : 0.0f);
+    }
+    
+    // 스피드에 따른 딜레이 처리
+    protected float GetDelay(int speed)
+    {
+        speed = Mathf.Max(0, speed);
+        float delay = maxDelay - (speed * delayBySpeed);
+        return Mathf.Max(minDelay, delay);
     }
 }
