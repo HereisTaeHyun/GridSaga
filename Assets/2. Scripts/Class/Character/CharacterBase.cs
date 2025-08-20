@@ -31,7 +31,8 @@ public class CharacterBase : MonoBehaviour
     public float CurrentCritRate => currentCritRate;
 
     protected Animator anim;
-    protected readonly int factionHash = Animator.StringToHash("Faction");
+    protected readonly int moveXHash = Animator.StringToHash("MoveX");
+    protected readonly int moveYHash = Animator.StringToHash("MoveY");
     protected readonly int isMoveHash = Animator.StringToHash("IsMove");
     protected readonly int attackHash = Animator.StringToHash("Attack");
     protected readonly int usePassiveSkillHash = Animator.StringToHash("UsePassiveSkill");

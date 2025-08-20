@@ -8,6 +8,7 @@ public class Warrior : CharacterBase
     {
         base.Init();
 
+        attackActiveTime = 0.25f;
         attackEndTime = 0.75f;
         dieTime = 1.5f;
         attackRange = 2.0f;
@@ -42,12 +43,20 @@ public class Warrior : CharacterBase
 
     protected override void Move(CharacterBase target)
     {
-        if (Vector2.Distance(transform.position, target.transform.position) > attackRange)
+        Vector2 currentPos = transform.position;
+        Vector2 targetPos = target.transform.position;
+        float distance = Vector2.Distance(transform.position, target.transform.position);
+
+        Vector2 dir = UtilityManager.utility.DirSet(targetPos - currentPos);
+        anim.SetFloat(moveXHash, dir.x);
+        anim.SetFloat(moveYHash, dir.y);
+
+        if (distance > attackRange)
         {
             anim.SetBool(isMoveHash, true);
             transform.position = Vector2.MoveTowards(transform.position, target.transform.position, currentSpeed * Time.deltaTime);
         }
-        else if (Vector2.Distance(transform.position, target.transform.position) <= attackRange && characterState != CharacterState.Attack)
+        else if (distance <= attackRange && characterState != CharacterState.Attack)
         {
             anim.SetBool(isMoveHash, false);
             StartCoroutine(Attack(target));
@@ -69,6 +78,7 @@ public class Warrior : CharacterBase
 
         // 공격 적용
         anim.SetTrigger(attackHash);
+        yield return new WaitForSeconds(attackActiveTime);
         GameManager.gameManager.ApplyDamage(this, target);
         yield return new WaitForSeconds(attackEndTime);
         characterState = CharacterState.Idle;
