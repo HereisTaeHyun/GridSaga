@@ -1093,11 +1093,6 @@ MonoBehaviour:
   factionId: 0
   partyPrefabs:
   - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
-  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
-  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
-  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
-  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
-  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
   board: {fileID: 1216142193}
 --- !u!1 &1424194523
 GameObject:
@@ -1257,11 +1252,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   factionId: 1
   partyPrefabs:
-  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
-  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
-  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
-  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
-  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
   - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
   board: {fileID: 1216142193}
 --- !u!1 &1812999344

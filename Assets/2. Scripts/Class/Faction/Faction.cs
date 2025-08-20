@@ -24,6 +24,8 @@ public class Faction : MonoBehaviour
     private List<CharacterBase> unitOnStage = new List<CharacterBase>();
     public List<CharacterBase> UnitOnStage => unitOnStage;
 
+    private List<CharacterBase> unitOnDied = new List<CharacterBase>();
+
     [SerializeField] private GameObject board;
     // private bool isBattle;
 
@@ -87,6 +89,7 @@ public class Faction : MonoBehaviour
 
     public void RemoveDiedUnit(CharacterBase diedUnit)
     {
+        unitOnDied.Add(diedUnit);
         unitOnStage.Remove(diedUnit);
     }
 }

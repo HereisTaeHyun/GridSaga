@@ -8,8 +8,7 @@ public class Warrior : CharacterBase
     {
         base.Init();
 
-        attackActiveTime = 0.25f;
-        returnAfterAttackTime = 0.75f;
+        attackEndTime = 0.75f;
         dieTime = 1.5f;
         attackRange = 2.0f;
     }
@@ -26,22 +25,19 @@ public class Warrior : CharacterBase
 
     void FixedUpdate()
     {
-        
-    }
-
-    public override IEnumerator Attack(CharacterBase target)
-    {
-        if (characterState == CharacterState.Die)
+        if (currentTarget == null)
         {
-            yield break;
+            currentTarget = SetTarget();
         }
 
-        // 공격 딜레이 적용
-        float wait = GetDelay(CurrentSpeed);
-        yield return new WaitForSeconds(wait);
-
-        // 공격 적용
-        anim.SetTrigger(attackHash);
+        if (currentTarget != null)
+        {
+            Move(currentTarget);
+        }
+        else
+        {
+            anim.SetBool(isMoveHash, false);  
+        } 
     }
 
     protected override void Move(CharacterBase target)
@@ -51,11 +47,31 @@ public class Warrior : CharacterBase
             anim.SetBool(isMoveHash, true);
             transform.position = Vector2.MoveTowards(transform.position, target.transform.position, currentSpeed * Time.deltaTime);
         }
-        else if (Vector2.Distance(transform.position, target.transform.position) <= attackRange)
+        else if (Vector2.Distance(transform.position, target.transform.position) <= attackRange && characterState != CharacterState.Attack)
         {
             anim.SetBool(isMoveHash, false);
-            // StartCoroutine(Attack());
+            StartCoroutine(Attack(target));
         }
+    }
+
+    protected override IEnumerator Attack(CharacterBase target)
+    {
+        if (characterState == CharacterState.Die)
+        {
+            yield break;
+        }
+
+        characterState = CharacterState.Attack;
+
+        // 공격 딜레이 적용
+        float wait = GetDelay(CurrentSpeed);
+        yield return new WaitForSeconds(wait);
+
+        // 공격 적용
+        anim.SetTrigger(attackHash);
+        GameManager.gameManager.ApplyDamage(this, target);
+        yield return new WaitForSeconds(attackEndTime);
+        characterState = CharacterState.Idle;
     }
 
     protected override void UseActiveSkill()

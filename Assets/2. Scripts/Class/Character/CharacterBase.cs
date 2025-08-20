@@ -46,7 +46,7 @@ public class CharacterBase : MonoBehaviour
 
     // 공격 처리 자연스럽게 하기 위한 변수
     protected float attackActiveTime;
-    protected float returnAfterAttackTime;
+    protected float attackEndTime;
     protected float dieTime;
     protected float attackRange;
 
@@ -57,6 +57,7 @@ public class CharacterBase : MonoBehaviour
     private float maxDelay = 2.5f;
 
     [SerializeField] private Faction allyFaction;
+    protected CharacterBase currentTarget;
 
 
     // init애서 스탯 배정은 이후 DB 권한으로 이전할 것
@@ -81,7 +82,7 @@ public class CharacterBase : MonoBehaviour
     }
 
     // 공격
-    public virtual IEnumerator Attack(CharacterBase target)
+    protected virtual IEnumerator Attack(CharacterBase target)
     {
         Debug.Log("Base attack start");
         characterState = CharacterState.Attack;
@@ -91,6 +92,28 @@ public class CharacterBase : MonoBehaviour
 
         Debug.Log("Base attack end");
         characterState = CharacterState.Idle;
+    }
+
+    protected virtual CharacterBase SetTarget()
+    {
+        if (allyFaction.EnemyOnStage == null || allyFaction.EnemyOnStage.Count == 0)
+        {
+            return null;
+        }
+
+        CharacterBase selected = null;
+        float selectedDistanceToEnemy = float.PositiveInfinity;
+
+        foreach (var elem in allyFaction.EnemyOnStage)
+        {
+            float distanceToEnemy = (elem.transform.position - transform.position).sqrMagnitude;
+            if (distanceToEnemy < selectedDistanceToEnemy)
+            {
+                selectedDistanceToEnemy = distanceToEnemy;
+                selected = elem;
+            }
+        }
+        return selected;
     }
 
     // 스킬 사용
