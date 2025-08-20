@@ -15,7 +15,10 @@ public class Faction : MonoBehaviour
     // 현재 스테이지 상에서의 faction 일반적으로 pve 상에서는 왼쪽이 플레이어
     [SerializeField] private FactionId factionId;
     public FactionId FactionId => factionId;
+    
     private Faction enemyFaction;
+    private List<CharacterBase> enemyOnStage = new List<CharacterBase>();
+    public List<CharacterBase> EnemyOnStage  => enemyOnStage ;
 
     [SerializeField] private List<GameObject> partyPrefabs;
     private List<CharacterBase> unitOnStage = new List<CharacterBase>();
@@ -66,10 +69,10 @@ public class Faction : MonoBehaviour
         }
 
         // 유닛들에게 팩션 주입
-foreach (var elem in unitOnStage)
-{
-    elem.SetFaction(factionId);   // ✅ 직접 대입 금지, 메서드만 호출
-}
+        foreach (var elem in unitOnStage)
+        {
+            elem.SetFaction(factionId);
+        }
 
         // isBattle = true;
         // StartCoroutine(Battle());

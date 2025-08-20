@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f69224c395a6da54e8851de8bf6f500f, type: 3}
-  m_Name: TestCharacter
+  m_Name: Skeleton
   m_EditorClassIdentifier: 
-  characterId: 0
-  characterName: TestCharacter
+  characterId: 2
+  characterName: Skeleton
   baseHp: 10
-  baseDefense: 20
+  baseDefense: 2
   baseAttack: 10
   baseSpeed: 2
   baseCritRate: 10

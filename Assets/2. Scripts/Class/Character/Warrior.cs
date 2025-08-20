@@ -21,7 +21,7 @@ public class Warrior : CharacterBase
 
     void Start()
     {
-        
+
     }
 
     void FixedUpdate()
@@ -48,7 +48,13 @@ public class Warrior : CharacterBase
     {
         if (Vector2.Distance(transform.position, target.transform.position) > attackRange)
         {
+            anim.SetBool(isMoveHash, true);
             transform.position = Vector2.MoveTowards(transform.position, target.transform.position, currentSpeed * Time.deltaTime);
+        }
+        else if (Vector2.Distance(transform.position, target.transform.position) <= attackRange)
+        {
+            anim.SetBool(isMoveHash, false);
+            // StartCoroutine(Attack());
         }
     }
 
@@ -71,11 +77,7 @@ public class Warrior : CharacterBase
 
         // hp 차감 후 0 이하면 사망
         currentHp -= safeDamage;
-        if (currentHp > 0)
-        {
-            anim.SetTrigger(takeDamageHash);
-        }
-        else if (currentHp <= 0)
+        if (currentHp <= 0)
         {
             StartCoroutine(Die());
         }

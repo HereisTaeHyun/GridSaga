@@ -32,13 +32,12 @@ public class CharacterBase : MonoBehaviour
 
     protected Animator anim;
     protected readonly int factionHash = Animator.StringToHash("Faction");
-    protected readonly int moveHash = Animator.StringToHash("Move");
+    protected readonly int isMoveHash = Animator.StringToHash("IsMove");
     protected readonly int attackHash = Animator.StringToHash("Attack");
     protected readonly int usePassiveSkillHash = Animator.StringToHash("UsePassiveSkill");
     protected readonly int useActiveSkillHash = Animator.StringToHash("UseActiveSkill");
     protected readonly int dieHash = Animator.StringToHash("Die");
     protected readonly int isBuffHash = Animator.StringToHash("IsBuff");
-    protected readonly int takeDamageHash = Animator.StringToHash("TakeDamage");
 
 
     public bool IsAlive => currentHp > 0 && characterState != CharacterState.Die && gameObject.activeInHierarchy;
@@ -58,6 +57,7 @@ public class CharacterBase : MonoBehaviour
     private float maxDelay = 2.5f;
 
     public FactionId faction;
+
 
     // init애서 스탯 배정은 이후 DB 권한으로 이전할 것
     // 현재 구조는 클라이언트 로컬 개발에서만 이용
