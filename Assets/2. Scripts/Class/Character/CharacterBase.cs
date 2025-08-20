@@ -56,7 +56,7 @@ public class CharacterBase : MonoBehaviour
     private float minDelay = 0.25f;
     private float maxDelay = 2.5f;
 
-    public FactionId faction;
+    [SerializeField] private Faction allyFaction;
 
 
     // init애서 스탯 배정은 이후 DB 권한으로 이전할 것
@@ -117,19 +117,9 @@ public class CharacterBase : MonoBehaviour
     }
 
     // 팩션 어디인지 처리
-    public void SetFaction(FactionId factionId)
+    public void SetFaction(Faction faction)
     {
-        bool isLeftSide = true;
-        if (factionId == FactionId.A)
-        {
-            faction = FactionId.A;
-        }
-        else if (factionId == FactionId.B)
-        {
-            faction = FactionId.B;
-            isLeftSide = false;
-        }
-        anim.SetFloat(factionHash, isLeftSide ? 0.0f : 1.0f);
+        allyFaction = faction;
     }
 
     protected void SetTarget(CharacterBase target)

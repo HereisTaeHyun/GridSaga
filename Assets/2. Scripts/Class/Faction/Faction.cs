@@ -43,6 +43,7 @@ public class Faction : MonoBehaviour
             if (selected.FactionId != this.factionId)
             {
                 enemyFaction = selected;
+                enemyOnStage = enemyFaction.UnitOnStage;
             }
         }
 
@@ -71,7 +72,7 @@ public class Faction : MonoBehaviour
         // 유닛들에게 팩션 주입
         foreach (var elem in unitOnStage)
         {
-            elem.SetFaction(factionId);
+            elem.SetFaction(this);
         }
 
         // isBattle = true;
