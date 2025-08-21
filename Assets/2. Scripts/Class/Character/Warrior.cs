@@ -9,7 +9,7 @@ public class Warrior : CharacterBase
         base.Init();
 
         attackActiveTime = 0.25f;
-        attackEndTime = 0.75f;
+        attackEndTime = 0.8f;
         dieTime = 1.5f;
         attackRange = 2.0f;
     }
@@ -26,7 +26,7 @@ public class Warrior : CharacterBase
 
     void FixedUpdate()
     {
-        if (currentTarget == null)
+        if (currentTarget == null || !currentTarget.gameObject.activeInHierarchy)
         {
             currentTarget = SetTarget();
         }
@@ -37,8 +37,8 @@ public class Warrior : CharacterBase
         }
         else
         {
-            anim.SetBool(isMoveHash, false);  
-        } 
+            anim.SetBool(isMoveHash, false);
+        }
     }
 
     protected override void Move(CharacterBase target)
@@ -65,10 +65,13 @@ public class Warrior : CharacterBase
 
     protected override IEnumerator Attack(CharacterBase target)
     {
-        if (characterState == CharacterState.Die)
+        if (characterState == CharacterState.Die || currentTarget == null)
         {
             yield break;
         }
+
+        int damage = GameManager.gameManager.CalculateDamage(this, target);
+        currentTarget.GetDamage(damage);
 
         characterState = CharacterState.Attack;
 
@@ -79,7 +82,9 @@ public class Warrior : CharacterBase
         // 공격 적용
         anim.SetTrigger(attackHash);
         yield return new WaitForSeconds(attackActiveTime);
-        GameManager.gameManager.ApplyDamage(this, target);
+
+        StartCoroutine(currentTarget.ClearGetDamage());
+
         yield return new WaitForSeconds(attackEndTime);
         characterState = CharacterState.Idle;
     }
@@ -105,16 +110,14 @@ public class Warrior : CharacterBase
         currentHp -= safeDamage;
         if (currentHp <= 0)
         {
-            StartCoroutine(Die());
+            Die();
         }
     }
 
-    protected override IEnumerator Die()
+    protected override void Die()
     {
         characterState = CharacterState.Die;
-        anim.SetTrigger(dieHash);
-        yield return new WaitForSeconds(dieTime);
+        allyFaction.RemoveDiedUnit(this);
         StopAllCoroutines();
-        gameObject.SetActive(false);
     }
 }

@@ -57,7 +57,7 @@ public class CharacterBase : MonoBehaviour
     private float minDelay = 0.25f;
     private float maxDelay = 2.5f;
 
-    [SerializeField] private Faction allyFaction;
+    [SerializeField] protected Faction allyFaction;
     protected CharacterBase currentTarget;
 
 
@@ -135,9 +135,9 @@ public class CharacterBase : MonoBehaviour
     }
 
     // 사망 처리
-    protected virtual IEnumerator Die()
+    protected virtual void Die()
     {
-        yield break;
+
     }
 
     // 팩션 어디인지 처리
@@ -151,12 +151,23 @@ public class CharacterBase : MonoBehaviour
 
     }
 
-    
+
     // 스피드에 따른 딜레이 처리
     protected float GetDelay(int speed)
     {
         speed = Mathf.Max(0, speed);
         float delay = maxDelay - (speed * delayBySpeed);
         return Mathf.Max(minDelay, delay);
+    }
+    
+    // 데미지를 입은 경우 애니메이션, UI 등 처리
+    public virtual IEnumerator ClearGetDamage()
+    {
+        if (characterState == CharacterState.Die)
+        {
+            anim.SetTrigger(dieHash);
+            yield return new WaitForSeconds(dieTime);
+            gameObject.SetActive(false);
+        }
     }
 }

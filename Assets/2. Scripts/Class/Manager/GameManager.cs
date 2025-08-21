@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public void ApplyDamage(CharacterBase attacker, CharacterBase target)
+    public int CalculateDamage(CharacterBase attacker, CharacterBase target)
     {
         // 계산 필요 로직 정리
         float atk = Mathf.Max(0f, attacker.CurrentAttack);
@@ -49,8 +49,7 @@ public class GameManager : MonoBehaviour
         float damageMultiplier = K / (def + K);
         float rawDamage = atk * damageMultiplier;
         int damage = Mathf.Max(1, Mathf.FloorToInt(rawDamage));
-
-        target.GetDamage(damage);
+        return damage;
     }
 
     private bool CalculateIsCrit(CharacterBase attacker)
