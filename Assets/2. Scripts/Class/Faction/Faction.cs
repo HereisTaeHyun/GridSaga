@@ -27,7 +27,7 @@ public class Faction : MonoBehaviour
     private List<CharacterBase> unitOnDied = new List<CharacterBase>();
 
     [SerializeField] private GameObject board;
-    // private bool isBattle;
+    private bool isBattle;
 
     // 테스트 용으로 OnEnable, Start 등에 뒀지만 이후 StageChange 등으로 분기할 것
     void OnEnable()
@@ -77,13 +77,24 @@ public class Faction : MonoBehaviour
             elem.SetFaction(this);
         }
 
-        // isBattle = true;
-        // StartCoroutine(Battle());
+        isBattle = true;
+        StartCoroutine(Battle());
     }
 
     // 스테이지 시작 시 전투 시작 코루틴
     private IEnumerator Battle()
     {
+        yield return null;
+        while (isBattle)
+        {
+            if (enemyOnStage.Count == 0)
+            {
+                isBattle = false;
+                Debug.Log($"{this} faction win");
+                break;
+            }
+            yield return null;
+        }
         yield break;
     }
 

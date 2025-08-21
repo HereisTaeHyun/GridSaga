@@ -65,7 +65,7 @@ public class Warrior : CharacterBase
 
     protected override IEnumerator Attack(CharacterBase target)
     {
-        if (characterState == CharacterState.Die || currentTarget == null)
+        if (characterState == CharacterState.Die)
         {
             yield break;
         }
@@ -78,6 +78,12 @@ public class Warrior : CharacterBase
         // 공격 딜레이 적용
         float wait = GetDelay(CurrentSpeed);
         yield return new WaitForSeconds(wait);
+
+        if (currentTarget == null)
+        {
+            characterState = CharacterState.Idle;
+            yield break;
+        }
 
         // 공격 적용
         anim.SetTrigger(attackHash);
