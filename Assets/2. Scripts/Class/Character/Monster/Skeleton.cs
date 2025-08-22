@@ -9,7 +9,7 @@ public class Skeleton : CharacterBase
 
         attackActiveTime = 0.25f;
         attackEndTime = 0.8f;
-        dieTime = 1.5f;
+        dieTime = 1.1f;
     }
 
     private void Awake()
