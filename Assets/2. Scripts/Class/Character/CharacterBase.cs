@@ -47,10 +47,11 @@ public class CharacterBase : MonoBehaviour
     public virtual bool CanAttack => IsAlive && characterState == CharacterState.Idle;
     public virtual bool CanBeTarget => IsAlive && characterState != CharacterState.Attack;
 
-    // 공격 처리 자연스럽게 하기 위한 변수
+    // 공격 처리, 사망 자연스럽게 하기 위한 변수
     protected float attackActiveTime;
     protected float attackEndTime;
     protected float dieTime;
+    protected bool isDieTriggered;
 
     // 공격 속도 제어
     // 스피드 1 = 0.25초의 딜레이 경감을 가짐
@@ -74,6 +75,7 @@ public class CharacterBase : MonoBehaviour
         currentAttackRange = characterData.BaseAttackRange;
 
         characterState = CharacterState.Idle;
+        isDieTriggered = false;
 
         anim = GetComponent<Animator>();
     }
@@ -97,6 +99,7 @@ public class CharacterBase : MonoBehaviour
         characterState = CharacterState.Idle;
     }
 
+    // 가장 인접한 타겟을 설정
     protected virtual CharacterBase SetTarget()
     {
         if (allyFaction.EnemyOnStage == null || allyFaction.EnemyOnStage.Count == 0)
@@ -165,8 +168,9 @@ public class CharacterBase : MonoBehaviour
     // 데미지를 입은 경우 애니메이션, UI 등 처리
     public virtual IEnumerator ClearGetDamage()
     {
-        if (characterState == CharacterState.Die)
+        if (characterState == CharacterState.Die && isDieTriggered == false)
         {
+            isDieTriggered = true;
             anim.SetTrigger(dieHash);
             yield return new WaitForSeconds(dieTime);
             gameObject.SetActive(false);

@@ -40,6 +40,7 @@ public class Warrior : CharacterBase
         }
     }
 
+    // 타겟을 향해 움직임
     protected override void Move(CharacterBase target)
     {
         Vector2 currentPos = transform.position;
@@ -57,17 +58,19 @@ public class Warrior : CharacterBase
         }
         else if (distance <= currentAttackRange && characterState != CharacterState.Attack)
         {
-            anim.SetBool(isMoveHash, false);
             StartCoroutine(Attack(target));
         }
     }
 
+    // 사거리 내의 적이면 정지 후 공격
     protected override IEnumerator Attack(CharacterBase target)
     {
         if (characterState == CharacterState.Die)
         {
             yield break;
         }
+
+        anim.SetBool(isMoveHash, false);
 
         int damage = GameManager.gameManager.CalculateDamage(this, target);
         currentTarget.GetDamage(damage);
@@ -94,6 +97,7 @@ public class Warrior : CharacterBase
         characterState = CharacterState.Idle;
     }
 
+    // 스킬 사용
     protected override void UseActiveSkill()
     {
         Debug.Log($"{this.name} Active Skill Activated");
@@ -106,6 +110,7 @@ public class Warrior : CharacterBase
         anim.SetTrigger(usePassiveSkillHash);
     }
 
+    // 데미지 처리
     public override void GetDamage(int damage)
     {
         // 데미지는 음수 불가
@@ -118,7 +123,6 @@ public class Warrior : CharacterBase
             Die();
         }
     }
-
     protected override void Die()
     {
         characterState = CharacterState.Die;
