@@ -5,13 +5,11 @@ public class SkillSO : ScriptableObject
 {
     [SerializeField] private int skillId;
     [SerializeField] string skillName;
-    [SerializeField] private float skillCoolDown;
     [SerializeField] private SkillKind skillKind;
     [SerializeField] private string description;
 
     public int SkillId => skillId;
     public string SkillName => skillName;
-    public float SkillCoolDown => skillCoolDown;
     public SkillKind SkillKind => skillKind;
     public string Description => description;
 }

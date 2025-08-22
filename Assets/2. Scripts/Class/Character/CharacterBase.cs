@@ -6,8 +6,8 @@ public class CharacterBase : MonoBehaviour
 {
     [SerializeField] protected CharacterSO characterData;
     public CharacterSO CharacterData => characterData;
-    [SerializeField] protected GameObject ActiveSkill;
-    [SerializeField] protected GameObject PassiveSkill;
+    [SerializeField] protected SkillBase ActiveSkill;
+    [SerializeField] protected SkillBase PassiveSkill;
 
     public enum CharacterState
     {
@@ -59,7 +59,7 @@ public class CharacterBase : MonoBehaviour
     private float minDelay = 0.25f;
     private float maxDelay = 2.5f;
 
-    [SerializeField] protected Faction allyFaction;
+    protected Faction allyFaction;
     protected CharacterBase currentTarget;
 
 
