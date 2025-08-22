@@ -64,18 +64,21 @@ public class Warrior : CharacterBase
             yield break;
         }
 
-        anim.SetBool(isMoveHash, false);
-
-        int damage = GameManager.gameManager.CalculateDamage(this, target);
-        currentTarget.GetDamage(damage);
-
         characterState = CharacterState.Attack;
+        anim.SetBool(isMoveHash, false);
 
         // 공격 딜레이 적용
         float wait = GetDelay(CurrentSpeed);
         yield return new WaitForSeconds(wait);
 
-        if (currentTarget == null)
+        int damage = GameManager.gameManager.CalculateDamage(this, target);
+
+        // 타겟이 존재하면 공격 아니면 Idle
+        if (currentTarget != null)
+        {
+            currentTarget.GetDamage(damage);
+        }
+        else if (currentTarget == null)
         {
             characterState = CharacterState.Idle;
             yield break;

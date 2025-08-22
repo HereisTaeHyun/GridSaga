@@ -15,7 +15,7 @@ MonoBehaviour:
   characterId: 0
   characterName: Warrior
   characterKind: 0
-  baseHp: 50
+  baseHp: 500
   baseDefense: 10
   baseAttack: 10
   baseSpeed: 4

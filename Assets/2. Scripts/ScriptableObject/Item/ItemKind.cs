@@ -1,5 +1,5 @@
 public enum ItemKind
 {
-    consume,
-    equip
+    Consume,
+    Equip
 }

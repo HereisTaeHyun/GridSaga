@@ -1,5 +1,5 @@
 public enum SkillKind
 {
-    passive,
-    active,
+    Passive,
+    Active,
 }

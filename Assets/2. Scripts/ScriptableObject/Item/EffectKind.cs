@@ -1,5 +1,5 @@
 public enum EffectKind
 {
-    percent,
-    flat
+    Percent,
+    Flat
 }

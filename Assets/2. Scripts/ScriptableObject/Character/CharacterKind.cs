@@ -1,5 +1,5 @@
 public enum CharacterKind
 {
-    Playerble,
+    Playable,
     Monster,
 }

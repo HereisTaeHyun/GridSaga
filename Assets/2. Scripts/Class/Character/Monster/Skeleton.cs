@@ -65,15 +65,14 @@ public class Skeleton : CharacterBase
         }
 
         anim.SetBool(isMoveHash, false);
-
-        int damage = GameManager.gameManager.CalculateDamage(this, target);
-        currentTarget.GetDamage(damage);
-
         characterState = CharacterState.Attack;
 
         // 공격 딜레이 적용
         float wait = GetDelay(CurrentSpeed);
         yield return new WaitForSeconds(wait);
+
+        int damage = GameManager.gameManager.CalculateDamage(this, target);
+        currentTarget.GetDamage(damage);
 
         if (currentTarget == null)
         {
