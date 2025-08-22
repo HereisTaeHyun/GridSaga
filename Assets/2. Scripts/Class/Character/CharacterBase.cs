@@ -6,8 +6,8 @@ public class CharacterBase : MonoBehaviour
 {
     [SerializeField] protected CharacterSO characterData;
     public CharacterSO CharacterData => characterData;
-    [SerializeField] protected SkillBase ActiveSkill;
-    [SerializeField] protected SkillBase PassiveSkill;
+    [SerializeField] protected SkillBase activeSkill;
+    [SerializeField] protected SkillBase passiveSkill;
 
     public enum CharacterState
     {
@@ -18,6 +18,7 @@ public class CharacterBase : MonoBehaviour
     }
 
     public CharacterState characterState;
+    protected int maxHp;
     protected int currentHp;
     protected int currentDefense;
     protected int currentAttack;
@@ -25,6 +26,7 @@ public class CharacterBase : MonoBehaviour
     protected float currentCritRate;
     protected float currentAttackRange;
 
+    public int MaxHp => maxHp;
     public int CurrentHp => currentHp;
     public int CurrentDefense => currentDefense;
     public int CurrentAttack => currentAttack;
@@ -61,13 +63,15 @@ public class CharacterBase : MonoBehaviour
 
     protected Faction allyFaction;
     protected CharacterBase currentTarget;
+    protected bool isPassiveTriggered;
 
 
     // init애서 스탯 배정은 이후 DB 권한으로 이전할 것
     // 현재 구조는 클라이언트 로컬 개발에서만 이용
     protected virtual void Init()
     {
-        currentHp = characterData.BaseHp;
+        maxHp = characterData.BaseHp;
+        currentHp = maxHp;
         currentDefense = characterData.BaseDefense;
         currentAttack = characterData.BaseAttack;
         currentSpeed = characterData.BaseSpeed;
@@ -76,6 +80,7 @@ public class CharacterBase : MonoBehaviour
 
         characterState = CharacterState.Idle;
         isDieTriggered = false;
+        isPassiveTriggered = false;
 
         anim = GetComponent<Animator>();
     }
@@ -164,7 +169,7 @@ public class CharacterBase : MonoBehaviour
         float delay = maxDelay - (speed * delayBySpeed);
         return Mathf.Max(minDelay, delay);
     }
-    
+
     // 데미지를 입은 경우 애니메이션, UI 등 처리
     public virtual IEnumerator ClearGetDamage()
     {
@@ -174,6 +179,28 @@ public class CharacterBase : MonoBehaviour
             anim.SetTrigger(dieHash);
             yield return new WaitForSeconds(dieTime);
             gameObject.SetActive(false);
+        }
+    }
+
+    public void ChangeStat(StatKind statKind, int value)
+    {
+        switch (statKind)
+        {
+            case StatKind.hp:
+                currentHp += value;
+                break;
+            case StatKind.defense:
+                currentDefense += value;
+                break;
+            case StatKind.attack:
+                currentAttack += value;
+                break;
+            case StatKind.speed:
+                currentSpeed += value;
+                break;
+            case StatKind.critRate:
+                currentCritRate += value;
+                break;
         }
     }
 }

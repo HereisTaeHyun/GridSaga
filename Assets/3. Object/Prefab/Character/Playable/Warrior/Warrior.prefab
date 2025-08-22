@@ -124,6 +124,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterData: {fileID: 11400000, guid: 26af82e51aef5954dbd8f53df0ccf50e, type: 2}
-  ActiveSkill: {fileID: 0}
-  PassiveSkill: {fileID: 7289002030410035248, guid: bca8adad81c02804b892efded021c25f, type: 3}
+  activeSkill: {fileID: 0}
+  passiveSkill: {fileID: 7289002030410035248, guid: bca8adad81c02804b892efded021c25f, type: 3}
   characterState: 0

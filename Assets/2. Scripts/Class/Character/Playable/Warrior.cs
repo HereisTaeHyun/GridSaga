@@ -17,11 +17,6 @@ public class Warrior : CharacterBase
         Init();
     }
 
-    void Start()
-    {
-
-    }
-
     void FixedUpdate()
     {
         if (currentTarget == null || !currentTarget.gameObject.activeInHierarchy)
@@ -106,6 +101,7 @@ public class Warrior : CharacterBase
     protected override void UsePassiveSkill()
     {
         Debug.Log($"{this.name} Passive Skill Activated");
+        anim.SetBool(isBuffHash, true);
         anim.SetTrigger(usePassiveSkillHash);
     }
 
