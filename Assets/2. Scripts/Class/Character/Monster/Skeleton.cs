@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Warrior : CharacterBase
+public class Skeleton : CharacterBase
 {
     protected override void Init()
     {
@@ -15,11 +15,6 @@ public class Warrior : CharacterBase
     private void Awake()
     {
         Init();
-    }
-
-    void Start()
-    {
-
     }
 
     void FixedUpdate()
@@ -94,19 +89,6 @@ public class Warrior : CharacterBase
 
         yield return new WaitForSeconds(attackEndTime);
         characterState = CharacterState.Idle;
-    }
-
-    // 스킬 사용
-    protected override void UseActiveSkill()
-    {
-        Debug.Log($"{this.name} Active Skill Activated");
-        anim.SetTrigger(useActiveSkillHash);
-    }
-
-    protected override void UsePassiveSkill()
-    {
-        Debug.Log($"{this.name} Passive Skill Activated");
-        anim.SetTrigger(usePassiveSkillHash);
     }
 
     // 데미지 처리
