@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f69224c395a6da54e8851de8bf6f500f, type: 3}
   m_Name: Warrior
   m_EditorClassIdentifier: 
-  characterId: 1
+  characterId: 0
   characterName: Warrior
   baseHp: 20
   baseDefense: 10
   baseAttack: 10
   baseSpeed: 4
   baseCritRate: 10
+  baseAttackRange: 2
   passiveSkillId: 0
   activeSkillId: 0

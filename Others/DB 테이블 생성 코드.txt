@@ -22,6 +22,12 @@ Enum stat_kind {
   crit_rate
 }
 
+Enum CharacterKind
+{
+    Playerble,
+    Monster,
+}
+
 /* ---------- 기본 엔티티 ---------- */
 
 Table Users {
@@ -58,10 +64,10 @@ Table Skill {
 Table Character {
   char_id   int         [pk, increment]
   char_name varchar(50) [unique, not null]
+CharacterKind characterKind [not null]
   hp        int         [not null]
   defense   int         [not null]
   attack    int         [not null]
-  attack_cool_time decimal(5,2)             [not null]
   speed int [not null]    
   crit_rate decimal(5,2) [not null]       // 0–100
 

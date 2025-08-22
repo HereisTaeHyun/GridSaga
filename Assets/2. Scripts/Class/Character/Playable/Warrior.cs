@@ -11,7 +11,6 @@ public class Warrior : CharacterBase
         attackActiveTime = 0.25f;
         attackEndTime = 0.8f;
         dieTime = 1.5f;
-        attackRange = 2.0f;
     }
 
     private void Awake()
@@ -51,12 +50,12 @@ public class Warrior : CharacterBase
         anim.SetFloat(moveXHash, dir.x);
         anim.SetFloat(moveYHash, dir.y);
 
-        if (distance > attackRange)
+        if (distance > currentAttackRange)
         {
             anim.SetBool(isMoveHash, true);
             transform.position = Vector2.MoveTowards(transform.position, target.transform.position, currentSpeed * Time.deltaTime);
         }
-        else if (distance <= attackRange && characterState != CharacterState.Attack)
+        else if (distance <= currentAttackRange && characterState != CharacterState.Attack)
         {
             anim.SetBool(isMoveHash, false);
             StartCoroutine(Attack(target));

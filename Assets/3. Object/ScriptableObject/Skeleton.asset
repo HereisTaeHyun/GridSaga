@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f69224c395a6da54e8851de8bf6f500f, type: 3}
   m_Name: Skeleton
   m_EditorClassIdentifier: 
-  characterId: 2
+  characterId: 0
   characterName: Skeleton
+  characterKind: 1
   baseHp: 10
   baseDefense: 2
   baseAttack: 10
   baseSpeed: 2
   baseCritRate: 10
+  baseAttackRange: 0
   passiveSkillId: 0
   activeSkillId: 0

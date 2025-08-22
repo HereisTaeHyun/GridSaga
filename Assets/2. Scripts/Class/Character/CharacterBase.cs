@@ -23,12 +23,14 @@ public class CharacterBase : MonoBehaviour
     protected int currentAttack;
     protected int currentSpeed;
     protected float currentCritRate;
+    protected float currentAttackRange;
 
     public int CurrentHp => currentHp;
     public int CurrentDefense => currentDefense;
     public int CurrentAttack => currentAttack;
     public int CurrentSpeed => currentSpeed;
     public float CurrentCritRate => currentCritRate;
+    public float CurrentAttackRange => currentAttackRange;
 
     protected Animator anim;
     protected readonly int moveXHash = Animator.StringToHash("MoveX");
@@ -49,7 +51,6 @@ public class CharacterBase : MonoBehaviour
     protected float attackActiveTime;
     protected float attackEndTime;
     protected float dieTime;
-    protected float attackRange;
 
     // 공격 속도 제어
     // 스피드 1 = 0.25초의 딜레이 경감을 가짐
@@ -70,6 +71,7 @@ public class CharacterBase : MonoBehaviour
         currentAttack = characterData.BaseAttack;
         currentSpeed = characterData.BaseSpeed;
         currentCritRate = characterData.BaseCritRate;
+        currentAttackRange = characterData.BaseAttackRange;
 
         characterState = CharacterState.Idle;
 

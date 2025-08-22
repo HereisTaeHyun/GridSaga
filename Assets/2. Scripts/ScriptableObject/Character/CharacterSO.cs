@@ -5,21 +5,25 @@ public class CharacterSO : ScriptableObject
 {
     [SerializeField] private int characterId;
     [SerializeField] private string characterName;
+    [SerializeField] private CharacterKind characterKind;
     [SerializeField] private int baseHp;
     [SerializeField] private int baseDefense;
     [SerializeField] private int baseAttack;
     [SerializeField] private int baseSpeed;
     [SerializeField] private float baseCritRate;
+    [SerializeField] private float baseAttackRange;
     [SerializeField] private int passiveSkillId;
     [SerializeField] private int activeSkillId;
 
     public int CharacterId => characterId;
     public string CharacterName => characterName;
+    public CharacterKind CharacterKind => characterKind;
     public int BaseHp => baseHp;
     public int BaseDefense => baseDefense;
     public int BaseAttack => baseAttack;
     public int BaseSpeed => baseSpeed;
     public float BaseCritRate => baseCritRate;
+    public float BaseAttackRange => baseAttackRange;
     public int PassiveSkillId => passiveSkillId;
     public int ActiveSkillId => activeSkillId;
 }
