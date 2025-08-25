@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Data.Common;
 using UnityEngine;
 
 public class Warrior : CharacterBase
@@ -74,21 +75,20 @@ public class Warrior : CharacterBase
         int damage = GameManager.gameManager.CalculateDamage(this, target);
 
         // 타겟이 존재하면 공격 아니면 Idle
-        if (currentTarget != null)
-        {
-            currentTarget.GetDamage(damage);
-        }
-        else if (currentTarget == null)
+        if (currentTarget == null)
         {
             characterState = CharacterState.Idle;
             yield break;
         }
 
+        var damageData = currentTarget.GetDamage(this, target, damage);
+
         // 공격 적용
         anim.SetTrigger(attackHash);
         yield return new WaitForSeconds(attackActiveTime);
 
-        StartCoroutine(currentTarget.ClearGetDamage());
+        target.InvokeDamageDataEvent(damageData);
+        // StartCoroutine(currentTarget.ClearGetDamage());
 
         yield return new WaitForSeconds(attackEndTime);
         characterState = CharacterState.Idle;
@@ -109,17 +109,19 @@ public class Warrior : CharacterBase
     }
 
     // 데미지 처리
-    public override void GetDamage(int damage)
+    public override DamageDataBus GetDamage(CharacterBase attacker, CharacterBase target, int damage)
     {
         // 데미지는 음수 불가
         int safeDamage = Mathf.Max(0, damage);
 
-        // hp 차감 후 0 이하면 사망
         currentHp -= safeDamage;
         if (currentHp <= 0)
         {
             Die();
         }
+
+        var damageData = new DamageDataBus(attacker, target, safeDamage, currentHp);
+        return damageData;
     }
     protected override void Die()
     {

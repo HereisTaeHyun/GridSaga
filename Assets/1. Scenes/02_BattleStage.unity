@@ -1253,11 +1253,6 @@ MonoBehaviour:
   factionId: 1
   partyPrefabs:
   - {fileID: 5851899068330569364, guid: b04d2426019fb7a40b7d207b8f67935b, type: 3}
-  - {fileID: 5851899068330569364, guid: b04d2426019fb7a40b7d207b8f67935b, type: 3}
-  - {fileID: 5851899068330569364, guid: b04d2426019fb7a40b7d207b8f67935b, type: 3}
-  - {fileID: 5851899068330569364, guid: b04d2426019fb7a40b7d207b8f67935b, type: 3}
-  - {fileID: 5851899068330569364, guid: b04d2426019fb7a40b7d207b8f67935b, type: 3}
-  - {fileID: 5851899068330569364, guid: b04d2426019fb7a40b7d207b8f67935b, type: 3}
   board: {fileID: 1216142193}
 --- !u!1 &1812999344
 GameObject:

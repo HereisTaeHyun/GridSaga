@@ -72,7 +72,17 @@ public class Skeleton : CharacterBase
         yield return new WaitForSeconds(wait);
 
         int damage = GameManager.gameManager.CalculateDamage(this, target);
-        currentTarget.GetDamage(damage);
+        
+        // 타겟이 존재하면 공격 아니면 Idle
+        if (currentTarget != null)
+        {
+            var damageData = currentTarget.GetDamage(this, target, damage);
+        }
+        else if (currentTarget == null)
+        {
+            characterState = CharacterState.Idle;
+            yield break;
+        }
 
         if (currentTarget == null)
         {
@@ -84,14 +94,14 @@ public class Skeleton : CharacterBase
         anim.SetTrigger(attackHash);
         yield return new WaitForSeconds(attackActiveTime);
 
-        StartCoroutine(currentTarget.ClearGetDamage());
+        // StartCoroutine(currentTarget.ClearGetDamage());
 
         yield return new WaitForSeconds(attackEndTime);
         characterState = CharacterState.Idle;
     }
 
     // 데미지 처리
-    public override void GetDamage(int damage)
+    public override DamageDataBus GetDamage(CharacterBase attacker, CharacterBase target, int damage)
     {
         // 데미지는 음수 불가
         int safeDamage = Mathf.Max(0, damage);
@@ -102,6 +112,9 @@ public class Skeleton : CharacterBase
         {
             Die();
         }
+
+        var damageData = new DamageDataBus(attacker, target, safeDamage, currentHp);
+        return damageData;
     }
     protected override void Die()
     {

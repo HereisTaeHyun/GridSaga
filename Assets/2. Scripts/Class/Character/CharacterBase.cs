@@ -2,6 +2,25 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+// 이벤트 전달 용 데이터 버스, UI나 애니메이션 재생이나 트리거 등 HP 사용하는 요소들이 구독하게 할 것
+public readonly struct DamageDataBus
+{
+    public readonly CharacterBase attacker;
+    public readonly CharacterBase target;
+    public readonly int damage;
+    public readonly int currentHp;
+    public readonly bool isDied;
+
+    public DamageDataBus(CharacterBase attackerParam, CharacterBase targetParam, int damageParam, int currentHpParam)
+    {
+        attacker = attackerParam;
+        target = targetParam;
+        damage = damageParam;
+        currentHp = currentHpParam;
+        isDied = currentHp <= 0;
+    }
+}
+
 public class CharacterBase : MonoBehaviour
 {
     [SerializeField] protected CharacterSO characterData;
@@ -54,6 +73,7 @@ public class CharacterBase : MonoBehaviour
     protected float attackEndTime;
     protected float dieTime;
     protected bool isDieTriggered;
+    public event Action<DamageDataBus> DamageData;
 
     // 공격 속도 제어
     // 스피드 1 = 0.25초의 딜레이 경감을 가짐
@@ -83,6 +103,16 @@ public class CharacterBase : MonoBehaviour
         isPassiveTriggered = false;
 
         anim = GetComponent<Animator>();
+    }
+
+    void OnEnable()
+    {
+        DamageData += ApplyDamageFeedback;
+    }
+
+    void OnDisable()
+    {
+        DamageData -= ApplyDamageFeedback;
     }
 
     // 타겟을 향해 이동
@@ -139,9 +169,25 @@ public class CharacterBase : MonoBehaviour
     }
 
     // 데미지 입음
-    public virtual void GetDamage(int damage)
+    public virtual DamageDataBus GetDamage(CharacterBase attacker, CharacterBase target, int damage)
     {
+        // 데미지는 음수 불가
+        int safeDamage = Mathf.Max(0, damage);
 
+        // hp 차감 후 0 이하면 사망
+        currentHp -= safeDamage;
+        if (currentHp <= 0)
+        {
+            Die();
+        }
+
+        var damageData = new DamageDataBus(attacker, target, safeDamage, currentHp);
+        return damageData;
+    }
+
+    public void InvokeDamageDataEvent(DamageDataBus damageData)
+    {
+        DamageData?.Invoke(damageData);
     }
 
     // 사망 처리
@@ -171,7 +217,14 @@ public class CharacterBase : MonoBehaviour
     }
 
     // 데미지를 입은 경우 애니메이션, UI 등 처리
-    public virtual IEnumerator ClearGetDamage()
+    private void ApplyDamageFeedback(DamageDataBus damageData)
+    {
+        if (damageData.isDied)
+        {
+            StartCoroutine(ApplyDieAnim());
+        }
+    }
+    public virtual IEnumerator ApplyDieAnim()
     {
         if (characterState == CharacterState.Die && isDieTriggered == false)
         {
