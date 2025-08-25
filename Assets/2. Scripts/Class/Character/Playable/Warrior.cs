@@ -88,24 +88,24 @@ public class Warrior : CharacterBase
         yield return new WaitForSeconds(attackActiveTime);
 
         target.InvokeDamageDataEvent(damageData);
-        // StartCoroutine(currentTarget.ClearGetDamage());
 
         yield return new WaitForSeconds(attackEndTime);
         characterState = CharacterState.Idle;
     }
 
     // 스킬 사용
-    protected override void UseActiveSkill()
+    public override void UseActiveSkill()
     {
         Debug.Log($"{this.name} Active Skill Activated");
         anim.SetTrigger(useActiveSkillHash);
     }
 
-    protected override void UsePassiveSkill()
+    public override void UsePassiveSkill()
     {
         Debug.Log($"{this.name} Passive Skill Activated");
+        isPassiveTriggered = true;
         anim.SetBool(isBuffHash, true);
-        anim.SetTrigger(usePassiveSkillHash);
+        anim.SetTrigger(usePassiveSkillHash);   
     }
 
     // 데미지 처리
@@ -127,6 +127,5 @@ public class Warrior : CharacterBase
     {
         characterState = CharacterState.Die;
         allyFaction.RemoveDiedUnit(this);
-        StopAllCoroutines();
     }
 }

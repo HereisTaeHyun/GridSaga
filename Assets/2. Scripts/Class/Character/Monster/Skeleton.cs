@@ -64,37 +64,29 @@ public class Skeleton : CharacterBase
             yield break;
         }
 
-        anim.SetBool(isMoveHash, false);
         characterState = CharacterState.Attack;
+        anim.SetBool(isMoveHash, false);
 
         // 공격 딜레이 적용
         float wait = GetDelay(CurrentSpeed);
         yield return new WaitForSeconds(wait);
 
         int damage = GameManager.gameManager.CalculateDamage(this, target);
-        
-        // 타겟이 존재하면 공격 아니면 Idle
-        if (currentTarget != null)
-        {
-            var damageData = currentTarget.GetDamage(this, target, damage);
-        }
-        else if (currentTarget == null)
-        {
-            characterState = CharacterState.Idle;
-            yield break;
-        }
 
+        // 타겟이 존재하면 공격 아니면 Idle
         if (currentTarget == null)
         {
             characterState = CharacterState.Idle;
             yield break;
         }
 
+        var damageData = currentTarget.GetDamage(this, target, damage);
+
         // 공격 적용
         anim.SetTrigger(attackHash);
         yield return new WaitForSeconds(attackActiveTime);
 
-        // StartCoroutine(currentTarget.ClearGetDamage());
+        target.InvokeDamageDataEvent(damageData);
 
         yield return new WaitForSeconds(attackEndTime);
         characterState = CharacterState.Idle;
@@ -106,7 +98,6 @@ public class Skeleton : CharacterBase
         // 데미지는 음수 불가
         int safeDamage = Mathf.Max(0, damage);
 
-        // hp 차감 후 0 이하면 사망
         currentHp -= safeDamage;
         if (currentHp <= 0)
         {
@@ -120,6 +111,5 @@ public class Skeleton : CharacterBase
     {
         characterState = CharacterState.Die;
         allyFaction.RemoveDiedUnit(this);
-        StopAllCoroutines();
     }
 }

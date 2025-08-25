@@ -73,7 +73,7 @@ public class CharacterBase : MonoBehaviour
     protected float attackEndTime;
     protected float dieTime;
     protected bool isDieTriggered;
-    public event Action<DamageDataBus> DamageData;
+    public event Action<DamageDataBus> SendDamageData;
 
     // 공격 속도 제어
     // 스피드 1 = 0.25초의 딜레이 경감을 가짐
@@ -83,7 +83,7 @@ public class CharacterBase : MonoBehaviour
 
     protected Faction allyFaction;
     protected CharacterBase currentTarget;
-    protected bool isPassiveTriggered;
+    public bool isPassiveTriggered;
 
 
     // init애서 스탯 배정은 이후 DB 권한으로 이전할 것
@@ -107,12 +107,12 @@ public class CharacterBase : MonoBehaviour
 
     void OnEnable()
     {
-        DamageData += ApplyDamageFeedback;
+        SendDamageData += ApplyDamageFeedback;
     }
 
     void OnDisable()
     {
-        DamageData -= ApplyDamageFeedback;
+        SendDamageData -= ApplyDamageFeedback;
     }
 
     // 타겟을 향해 이동
@@ -158,12 +158,12 @@ public class CharacterBase : MonoBehaviour
     }
 
     // 스킬 사용
-    protected virtual void UseActiveSkill()
+    public virtual void UseActiveSkill()
     {
 
     }
 
-    protected virtual void UsePassiveSkill()
+    public virtual void UsePassiveSkill()
     {
 
     }
@@ -187,7 +187,7 @@ public class CharacterBase : MonoBehaviour
 
     public void InvokeDamageDataEvent(DamageDataBus damageData)
     {
-        DamageData?.Invoke(damageData);
+        SendDamageData?.Invoke(damageData);
     }
 
     // 사망 처리

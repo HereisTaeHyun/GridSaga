@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillData: {fileID: 11400000, guid: c5e6daa95e6bec74c9052013c09aab17, type: 2}
-  statKind: 3
+  statKind: 2
