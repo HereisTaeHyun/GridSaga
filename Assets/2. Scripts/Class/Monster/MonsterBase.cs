@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MonsterBase : MonoBehaviour, ICombat
 {
-    [SerializeField] protected CharacterSO characterData;
-    public CharacterSO CharacterData => characterData;
+    [SerializeField] protected CharacterSO monsterData;
+    public CharacterSO MonsterData => monsterData;
     [SerializeField] protected SkillBase activeSkill;
     [SerializeField] protected SkillBase passiveSkill;
 
@@ -72,13 +72,13 @@ public class MonsterBase : MonoBehaviour, ICombat
     // 현재 구조는 클라이언트 로컬 개발에서만 이용
     protected virtual void Init()
     {
-        maxHp = characterData.BaseHp;
+        maxHp = monsterData.BaseHp;
         currentHp = maxHp;
-        currentDefense = characterData.BaseDefense;
-        currentAttack = characterData.BaseAttack;
-        currentSpeed = characterData.BaseSpeed;
-        currentCritRate = characterData.BaseCritRate;
-        currentAttackRange = characterData.BaseAttackRange;
+        currentDefense = monsterData.BaseDefense;
+        currentAttack = monsterData.BaseAttack;
+        currentSpeed = monsterData.BaseSpeed;
+        currentCritRate = monsterData.BaseCritRate;
+        currentAttackRange = monsterData.BaseAttackRange;
 
         monsterState = MonsterState.Idle;
         isDieTriggered = false;
