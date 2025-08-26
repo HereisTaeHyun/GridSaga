@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class UtilityManager : MonoBehaviour
 {
     private AudioSource audioSource;
+    private int defenseTuningFactor = 50;
+
     public static UtilityManager utility = null;
     void Awake()
     {
@@ -24,7 +26,43 @@ public class UtilityManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-     public Vector2 DirSet(Vector2 move)
+    // 데미지 계산 함수
+    public int CalculateDamage(ICombat attacker, ICombat target)
+    {
+        // 계산 필요 로직 정리
+        float atk = Mathf.Max(0f, attacker.CurrentAttack);
+        float def = Mathf.Max(0f, target.CurrentDefense);
+        bool isCrit = CalculateIsCrit(attacker);
+
+        // 크리티컬 여부에 따라 atk 분리
+        if (isCrit)
+        {
+            atk = attacker.CurrentAttack * 2;
+        }
+        else
+        {
+            atk = attacker.CurrentAttack;
+        }
+
+        // 방어도에 따른 차감
+        float K = Mathf.Max(0.0001f, defenseTuningFactor);
+        float damageMultiplier = K / (def + K);
+        float rawDamage = atk * damageMultiplier;
+        int damage = Mathf.Max(1, Mathf.FloorToInt(rawDamage));
+        return damage;
+    }
+    private bool CalculateIsCrit(ICombat attacker)
+    {
+        float rollPercent = Random.Range(0.0f, 100.0f);
+        if (rollPercent - attacker.CurrentCritRate <= 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    // 방향 설정 함수
+    public Vector2 DirSet(Vector2 move)
     {
         Vector2 moveDir = new Vector2(0, 0);
         if (Mathf.Approximately(move.x, 0) == false || Mathf.Approximately(0, move.y) == false)

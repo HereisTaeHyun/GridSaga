@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class MonsterBase : MonoBehaviour, ICombat
 {
     [SerializeField] protected CharacterSO monsterData;
@@ -46,8 +47,7 @@ public class MonsterBase : MonoBehaviour, ICombat
 
 
     public bool IsAlive => currentHp > 0 && monsterState != MonsterState.Die && gameObject.activeInHierarchy;
-    public virtual bool CanAttack => IsAlive && monsterState == MonsterState.Idle;
-    public virtual bool CanBeTarget => IsAlive && monsterState != MonsterState.Attack;
+
 
     // 공격 처리, 사망 자연스럽게 하기 위한 변수
     protected float attackActiveTime;
@@ -58,9 +58,9 @@ public class MonsterBase : MonoBehaviour, ICombat
 
     // 공격 속도 제어
     // 스피드 1 = 0.25초의 딜레이 경감을 가짐
-    private float delayBySpeed = 0.25f;
-    private float minDelay = 0.25f;
-    private float maxDelay = 2.5f;
+    private readonly float delayBySpeed = 0.25f;
+    private readonly float minDelay = 0.25f;
+    private readonly float maxDelay = 2.5f;
 
     protected CharacterBase currentTarget;
     protected bool isPassiveTriggered;

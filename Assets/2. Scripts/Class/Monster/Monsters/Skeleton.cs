@@ -42,6 +42,7 @@ public class Skeleton : MonsterBase
             yield break;
         }
 
+
         monsterState = MonsterState.Attack;
         anim.SetBool(isMoveHash, false);
 
@@ -49,7 +50,7 @@ public class Skeleton : MonsterBase
         float wait = GetDelay(CurrentSpeed);
         yield return new WaitForSeconds(wait);
 
-        int damage = GameManager.gameManager.CalculateDamage(this, target);
+        int damage = UtilityManager.utility.CalculateDamage(this, target);
 
         // 타겟이 존재하면 공격 아니면 Idle
         if (currentTarget == null)
