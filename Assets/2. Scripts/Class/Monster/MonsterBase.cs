@@ -104,6 +104,8 @@ public class MonsterBase : MonoBehaviour, ICombat
     // 타겟을 향해 이동
     protected virtual void Move(ICombat target)
     {
+        if (!isPlayerInSight)   return;
+
         Vector2 currentPos = transform.position;
         Vector2 targetPos = target.Position;
         float distance = Vector2.Distance(transform.position, target.Position);

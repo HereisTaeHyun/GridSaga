@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -4338256863595976453}
   m_Layer: 6
   m_Name: Warrior
-  m_TagString: Unit
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
