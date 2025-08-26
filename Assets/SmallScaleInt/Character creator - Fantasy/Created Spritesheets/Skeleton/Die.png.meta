@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 504de366111d4c841ba8230c7c6ddf1b
+guid: 3c0dde7fac9a8c0419c1026ce95e2196
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -371,21 +371,6 @@ TextureImporter:
   - first:
       213: 8676406376118417166
     second: Die_122
-  - first:
-      213: -119470956423274006
-    second: Die_123
-  - first:
-      213: 4922513427070550373
-    second: Die_124
-  - first:
-      213: 4569069248878455315
-    second: Die_125
-  - first:
-      213: -3112751181332475632
-    second: Die_126
-  - first:
-      213: -5681170976684760850
-    second: Die_127
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -405,7 +390,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -432,7 +417,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 24
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -470,32 +455,6 @@ TextureImporter:
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -818,9 +777,9 @@ TextureImporter:
       name: Die_0_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 0
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1148,9 +1107,9 @@ TextureImporter:
       name: Die_1_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 128
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1478,9 +1437,9 @@ TextureImporter:
       name: Die_2_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 256
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1808,9 +1767,9 @@ TextureImporter:
       name: Die_3_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 384
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -2138,9 +2097,9 @@ TextureImporter:
       name: Die_4_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 512
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -2468,9 +2427,9 @@ TextureImporter:
       name: Die_5_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 640
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -2798,9 +2757,9 @@ TextureImporter:
       name: Die_6_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 768
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -3128,9 +3087,9 @@ TextureImporter:
       name: Die_7_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 896
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -3150,7 +3109,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e2761bb761d5e9540886f6dace45e83f
     internalID: 0
     vertices: []
     indices: 

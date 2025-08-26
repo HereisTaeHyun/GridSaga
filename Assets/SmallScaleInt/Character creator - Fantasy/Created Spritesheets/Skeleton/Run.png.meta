@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6857336c0337ca04c82b9bac2bad5972
+guid: fbf5ad9f34e0cee479a0cf67d9f0d53a
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -377,21 +377,6 @@ TextureImporter:
   - first:
       213: 8694099520168609047
     second: Run_124
-  - first:
-      213: 3937765628439937384
-    second: Run_125
-  - first:
-      213: 6856443933869065858
-    second: Run_126
-  - first:
-      213: 7623223168669964114
-    second: Run_127
-  - first:
-      213: 8010066694699260866
-    second: Run_128
-  - first:
-      213: -5366022883631562041
-    second: Run_129
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -411,7 +396,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -438,7 +423,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 24
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -476,32 +461,6 @@ TextureImporter:
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -824,9 +783,9 @@ TextureImporter:
       name: Run_0_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 0
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1154,9 +1113,9 @@ TextureImporter:
       name: Run_1_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 128
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1484,9 +1443,9 @@ TextureImporter:
       name: Run_2_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 256
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1814,9 +1773,9 @@ TextureImporter:
       name: Run_3_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 384
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -2144,9 +2103,9 @@ TextureImporter:
       name: Run_4_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 512
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -2474,9 +2433,9 @@ TextureImporter:
       name: Run_5_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 640
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -2804,9 +2763,9 @@ TextureImporter:
       name: Run_6_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 768
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -3134,9 +3093,9 @@ TextureImporter:
       name: Run_7_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 896
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -3156,7 +3115,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a70b798e258cb404eaa84ac060cd4d54
     internalID: 0
     vertices: []
     indices: 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 98d88ca1d11aba64cb46fbf4563d172c
+guid: 7ddd980100414d043a494f66a55a6a8e
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -377,39 +377,6 @@ TextureImporter:
   - first:
       213: -8387388449913569581
     second: TakeDamage_124
-  - first:
-      213: 3333767982840327191
-    second: TakeDamage_125
-  - first:
-      213: -2341488958525689473
-    second: TakeDamage_126
-  - first:
-      213: -1669362365361396288
-    second: TakeDamage_127
-  - first:
-      213: 2648129043793038829
-    second: TakeDamage_128
-  - first:
-      213: -1855085993575656789
-    second: TakeDamage_129
-  - first:
-      213: 221516902693679395
-    second: TakeDamage_130
-  - first:
-      213: 4004446727670048451
-    second: TakeDamage_131
-  - first:
-      213: 277044518020848138
-    second: TakeDamage_132
-  - first:
-      213: 1546222303217567028
-    second: TakeDamage_133
-  - first:
-      213: -7090382685696856103
-    second: TakeDamage_134
-  - first:
-      213: 6175972491589313664
-    second: TakeDamage_135
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -429,7 +396,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -456,7 +423,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 24
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -494,32 +461,6 @@ TextureImporter:
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -842,9 +783,9 @@ TextureImporter:
       name: TakeDamage_0_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 0
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1172,9 +1113,9 @@ TextureImporter:
       name: TakeDamage_1_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 128
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1502,9 +1443,9 @@ TextureImporter:
       name: TakeDamage_2_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 256
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1832,9 +1773,9 @@ TextureImporter:
       name: TakeDamage_3_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 384
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -2162,9 +2103,9 @@ TextureImporter:
       name: TakeDamage_4_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 512
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -2492,9 +2433,9 @@ TextureImporter:
       name: TakeDamage_5_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 640
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -2822,9 +2763,9 @@ TextureImporter:
       name: TakeDamage_6_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 768
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -3152,9 +3093,9 @@ TextureImporter:
       name: TakeDamage_7_14
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1791
         y: 896
-        width: 128
+        width: 1
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -3174,7 +3115,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 949866c283f627841a43986fbceb8419
     internalID: 0
     vertices: []
     indices: 

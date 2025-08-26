@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e0c7f682cbd676047a68a981ef3fee23
+guid: 7a4334ffb0688a74c9429ee6a5385e9b
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -407,33 +407,6 @@ TextureImporter:
   - first:
       213: 5782283137749627157
     second: Attack1_134
-  - first:
-      213: 6994288245527401180
-    second: Attack1_135
-  - first:
-      213: 4262236762411524773
-    second: Attack1_136
-  - first:
-      213: -8361737461494316284
-    second: Attack1_137
-  - first:
-      213: -7680449789997754370
-    second: Attack1_138
-  - first:
-      213: -9037692208813380345
-    second: Attack1_139
-  - first:
-      213: 3881440284630054050
-    second: Attack1_140
-  - first:
-      213: 2588888895414917022
-    second: Attack1_141
-  - first:
-      213: 7860758102519084910
-    second: Attack1_142
-  - first:
-      213: -5543123684540566779
-    second: Attack1_143
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -480,7 +453,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 24
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -518,32 +491,6 @@ TextureImporter:
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -3198,7 +3145,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: fe2ceb3a80ae04649aab0c7e78056dce
+    spriteID: 269c075baad46fd4696475c105e53040
     internalID: 0
     vertices: []
     indices: 
