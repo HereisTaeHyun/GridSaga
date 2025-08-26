@@ -1092,7 +1092,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   factionId: 0
   partyPrefabs:
-  - {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
+  - {fileID: 5270673007346567269, guid: 9ed5c70926e59b64da4cf73c22b65cdd, type: 3}
   board: {fileID: 1216142193}
 --- !u!1 &1424194523
 GameObject:
@@ -1252,6 +1252,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   factionId: 1
   partyPrefabs:
+  - {fileID: 6750571592902007509, guid: 00c7d89de768be449956c80b89ab6520, type: 3}
+  - {fileID: 6750571592902007509, guid: 00c7d89de768be449956c80b89ab6520, type: 3}
+  - {fileID: 6750571592902007509, guid: 00c7d89de768be449956c80b89ab6520, type: 3}
   - {fileID: 6750571592902007509, guid: 00c7d89de768be449956c80b89ab6520, type: 3}
   - {fileID: 6750571592902007509, guid: 00c7d89de768be449956c80b89ab6520, type: 3}
   - {fileID: 6750571592902007509, guid: 00c7d89de768be449956c80b89ab6520, type: 3}
