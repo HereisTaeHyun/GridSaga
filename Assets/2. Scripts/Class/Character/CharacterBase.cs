@@ -154,7 +154,7 @@ public class CharacterBase : MonoBehaviour, ICombat
     }
 
 
-    // 스피드에 따른 딜레이 처리
+    // 스피드에 따른 공격 딜레이 처리
     protected float GetDelay(int speed)
     {
         speed = Mathf.Max(0, speed);

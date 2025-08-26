@@ -67,6 +67,10 @@ public class MonsterBase : MonoBehaviour, ICombat
     public bool IsPassiveTriggered => isPassiveTriggered;
     public Vector3 Position => transform.position;
 
+    // 플레이어야 시야에 있는지 처리하기 위한 변수
+    protected float sightRange;
+    protected bool isPlayerInSight;
+
 
     // init애서 스탯 배정은 이후 DB 권한으로 이전할 것
     // 현재 구조는 클라이언트 로컬 개발에서만 이용
@@ -179,7 +183,7 @@ public class MonsterBase : MonoBehaviour, ICombat
     }
 
 
-    // 스피드에 따른 딜레이 처리
+    // 스피드에 따른 공격 딜레이 처리
     protected float GetDelay(int speed)
     {
         speed = Mathf.Max(0, speed);
