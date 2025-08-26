@@ -1251,7 +1251,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   factionId: 1
-  partyPrefabs: []
+  partyPrefabs:
+  - {fileID: 6750571592902007509, guid: 00c7d89de768be449956c80b89ab6520, type: 3}
+  - {fileID: 6750571592902007509, guid: 00c7d89de768be449956c80b89ab6520, type: 3}
+  - {fileID: 6750571592902007509, guid: 00c7d89de768be449956c80b89ab6520, type: 3}
   board: {fileID: 1216142193}
 --- !u!1 &1812999344
 GameObject:

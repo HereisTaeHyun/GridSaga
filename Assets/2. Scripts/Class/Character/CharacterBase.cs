@@ -83,7 +83,8 @@ public class CharacterBase : MonoBehaviour
 
     protected Faction allyFaction;
     protected CharacterBase currentTarget;
-    public bool isPassiveTriggered;
+    protected bool isPassiveTriggered;
+    public bool IsPassiveTriggered => isPassiveTriggered;
 
 
     // init애서 스탯 배정은 이후 DB 권한으로 이전할 것
