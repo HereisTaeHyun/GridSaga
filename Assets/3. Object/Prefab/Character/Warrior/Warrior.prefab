@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 7041691816502467634}
   - component: {fileID: 4018502027342716680}
   - component: {fileID: -4338256863595976453}
-  - component: {fileID: 254886058362001781}
-  - component: {fileID: 8138882892016141953}
   m_Layer: 6
   m_Name: Warrior
   m_TagString: Unit
@@ -112,34 +110,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &254886058362001781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2811252633809056702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f583c61863d031a4c921cd1ab5d69991, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterData: {fileID: 11400000, guid: 26af82e51aef5954dbd8f53df0ccf50e, type: 2}
-  activeSkill: {fileID: 0}
-  passiveSkill: {fileID: 8138882892016141953}
-  characterState: 0
---- !u!114 &8138882892016141953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2811252633809056702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4d789fcc8c82354382be1e436d6786b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 254886058362001781}
-  skillData: {fileID: 11400000, guid: c5e6daa95e6bec74c9052013c09aab17, type: 2}
-  statKind: 2

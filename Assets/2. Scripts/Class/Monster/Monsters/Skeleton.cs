@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Skeleton : CharacterBase
+public class Skeleton : MonsterBase
 {
     protected override void Init()
     {
@@ -34,37 +34,15 @@ public class Skeleton : CharacterBase
         }
     }
 
-    // 타겟을 향해 움직임
-    protected override void Move(CharacterBase target)
-    {
-        Vector2 currentPos = transform.position;
-        Vector2 targetPos = target.transform.position;
-        float distance = Vector2.Distance(transform.position, target.transform.position);
-
-        Vector2 dir = UtilityManager.utility.DirSet(targetPos - currentPos);
-        anim.SetFloat(moveXHash, dir.x);
-        anim.SetFloat(moveYHash, dir.y);
-
-        if (distance > currentAttackRange)
-        {
-            anim.SetBool(isMoveHash, true);
-            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, currentSpeed * Time.deltaTime);
-        }
-        else if (distance <= currentAttackRange && characterState != CharacterState.Attack)
-        {
-            StartCoroutine(Attack(target));
-        }
-    }
-
     // 사거리 내의 적이면 정지 후 공격
-    protected override IEnumerator Attack(CharacterBase target)
+    protected override IEnumerator Attack(ICombat target)
     {
-        if (characterState == CharacterState.Die)
+        if (monsterState == MonsterState.Die)
         {
             yield break;
         }
 
-        characterState = CharacterState.Attack;
+        monsterState = MonsterState.Attack;
         anim.SetBool(isMoveHash, false);
 
         // 공격 딜레이 적용
@@ -76,7 +54,7 @@ public class Skeleton : CharacterBase
         // 타겟이 존재하면 공격 아니면 Idle
         if (currentTarget == null)
         {
-            characterState = CharacterState.Idle;
+            monsterState = MonsterState.Idle;
             yield break;
         }
 
@@ -89,11 +67,11 @@ public class Skeleton : CharacterBase
         target.InvokeDamageDataEvent(damageData);
 
         yield return new WaitForSeconds(attackEndTime);
-        characterState = CharacterState.Idle;
+        monsterState = MonsterState.Idle;
     }
 
     // 데미지 처리
-    public override DamageDataBus GetDamage(CharacterBase attacker, CharacterBase target, int damage)
+    public override DamageDataBus GetDamage(ICombat attacker,ICombat target, int damage)
     {
         // 데미지는 음수 불가
         int safeDamage = Mathf.Max(0, damage);
@@ -109,7 +87,6 @@ public class Skeleton : CharacterBase
     }
     protected override void Die()
     {
-        characterState = CharacterState.Die;
-        allyFaction.RemoveDiedUnit(this);
+        monsterState = MonsterState.Die;
     }
 }

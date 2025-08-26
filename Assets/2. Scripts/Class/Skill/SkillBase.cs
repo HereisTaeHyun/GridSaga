@@ -13,7 +13,7 @@ public class SkillBase : MonoBehaviour
     public SkillKind SkillKind => skillKind;
     public string Description => description;
 
-    protected CharacterBase character;
+    protected ICombat character;
 
     protected virtual void Init()
     {
@@ -22,7 +22,7 @@ public class SkillBase : MonoBehaviour
         skillKind = skillData.SkillKind;
         description = skillData.Description;
 
-        character = GetComponent<CharacterBase>();
+        character = GetComponent<ICombat>();
     }
 
     protected virtual void SkillTrigger(DamageDataBus damageData)

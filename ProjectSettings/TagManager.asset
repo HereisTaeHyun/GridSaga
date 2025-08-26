@@ -5,7 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Faction
-  - Unit
+  - Character
+  - Monster
   layers:
   - Default
   - TransparentFX
@@ -13,8 +14,8 @@ TagManager:
   - 
   - Water
   - UI
-  - Unit
-  - 
+  - Character
+  - Monster
   - 
   - 
   - 

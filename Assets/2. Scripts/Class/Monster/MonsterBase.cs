@@ -2,15 +2,14 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-
-public class CharacterBase : MonoBehaviour, ICombat
+public class MonsterBase : MonoBehaviour, ICombat
 {
     [SerializeField] protected CharacterSO characterData;
     public CharacterSO CharacterData => characterData;
     [SerializeField] protected SkillBase activeSkill;
     [SerializeField] protected SkillBase passiveSkill;
 
-    public enum CharacterState
+    public enum MonsterState
     {
         Idle,
         Move,
@@ -18,7 +17,7 @@ public class CharacterBase : MonoBehaviour, ICombat
         Die,
     }
 
-    public CharacterState characterState;
+    public MonsterState monsterState;
     protected int maxHp;
     protected int currentHp;
     protected int currentDefense;
@@ -46,8 +45,9 @@ public class CharacterBase : MonoBehaviour, ICombat
     protected readonly int isBuffHash = Animator.StringToHash("IsBuff");
 
 
-    public bool IsAlive => currentHp > 0 && characterState != CharacterState.Die && gameObject.activeInHierarchy;
-
+    public bool IsAlive => currentHp > 0 && monsterState != MonsterState.Die && gameObject.activeInHierarchy;
+    public virtual bool CanAttack => IsAlive && monsterState == MonsterState.Idle;
+    public virtual bool CanBeTarget => IsAlive && monsterState != MonsterState.Attack;
 
     // 공격 처리, 사망 자연스럽게 하기 위한 변수
     protected float attackActiveTime;
@@ -62,6 +62,7 @@ public class CharacterBase : MonoBehaviour, ICombat
     private float minDelay = 0.25f;
     private float maxDelay = 2.5f;
 
+    protected CharacterBase currentTarget;
     protected bool isPassiveTriggered;
     public bool IsPassiveTriggered => isPassiveTriggered;
     public Vector3 Position => transform.position;
@@ -79,7 +80,7 @@ public class CharacterBase : MonoBehaviour, ICombat
         currentCritRate = characterData.BaseCritRate;
         currentAttackRange = characterData.BaseAttackRange;
 
-        characterState = CharacterState.Idle;
+        monsterState = MonsterState.Idle;
         isDieTriggered = false;
         isPassiveTriggered = false;
 
@@ -97,23 +98,47 @@ public class CharacterBase : MonoBehaviour, ICombat
     }
 
     // 타겟을 향해 이동
-    protected virtual void Move()
+    protected virtual void Move(ICombat target)
     {
+        Vector2 currentPos = transform.position;
+        Vector2 targetPos = target.Position;
+        float distance = Vector2.Distance(transform.position, target.Position);
 
+        Vector2 dir = UtilityManager.utility.DirSet(targetPos - currentPos);
+        anim.SetFloat(moveXHash, dir.x);
+        anim.SetFloat(moveYHash, dir.y);
+
+        if (distance > currentAttackRange)
+        {
+            anim.SetBool(isMoveHash, true);
+            transform.position = Vector2.MoveTowards(transform.position, target.Position, currentSpeed * Time.deltaTime);
+        }
+        else if (distance <= currentAttackRange && monsterState != MonsterState.Attack)
+        {
+            StartCoroutine(Attack(target));
+        }
     }
 
     // 공격
     protected virtual IEnumerator Attack(ICombat target)
     {
         Debug.Log("Base attack start");
-        characterState = CharacterState.Attack;
+        monsterState = MonsterState.Attack;
 
         float wait = GetDelay(CurrentSpeed);
         yield return new WaitForSeconds(wait);
 
         Debug.Log("Base attack end");
-        characterState = CharacterState.Idle;
+        monsterState = MonsterState.Idle;
     }
+
+    // 사거리 이내이고 시야 내의 캐릭터를 설정
+    protected virtual CharacterBase SetTarget()
+    {
+        CharacterBase selected = null;
+        return selected;
+    }
+
     // 스킬 사용
     public virtual void UseActiveSkill()
     {
@@ -172,7 +197,7 @@ public class CharacterBase : MonoBehaviour, ICombat
     }
     public virtual IEnumerator ApplyDieAnim()
     {
-        if (characterState == CharacterState.Die && isDieTriggered == false)
+        if (monsterState == MonsterState.Die && isDieTriggered == false)
         {
             isDieTriggered = true;
             anim.SetTrigger(dieHash);

@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public int CalculateDamage(CharacterBase attacker, CharacterBase target)
+    public int CalculateDamage(ICombat attacker, ICombat target)
     {
         // 계산 필요 로직 정리
         float atk = Mathf.Max(0f, attacker.CurrentAttack);
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
         return damage;
     }
 
-    private bool CalculateIsCrit(CharacterBase attacker)
+    private bool CalculateIsCrit(ICombat attacker)
     {
         float rollPercent = Random.Range(0.0f, 100.0f);
         if (rollPercent - attacker.CurrentCritRate <= 0)
