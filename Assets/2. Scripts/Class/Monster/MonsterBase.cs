@@ -72,6 +72,7 @@ public class MonsterBase : MonoBehaviour, ICombat
      protected float sightRange;
     protected bool isPlayerInSight;
     private LayerMask detectLayer;
+    private LayerMask obstacleLayer;
     private RaycastHit2D[] rayHits = new RaycastHit2D[10];
     private Collider2D scanResult;
     private WaitForSeconds scanWait;
@@ -96,7 +97,8 @@ public class MonsterBase : MonoBehaviour, ICombat
         isPassiveTriggered = false;
 
         isPlayerInSight = false;
-        detectLayer = LayerMask.GetMask("Character", "Wall");
+        detectLayer = LayerMask.GetMask("Character");
+        obstacleLayer = LayerMask.GetMask( "Wall");
         scanWait = new WaitForSeconds(scanInterval);
 
         anim = GetComponent<Animator>();
@@ -154,8 +156,6 @@ public class MonsterBase : MonoBehaviour, ICombat
         float distance = Vector2.Distance(origin, character.transform.position);
         int count = Physics2D.RaycastNonAlloc(target, directionNorm, rayHits, distance, detectLayer);
 
-        Debug.DrawRay(transform.position, directionNorm * distance, Color.red, 0.1f);
-        
         // ray에 닿은 존재가 있으며 첫 충돌이 Character라면 true
         if (count > 0)
         {
