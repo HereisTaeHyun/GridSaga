@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4263080258196157788}
   - component: {fileID: 6741409858525832986}
   - component: {fileID: -6899692070974166443}
-  - component: {fileID: 5232159205955582629}
+  - component: {fileID: 2223464475415372786}
+  - component: {fileID: 1114238228348170586}
   m_Layer: 7
   m_Name: Skeleton
   m_TagString: Monster
@@ -111,7 +112,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5232159205955582629
+--- !u!114 &2223464475415372786
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,7 +124,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e181d5446de9b0042944fa0256864241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterData: {fileID: 0}
+  monsterData: {fileID: 11400000, guid: 2c6fce7363de97144b9a42f5efb5be59, type: 2}
   activeSkill: {fileID: 0}
   passiveSkill: {fileID: 0}
   monsterState: 0
+  sightRange: 10
+--- !u!58 &1114238228348170586
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6750571592902007509}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.019981384, y: -0.65938866}
+  m_Radius: 0.5399629

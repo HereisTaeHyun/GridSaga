@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -68,8 +69,14 @@ public class MonsterBase : MonoBehaviour, ICombat
     public Vector3 Position => transform.position;
 
     // 플레이어야 시야에 있는지 처리하기 위한 변수
-    protected float sightRange;
+     protected float sightRange;
     protected bool isPlayerInSight;
+    private LayerMask detectLayer;
+    private RaycastHit2D[] rayHits = new RaycastHit2D[10];
+    private Collider2D scanResult;
+    private WaitForSeconds scanWait;
+    protected float scanInterval = 0.25f;
+
 
 
     // init애서 스탯 배정은 이후 DB 권한으로 이전할 것
@@ -88,7 +95,13 @@ public class MonsterBase : MonoBehaviour, ICombat
         isDieTriggered = false;
         isPassiveTriggered = false;
 
+        isPlayerInSight = false;
+        detectLayer = LayerMask.GetMask("Character", "Wall");
+        scanWait = new WaitForSeconds(scanInterval);
+
         anim = GetComponent<Animator>();
+
+        StartCoroutine(ScanPlayer());
     }
 
     void OnEnable()
@@ -101,10 +114,71 @@ public class MonsterBase : MonoBehaviour, ICombat
         SendDamageData -= ApplyDamageFeedback;
     }
 
+    // 사거리 이내이고 시야 내의 캐릭터를 설정
+    protected IEnumerator ScanPlayer()
+    {
+        yield return null;
+        while (IsAlive)
+        {
+            FindTarget();
+            yield return scanWait;
+        }
+    }
+    
+    // 사거리 이내이고 시야 내의 캐릭터를 설정
+    protected virtual void FindTarget()
+    {
+        scanResult = Physics2D.OverlapCircle(transform.position, sightRange, detectLayer);
+        if (scanResult == null)
+        {
+            return;
+        }
+
+        var selected = scanResult.GetComponent<CharacterBase>();
+        isPlayerInSight = SeeingPlayer(selected);
+        if (selected != null && isPlayerInSight)
+        {
+            currentTarget = selected;
+        }
+    }
+    
+    // ray를 쏘아 첫 대상이 캐릭터인지 감지
+    protected bool SeeingPlayer(CharacterBase character)
+    {
+        Vector2 direction = character.transform.position - transform.position;
+        Vector2 directionNorm = UtilityManager.utility.DirSet(direction);
+
+        // 콜라이더 기준이 발 위치니 그에 맞추기
+        Vector2 origin = FootPoint(transform);
+        Vector2 target = FootPoint(character.transform);
+        float distance = Vector2.Distance(origin, character.transform.position);
+        int count = Physics2D.RaycastNonAlloc(target, directionNorm, rayHits, distance, detectLayer);
+
+        Debug.DrawRay(transform.position, directionNorm * distance, Color.red, 0.1f);
+        
+        // ray에 닿은 존재가 있으며 첫 충돌이 Character라면 true
+        if (count > 0)
+        {
+            var hit = rayHits[0];
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Character"))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected Vector2 FootPoint(Transform transform)
+    {
+        var collider = transform.GetComponent<Collider2D>();
+        var bound = collider.bounds;
+        return new Vector2(bound.center.x, bound.center.y - 0.02f);
+    }
+
     // 타겟을 향해 이동
     protected virtual void Move(ICombat target)
     {
-        if (!isPlayerInSight)   return;
+        if (!isPlayerInSight) return;
 
         Vector2 currentPos = transform.position;
         Vector2 targetPos = target.Position;
@@ -136,13 +210,6 @@ public class MonsterBase : MonoBehaviour, ICombat
 
         Debug.Log("Base attack end");
         monsterState = MonsterState.Idle;
-    }
-
-    // 사거리 이내이고 시야 내의 캐릭터를 설정
-    protected virtual CharacterBase SetTarget()
-    {
-        CharacterBase selected = null;
-        return selected;
     }
 
     // 스킬 사용

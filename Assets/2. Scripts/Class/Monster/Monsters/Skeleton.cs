@@ -10,6 +10,7 @@ public class Skeleton : MonsterBase
         attackActiveTime = 0.25f;
         attackEndTime = 0.8f;
         dieTime = 1.1f;
+        sightRange = 10.0f;
     }
 
     private void Awake()
@@ -19,11 +20,6 @@ public class Skeleton : MonsterBase
 
     void FixedUpdate()
     {
-        if (currentTarget == null || !currentTarget.gameObject.activeInHierarchy)
-        {
-            currentTarget = SetTarget();
-        }
-
         if (currentTarget != null)
         {
             Move(currentTarget);
@@ -41,7 +37,6 @@ public class Skeleton : MonsterBase
         {
             yield break;
         }
-
 
         monsterState = MonsterState.Attack;
         anim.SetBool(isMoveHash, false);
