@@ -48,7 +48,6 @@ public class CharacterBase : MonoBehaviour, ICombat
 
     public bool IsAlive => currentHp > 0 && characterState != CharacterState.Die && gameObject.activeInHierarchy;
 
-
     // 공격 처리, 사망 자연스럽게 하기 위한 변수
     protected float attackActiveTime;
     protected float attackEndTime;
@@ -65,6 +64,8 @@ public class CharacterBase : MonoBehaviour, ICombat
     protected bool isPassiveTriggered;
     public bool IsPassiveTriggered => isPassiveTriggered;
     public Vector3 Position => transform.position;
+
+    protected CharacterCtrl characterCtrl;
 
 
     // init애서 스탯 배정은 이후 DB 권한으로 이전할 것
@@ -84,16 +85,21 @@ public class CharacterBase : MonoBehaviour, ICombat
         isPassiveTriggered = false;
 
         anim = GetComponent<Animator>();
+        characterCtrl = GetComponentInParent<CharacterCtrl>();
     }
 
     void OnEnable()
     {
         SendDamageData += ApplyDamageFeedback;
+
+        characterCtrl.ActivateAttack += Attack;
     }
 
     void OnDisable()
     {
         SendDamageData -= ApplyDamageFeedback;
+
+        characterCtrl.ActivateAttack -= Attack;
     }
 
     // 타겟을 향해 이동
@@ -103,17 +109,11 @@ public class CharacterBase : MonoBehaviour, ICombat
     }
 
     // 공격
-    protected virtual IEnumerator Attack(ICombat target)
+    protected virtual void Attack()
     {
-        Debug.Log("Base attack start");
-        characterState = CharacterState.Attack;
 
-        float wait = GetDelay(CurrentSpeed);
-        yield return new WaitForSeconds(wait);
-
-        Debug.Log("Base attack end");
-        characterState = CharacterState.Idle;
     }
+
     // 스킬 사용
     public virtual void UseActiveSkill()
     {

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class UtilityManager : MonoBehaviour
 {
     private AudioSource audioSource;
-    private int defenseTuningFactor = 50;
+    private readonly int defenseTuningFactor = 50;
 
     public static UtilityManager utility = null;
     void Awake()

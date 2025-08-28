@@ -69,7 +69,7 @@ public class MonsterBase : MonoBehaviour, ICombat
     public Vector3 Position => transform.position;
 
     // 플레이어야 시야에 있는지 처리하기 위한 변수
-     protected float sightRange;
+    protected float sightRange;
     protected bool isPlayerInSight;
     private LayerMask detectLayer;
     private LayerMask obstacleLayer;
