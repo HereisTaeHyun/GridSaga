@@ -66,6 +66,7 @@ public class CharacterBase : MonoBehaviour, ICombat
     public Vector3 Position => transform.position;
 
     protected CharacterCtrl characterCtrl;
+    protected Rigidbody2D rb2D;
 
 
     // init애서 스탯 배정은 이후 DB 권한으로 이전할 것
@@ -84,6 +85,7 @@ public class CharacterBase : MonoBehaviour, ICombat
         isDieTriggered = false;
         isPassiveTriggered = false;
 
+        rb2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         characterCtrl = GetComponentInParent<CharacterCtrl>();
     }
