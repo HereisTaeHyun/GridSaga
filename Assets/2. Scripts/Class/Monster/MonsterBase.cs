@@ -136,7 +136,7 @@ public class MonsterBase : MonoBehaviour, ICombat
             return;
         }
 
-        var selected = scanResult.GetComponent<CharacterBase>();
+        var selected = scanResult.GetComponentInChildren<CharacterBase>();
         isPlayerInSight = SeeingPlayer(selected);
         if (selected != null && isPlayerInSight)
         {
@@ -152,10 +152,9 @@ public class MonsterBase : MonoBehaviour, ICombat
 
         // 콜라이더 기준이 발 위치니 그에 맞추기
         Vector2 origin = FootPoint(transform);
-        Vector2 target = FootPoint(character.transform);
         float distance = Vector2.Distance(origin, character.transform.position);
-        int count = Physics2D.RaycastNonAlloc(target, directionNorm, rayHits, distance, detectLayer);
-
+        int count = Physics2D.RaycastNonAlloc(origin, directionNorm, rayHits, distance, detectLayer | obstacleLayer);
+        
         // ray에 닿은 존재가 있으며 첫 충돌이 Character라면 true
         if (count > 0)
         {
