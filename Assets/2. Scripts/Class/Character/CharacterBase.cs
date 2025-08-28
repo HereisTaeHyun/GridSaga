@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-
 public class CharacterBase : MonoBehaviour, ICombat
 {
     [SerializeField] protected CharacterSO characterData;
