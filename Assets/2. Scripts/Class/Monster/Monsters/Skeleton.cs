@@ -10,7 +10,7 @@ public class Skeleton : MonsterBase
         attackActiveTime = 0.25f;
         attackEndTime = 0.8f;
         dieTime = 1.1f;
-        sightRange = 10.0f;
+        sightRange = 15.0f;
     }
 
     private void Awake()

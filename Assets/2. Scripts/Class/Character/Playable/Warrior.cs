@@ -19,7 +19,9 @@ public class Warrior : CharacterBase
 
     protected override void Move()
     {
-        anim.SetBool(isMoveHash, true);
+        isMove = characterCtrl.Move.magnitude > 0.0001f;
+        anim.SetBool(isMoveHash, isMove);
+        
         Vector2 dir = UtilityManager.utility.DirSet(characterCtrl.Move);
         anim.SetFloat(moveXHash, dir.x);
         anim.SetFloat(moveYHash, dir.y);

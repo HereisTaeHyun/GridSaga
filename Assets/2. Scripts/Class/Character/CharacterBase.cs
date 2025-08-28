@@ -57,9 +57,9 @@ public class CharacterBase : MonoBehaviour, ICombat
 
     // 공격 속도 제어
     // 스피드 1 = 0.25초의 딜레이 경감을 가짐
-    private float delayBySpeed = 0.25f;
-    private float minDelay = 0.25f;
-    private float maxDelay = 2.5f;
+    private readonly float delayBySpeed = 0.25f;
+    private readonly float minDelay = 0.25f;
+    private readonly float maxDelay = 2.5f;
 
     protected bool isPassiveTriggered;
     public bool IsPassiveTriggered => isPassiveTriggered;
@@ -67,6 +67,7 @@ public class CharacterBase : MonoBehaviour, ICombat
 
     protected CharacterCtrl characterCtrl;
     protected Rigidbody2D rb2D;
+    protected bool isMove;
 
 
     // init애서 스탯 배정은 이후 DB 권한으로 이전할 것

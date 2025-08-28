@@ -21,6 +21,7 @@ public class CharacterCtrl : MonoBehaviour
         inputActions.Enable();
 
         inputActions.CharacterAction.Move.performed += OnMove;
+        inputActions.CharacterAction.Move.canceled += OnMove;
         inputActions.CharacterAction.Attack.performed += OnAttack;
     }
 
@@ -29,6 +30,7 @@ public class CharacterCtrl : MonoBehaviour
         inputActions.Disable();
 
         inputActions.CharacterAction.Move.performed -= OnMove;
+        inputActions.CharacterAction.Move.canceled -= OnMove;
         inputActions.CharacterAction.Attack.performed -= OnAttack;
     }
 
