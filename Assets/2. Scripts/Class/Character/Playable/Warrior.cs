@@ -14,8 +14,12 @@ public class Warrior : CharacterBase
 
     void FixedUpdate()
     {
-        Vector2 dir = UtilityManager.utility.DirSet(characterCtrl.Move);
+        Move();
+    }
 
+    protected override void Move()
+    {
+        Vector2 dir = UtilityManager.utility.DirSet(characterCtrl.Move);
         anim.SetFloat(moveXHash, dir.x);
         anim.SetFloat(moveYHash, dir.y);
     }
