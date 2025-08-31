@@ -10,7 +10,7 @@ public class Warrior : CharacterBase
         attackActiveTime = 0.25f;
         attackEndTime = 0.8f;
 
-        attackRadius = 2.4f;
+        attackRadius = 3.0f;
         attackDegree = 90.0f;
         dieTime = 1.5f;
     }
