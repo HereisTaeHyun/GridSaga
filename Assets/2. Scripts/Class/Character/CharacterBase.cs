@@ -52,7 +52,7 @@ public class CharacterBase : MonoBehaviour, ICombat
     protected float attackEndTime;
     protected float dieTime;
     protected bool isDieTriggered;
-    public event Action<DamageDataBus> SendDamageData;
+    public event Action<float> RefreshDamageData;
 
     // 공격 속도 제어
     // 스피드 1 = 0.25초의 딜레이 경감을 가짐
@@ -93,14 +93,14 @@ public class CharacterBase : MonoBehaviour, ICombat
 
     void OnEnable()
     {
-        SendDamageData += ApplyDamageFeedback;
+        RefreshDamageData += ApplyDamageFeedback;
 
         characterCtrl.ActivateAttack += Attack;
     }
 
     void OnDisable()
     {
-        SendDamageData -= ApplyDamageFeedback;
+        RefreshDamageData -= ApplyDamageFeedback;
 
         characterCtrl.ActivateAttack -= Attack;
     }
@@ -129,59 +129,52 @@ public class CharacterBase : MonoBehaviour, ICombat
     }
 
     // 데미지 입음
-    public virtual DamageDataBus GetDamage(ICombat attacker, ICombat target, int damage)
+    public virtual void GetDamage(ICombat attacker, ICombat target, int damage)
     {
         // 데미지는 음수 불가
         int safeDamage = Mathf.Max(0, damage);
 
         // hp 차감 후 0 이하면 사망
         currentHp -= safeDamage;
+
         if (currentHp <= 0)
         {
-            Die();
+            characterState = CharacterState.Die;
         }
-
-        var damageData = new DamageDataBus(attacker, target, safeDamage, currentHp);
-        return damageData;
     }
 
-    public void InvokeDamageDataEvent(DamageDataBus damageData)
+    public void InvokeDamageDataEvent(float damage)
     {
-        SendDamageData?.Invoke(damageData);
+        RefreshDamageData?.Invoke(damage);
     }
 
-    // 사망 처리
-    protected virtual void Die()
-    {
-
-    }
-
-
-    // 스피드에 따른 공격 딜레이 처리
-    protected float GetDelay(int speed)
-    {
-        speed = Mathf.Max(0, speed);
-        float delay = maxDelay - (speed * delayBySpeed);
-        return Mathf.Max(minDelay, delay);
-    }
 
     // 데미지를 입은 경우 애니메이션, UI 등 처리
-    private void ApplyDamageFeedback(DamageDataBus damageData)
+    private void ApplyDamageFeedback(float damage)
     {
-        if (damageData.isDied)
+        if (characterState == CharacterState.Die)
         {
-            StartCoroutine(ApplyDieAnim());
+            StartCoroutine(Die());
         }
     }
-    public virtual IEnumerator ApplyDieAnim()
+    public virtual IEnumerator Die()
     {
-        if (characterState == CharacterState.Die && isDieTriggered == false)
+        if (isDieTriggered == false)
         {
             isDieTriggered = true;
             anim.SetTrigger(dieHash);
             yield return new WaitForSeconds(dieTime);
             gameObject.SetActive(false);
         }
+    }
+
+    
+    // 스피드에 따른 공격 딜레이 처리
+    protected float GetDelay(int speed)
+    {
+        speed = Mathf.Max(0, speed);
+        float delay = maxDelay - (speed * delayBySpeed);
+        return Mathf.Max(minDelay, delay);
     }
 
     public void ChangeStat(StatKind statKind, int value)

@@ -18,16 +18,16 @@ public class Strength : SkillBase
 
     void OnEnable()
     {
-        character.SendDamageData += SkillTrigger;
+
     }
 
     void OnDisable()
     {
-        character.SendDamageData -= SkillTrigger;
+
     }
 
     // 피격 당한 상대의 hp가 30퍼센트 이하면 트리거
-    protected override void SkillTrigger(DamageDataBus damageData)
+    protected override void SkillTrigger()
     {
         if ((character.CurrentHp * 100f / character.MaxHp) <= triggerHpPercent)
         {

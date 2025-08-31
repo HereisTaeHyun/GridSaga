@@ -25,7 +25,7 @@ public class SkillBase : MonoBehaviour
         character = GetComponent<ICombat>();
     }
 
-    protected virtual void SkillTrigger(DamageDataBus damageData)
+    protected virtual void SkillTrigger()
     {
 
     }

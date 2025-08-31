@@ -54,20 +54,19 @@ public class Skeleton : MonsterBase
             yield break;
         }
 
-        var damageData = currentTarget.GetDamage(this, target, damage);
-
         // 공격 적용
         anim.SetTrigger(attackHash);
         yield return new WaitForSeconds(attackActiveTime);
 
-        target.InvokeDamageDataEvent(damageData);
+        currentTarget.GetDamage(this, target, damage);
+        target.InvokeDamageDataEvent(damage);
 
         yield return new WaitForSeconds(attackEndTime);
         monsterState = MonsterState.Idle;
     }
 
     // 데미지 처리
-    public override DamageDataBus GetDamage(ICombat attacker,ICombat target, int damage)
+    public override void GetDamage(ICombat attacker,ICombat target, int damage)
     {
         // 데미지는 음수 불가
         int safeDamage = Mathf.Max(0, damage);
@@ -77,12 +76,5 @@ public class Skeleton : MonsterBase
         {
             Die();
         }
-
-        var damageData = new DamageDataBus(attacker, target, safeDamage, currentHp);
-        return damageData;
-    }
-    protected override void Die()
-    {
-        monsterState = MonsterState.Die;
     }
 }

@@ -55,7 +55,7 @@ public class MonsterBase : MonoBehaviour, ICombat
     protected float attackEndTime;
     protected float dieTime;
     protected bool isDieTriggered;
-    public event Action<DamageDataBus> SendDamageData;
+    public event Action<float> RefreshDamageData;
 
     // 공격 속도 제어
     // 스피드 1 = 0.25초의 딜레이 경감을 가짐
@@ -108,12 +108,12 @@ public class MonsterBase : MonoBehaviour, ICombat
 
     void OnEnable()
     {
-        SendDamageData += ApplyDamageFeedback;
+        RefreshDamageData += ApplyDamageFeedback;
     }
 
     void OnDisable()
     {
-        SendDamageData -= ApplyDamageFeedback;
+        RefreshDamageData -= ApplyDamageFeedback;
     }
 
     // 사거리 이내이고 시야 내의 캐릭터를 설정
@@ -223,7 +223,7 @@ public class MonsterBase : MonoBehaviour, ICombat
     }
 
     // 데미지 입음
-    public virtual DamageDataBus GetDamage(ICombat attacker, ICombat target, int damage)
+    public virtual void GetDamage(ICombat attacker, ICombat target, int damage)
     {
         // 데미지는 음수 불가
         int safeDamage = Mathf.Max(0, damage);
@@ -232,22 +232,13 @@ public class MonsterBase : MonoBehaviour, ICombat
         currentHp -= safeDamage;
         if (currentHp <= 0)
         {
-            Die();
+            monsterState = MonsterState.Die;
         }
-
-        var damageData = new DamageDataBus(attacker, target, safeDamage, currentHp);
-        return damageData;
     }
 
-    public void InvokeDamageDataEvent(DamageDataBus damageData)
+    public void InvokeDamageDataEvent(float damage)
     {
-        SendDamageData?.Invoke(damageData);
-    }
-
-    // 사망 처리
-    protected virtual void Die()
-    {
-
+        RefreshDamageData?.Invoke(damage);
     }
 
 
@@ -260,16 +251,16 @@ public class MonsterBase : MonoBehaviour, ICombat
     }
 
     // 데미지를 입은 경우 애니메이션, UI 등 처리
-    private void ApplyDamageFeedback(DamageDataBus damageData)
+    private void ApplyDamageFeedback(float damage)
     {
-        if (damageData.isDied)
+        if (monsterState == MonsterState.Die)
         {
-            StartCoroutine(ApplyDieAnim());
+            StartCoroutine(Die());
         }
     }
-    public virtual IEnumerator ApplyDieAnim()
+    protected virtual IEnumerator Die()
     {
-        if (monsterState == MonsterState.Die && isDieTriggered == false)
+        if (isDieTriggered == false)
         {
             isDieTriggered = true;
             anim.SetTrigger(dieHash);

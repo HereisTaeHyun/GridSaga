@@ -5,6 +5,10 @@ public class Warrior : CharacterBase
     protected override void Init()
     {
         base.Init();
+
+        attackActiveTime = 0.25f;
+        attackEndTime = 0.8f;
+        dieTime = 1.5f;
     }
 
     private void Awake()
@@ -14,6 +18,10 @@ public class Warrior : CharacterBase
 
     void FixedUpdate()
     {
+        if (characterState == CharacterState.Die)
+        {
+            return;
+        }
         Move();
     }
 
