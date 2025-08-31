@@ -67,6 +67,7 @@ public class CharacterBase : MonoBehaviour, ICombat
     protected CharacterCtrl characterCtrl;
     protected Rigidbody2D rb2D;
     protected bool isMove;
+    protected Vector2 lastDir;
 
 
     // init애서 스탯 배정은 이후 DB 권한으로 이전할 것

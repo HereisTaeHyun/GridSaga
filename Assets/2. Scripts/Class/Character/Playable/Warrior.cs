@@ -23,8 +23,15 @@ public class Warrior : CharacterBase
         anim.SetBool(isMoveHash, isMove);
         
         Vector2 dir = UtilityManager.utility.DirSet(characterCtrl.Move);
-        anim.SetFloat(moveXHash, dir.x);
-        anim.SetFloat(moveYHash, dir.y);
+
+        if (isMove)
+        {
+            lastDir.x = dir.x;
+            lastDir.y = dir.y;
+        }
+
+        anim.SetFloat(moveXHash, lastDir.x);
+        anim.SetFloat(moveYHash, lastDir.y);
 
         Vector2 newVelocity = new Vector2(currentSpeed * characterCtrl.Move.x, currentSpeed * characterCtrl.Move.y);
         rb2D.linearVelocity = newVelocity;
