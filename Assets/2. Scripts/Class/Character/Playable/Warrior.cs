@@ -67,11 +67,12 @@ public class Warrior : CharacterBase
         anim.SetTrigger(attackHash);
         yield return new WaitForSeconds(attackActiveTime);
 
-        // 부채꼴 공격 범위 내 적들에게 공격 적용
+        // 공격 범위 내 적들에게 공격 적용
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius, attackableLayer);
         foreach (var collider in colliders)
         {
             var target = collider.GetComponent<ICombat>();
+
             int damage = UtilityManager.utility.CalculateDamage(this, target);
             target.GetDamage(target, damage);
         }
