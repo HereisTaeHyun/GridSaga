@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Warrior : CharacterBase
@@ -22,6 +23,7 @@ public class Warrior : CharacterBase
         {
             return;
         }
+        Debug.Log(characterState);
         Move();
     }
 
@@ -34,8 +36,13 @@ public class Warrior : CharacterBase
 
         if (isMove)
         {
+            characterState = CharacterState.Move;
             lastDir.x = dir.x;
             lastDir.y = dir.y;
+        }
+        else
+        {
+            characterState = CharacterState.Idle;
         }
 
         anim.SetFloat(moveXHash, lastDir.x);
@@ -45,8 +52,20 @@ public class Warrior : CharacterBase
         rb2D.linearVelocity = newVelocity;
     }
 
-    protected override void Attack()
+    protected override IEnumerator Attack()
     {
+        if (characterState == CharacterState.Die || characterState == CharacterState.Move)
+        {
+            yield break;
+        }
+
+        characterState = CharacterState.Attack;
+
+        // 공격 적용
         anim.SetTrigger(attackHash);
+        yield return new WaitForSeconds(attackActiveTime);
+
+        yield return new WaitForSeconds(attackEndTime);
+        characterState = CharacterState.Idle;
     }
 }

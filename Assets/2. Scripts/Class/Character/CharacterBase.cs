@@ -54,6 +54,9 @@ public class CharacterBase : MonoBehaviour, ICombat
     protected bool isDieTriggered;
     public event Action<float> RefreshDamageData;
 
+    private LayerMask attackableLayer;
+    private LayerMask obstacleLayer;
+
     // 공격 속도 제어
     // 스피드 1 = 0.25초의 딜레이 경감을 가짐
     private readonly float delayBySpeed = 0.25f;
@@ -68,6 +71,9 @@ public class CharacterBase : MonoBehaviour, ICombat
     protected Rigidbody2D rb2D;
     protected bool isMove;
     protected Vector2 lastDir;
+    
+    private float attackRadius = 1.6f;
+    private float attackDegree = 90f;
 
 
     // init애서 스탯 배정은 이후 DB 권한으로 이전할 것
@@ -86,23 +92,27 @@ public class CharacterBase : MonoBehaviour, ICombat
         isDieTriggered = false;
         isPassiveTriggered = false;
 
+        attackableLayer = LayerMask.GetMask("Monster");
+        obstacleLayer = LayerMask.GetMask("Wall");
+
         rb2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         characterCtrl = GetComponentInParent<CharacterCtrl>();
+
     }
 
     void OnEnable()
     {
         RefreshDamageData += ApplyDamageFeedback;
 
-        characterCtrl.ActivateAttack += Attack;
+        characterCtrl.ActivateAttack += AcrivateAttack;
     }
 
     void OnDisable()
     {
         RefreshDamageData -= ApplyDamageFeedback;
 
-        characterCtrl.ActivateAttack -= Attack;
+        characterCtrl.ActivateAttack -= AcrivateAttack;
     }
 
     // 타겟을 향해 이동
@@ -111,10 +121,15 @@ public class CharacterBase : MonoBehaviour, ICombat
 
     }
 
-    // 공격
-    protected virtual void Attack()
+    protected virtual void AcrivateAttack()
     {
+        StartCoroutine(Attack());
+    }
 
+    // 공격
+    protected virtual IEnumerator Attack()
+    {
+        yield break;
     }
 
     // 스킬 사용

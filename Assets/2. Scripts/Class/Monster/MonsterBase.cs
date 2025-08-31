@@ -71,7 +71,7 @@ public class MonsterBase : MonoBehaviour, ICombat
     // 플레이어야 시야에 있는지 처리하기 위한 변수
     protected float sightRange;
     protected bool isPlayerInSight;
-    private LayerMask detectLayer;
+    private LayerMask dattackableLayer;
     private LayerMask obstacleLayer;
     private RaycastHit2D[] rayHits = new RaycastHit2D[10];
     private Collider2D scanResult;
@@ -97,7 +97,7 @@ public class MonsterBase : MonoBehaviour, ICombat
         isPassiveTriggered = false;
 
         isPlayerInSight = false;
-        detectLayer = LayerMask.GetMask("Character");
+        dattackableLayer = LayerMask.GetMask("Character");
         obstacleLayer = LayerMask.GetMask( "Wall");
         scanWait = new WaitForSeconds(scanInterval);
 
@@ -130,7 +130,7 @@ public class MonsterBase : MonoBehaviour, ICombat
     // 사거리 이내이고 시야 내의 캐릭터를 설정
     protected virtual void FindTarget()
     {
-        scanResult = Physics2D.OverlapCircle(transform.position, sightRange, detectLayer);
+        scanResult = Physics2D.OverlapCircle(transform.position, sightRange, dattackableLayer);
         if (scanResult == null)
         {
             return;
@@ -153,7 +153,7 @@ public class MonsterBase : MonoBehaviour, ICombat
         // 콜라이더 기준이 발 위치니 그에 맞추기
         Vector2 origin = FootPoint(transform);
         float distance = Vector2.Distance(origin, character.transform.position);
-        int count = Physics2D.RaycastNonAlloc(origin, directionNorm, rayHits, distance, detectLayer | obstacleLayer);
+        int count = Physics2D.RaycastNonAlloc(origin, directionNorm, rayHits, distance, dattackableLayer | obstacleLayer);
         
         // ray에 닿은 존재가 있으며 첫 충돌이 Character라면 true
         if (count > 0)
