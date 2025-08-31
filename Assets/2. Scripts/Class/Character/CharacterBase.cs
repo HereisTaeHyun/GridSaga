@@ -151,10 +151,9 @@ public class CharacterBase : MonoBehaviour, ICombat
 
         // hp 차감 후 0 이하면 사망
         currentHp -= safeDamage;
-        Debug.Log($"{this} : {currentHp}");
         if (currentHp <= 0)
         {
-            characterState = CharacterState.Die;
+            StartCoroutine(Die());
         }
     }
 
@@ -167,15 +166,13 @@ public class CharacterBase : MonoBehaviour, ICombat
     // 데미지를 입은 경우 애니메이션, UI 등 처리
     private void ApplyDamageFeedback(float damage)
     {
-        if (characterState == CharacterState.Die)
-        {
-            StartCoroutine(Die());
-        }
+
     }
     public virtual IEnumerator Die()
     {
         if (isDieTriggered == false)
         {
+            characterState = CharacterState.Die;
             isDieTriggered = true;
             anim.SetTrigger(dieHash);
             yield return new WaitForSeconds(dieTime);

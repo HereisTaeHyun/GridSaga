@@ -77,7 +77,6 @@ public class Skeleton : MonsterBase
         int safeDamage = Mathf.Max(0, damage);
 
         currentHp -= safeDamage;
-        Debug.Log($"{this} : {currentHp}");
         if (currentHp <= 0)
         {
             StartCoroutine(Die());

@@ -252,15 +252,13 @@ public class MonsterBase : MonoBehaviour, ICombat
     // 데미지를 입은 경우 애니메이션, UI 등 처리
     private void ApplyDamageFeedback(float damage)
     {
-        if (monsterState == MonsterState.Die)
-        {
-            StartCoroutine(Die());
-        }
+
     }
     protected virtual IEnumerator Die()
     {
         if (isDieTriggered == false)
         {
+            monsterState = MonsterState.Die;
             isDieTriggered = true;
             anim.SetTrigger(dieHash);
             yield return new WaitForSeconds(dieTime);
