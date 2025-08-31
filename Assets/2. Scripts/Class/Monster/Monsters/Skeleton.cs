@@ -9,7 +9,7 @@ public class Skeleton : MonsterBase
 
         attackActiveTime = 0.25f;
         attackEndTime = 0.8f;
-        dieTime = 1.1f;
+        dieTime = 1.5f;
         sightRange = 15.0f;
     }
 
@@ -20,6 +20,11 @@ public class Skeleton : MonsterBase
 
     void FixedUpdate()
     {
+        if (monsterState == MonsterState.Die)
+        {
+            return;
+        }
+
         if (currentTarget != null)
         {
             Move(currentTarget);
@@ -58,7 +63,7 @@ public class Skeleton : MonsterBase
         anim.SetTrigger(attackHash);
         yield return new WaitForSeconds(attackActiveTime);
 
-        currentTarget.GetDamage(this, target, damage);
+        currentTarget.GetDamage(target, damage);
         target.InvokeDamageDataEvent(damage);
 
         yield return new WaitForSeconds(attackEndTime);
@@ -66,15 +71,16 @@ public class Skeleton : MonsterBase
     }
 
     // 데미지 처리
-    public override void GetDamage(ICombat attacker,ICombat target, int damage)
+    public override void GetDamage(ICombat target, int damage)
     {
         // 데미지는 음수 불가
         int safeDamage = Mathf.Max(0, damage);
 
         currentHp -= safeDamage;
+        Debug.Log($"{this} : {currentHp}");
         if (currentHp <= 0)
         {
-            Die();
+            StartCoroutine(Die());
         }
     }
 }

@@ -54,8 +54,8 @@ public class CharacterBase : MonoBehaviour, ICombat
     protected bool isDieTriggered;
     public event Action<float> RefreshDamageData;
 
-    private LayerMask attackableLayer;
-    private LayerMask obstacleLayer;
+    protected LayerMask attackableLayer;
+    protected LayerMask obstacleLayer;
 
     // 공격 속도 제어
     // 스피드 1 = 0.25초의 딜레이 경감을 가짐
@@ -72,8 +72,8 @@ public class CharacterBase : MonoBehaviour, ICombat
     protected bool isMove;
     protected Vector2 lastDir;
     
-    private float attackRadius = 1.6f;
-    private float attackDegree = 90f;
+    protected float attackRadius;
+    protected float attackDegree;
 
 
     // init애서 스탯 배정은 이후 DB 권한으로 이전할 것
@@ -105,14 +105,14 @@ public class CharacterBase : MonoBehaviour, ICombat
     {
         RefreshDamageData += ApplyDamageFeedback;
 
-        characterCtrl.ActivateAttack += AcrivateAttack;
+        characterCtrl.ActivateAttack += ActiveAttack;
     }
 
     void OnDisable()
     {
         RefreshDamageData -= ApplyDamageFeedback;
 
-        characterCtrl.ActivateAttack -= AcrivateAttack;
+        characterCtrl.ActivateAttack -= ActiveAttack;
     }
 
     // 타겟을 향해 이동
@@ -121,7 +121,7 @@ public class CharacterBase : MonoBehaviour, ICombat
 
     }
 
-    protected virtual void AcrivateAttack()
+    protected virtual void ActiveAttack()
     {
         StartCoroutine(Attack());
     }
@@ -144,14 +144,14 @@ public class CharacterBase : MonoBehaviour, ICombat
     }
 
     // 데미지 입음
-    public virtual void GetDamage(ICombat attacker, ICombat target, int damage)
+    public virtual void GetDamage(ICombat target, int damage)
     {
         // 데미지는 음수 불가
         int safeDamage = Mathf.Max(0, damage);
 
         // hp 차감 후 0 이하면 사망
         currentHp -= safeDamage;
-
+        Debug.Log($"{this} : {currentHp}");
         if (currentHp <= 0)
         {
             characterState = CharacterState.Die;

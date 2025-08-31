@@ -14,6 +14,7 @@ public interface ICombat
     void InvokeDamageDataEvent(float damage);
     void UsePassiveSkill();
     void UseActiveSkill();
+    void GetDamage(ICombat target, int damage);
     void ChangeStat(StatKind statKind, int value);
     event Action<float> RefreshDamageData;
 }

@@ -3,7 +3,6 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
 public class MonsterBase : MonoBehaviour, ICombat
 {
     [SerializeField] protected CharacterSO monsterData;
@@ -223,7 +222,7 @@ public class MonsterBase : MonoBehaviour, ICombat
     }
 
     // 데미지 입음
-    public virtual void GetDamage(ICombat attacker, ICombat target, int damage)
+    public virtual void GetDamage(ICombat target, int damage)
     {
         // 데미지는 음수 불가
         int safeDamage = Mathf.Max(0, damage);

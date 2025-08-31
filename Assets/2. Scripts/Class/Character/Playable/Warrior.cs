@@ -9,6 +9,9 @@ public class Warrior : CharacterBase
 
         attackActiveTime = 0.25f;
         attackEndTime = 0.8f;
+
+        attackRadius = 2.4f;
+        attackDegree = 90.0f;
         dieTime = 1.5f;
     }
 
@@ -23,7 +26,6 @@ public class Warrior : CharacterBase
         {
             return;
         }
-        Debug.Log(characterState);
         Move();
     }
 
@@ -31,7 +33,7 @@ public class Warrior : CharacterBase
     {
         isMove = characterCtrl.Move.magnitude > 0.0001f;
         anim.SetBool(isMoveHash, isMove);
-        
+
         Vector2 dir = UtilityManager.utility.DirSet(characterCtrl.Move);
 
         if (isMove)
@@ -64,6 +66,15 @@ public class Warrior : CharacterBase
         // 공격 적용
         anim.SetTrigger(attackHash);
         yield return new WaitForSeconds(attackActiveTime);
+
+        // 부채꼴 공격 범위 내 적들에게 공격 적용
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius, attackableLayer);
+        foreach (var collider in colliders)
+        {
+            var target = collider.GetComponent<ICombat>();
+            int damage = UtilityManager.utility.CalculateDamage(this, target);
+            target.GetDamage(target, damage);
+        }
 
         yield return new WaitForSeconds(attackEndTime);
         characterState = CharacterState.Idle;
