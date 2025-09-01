@@ -15,7 +15,7 @@ MonoBehaviour:
   characterId: 0
   characterName: Skeleton
   characterKind: 1
-  baseHp: 10
+  baseHp: 100
   baseDefense: 2
   baseAttack: 10
   baseSpeed: 2

@@ -74,6 +74,7 @@ public class CharacterBase : MonoBehaviour, ICombat
     
     protected float attackRadius;
     protected float attackDegree;
+    protected float attackThreshold;
 
 
     // init애서 스탯 배정은 이후 DB 권한으로 이전할 것

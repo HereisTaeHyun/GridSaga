@@ -10,9 +10,11 @@ public class Warrior : CharacterBase
         attackActiveTime = 0.25f;
         attackEndTime = 0.8f;
 
+        dieTime = 1.5f;
+
         attackRadius = 3.0f;
         attackDegree = 90.0f;
-        dieTime = 1.5f;
+        attackThreshold = Mathf.Cos(attackDegree * Mathf.Deg2Rad / 2.0f);
     }
 
     private void Awake()
@@ -73,11 +75,27 @@ public class Warrior : CharacterBase
         {
             var target = collider.GetComponent<ICombat>();
 
-            int damage = UtilityManager.utility.CalculateDamage(this, target);
-            target.GetDamage(target, damage);
+            if (IsInAttackSectorDeg(target))
+            {
+                int damage = UtilityManager.utility.CalculateDamage(this, target);
+                target.GetDamage(target, damage);   
+            }
         }
 
         yield return new WaitForSeconds(attackEndTime);
         characterState = CharacterState.Idle;
+    }
+
+    // 공격 각도 계산 함수
+    private bool IsInAttackSectorDeg(ICombat target)
+    {
+        attackThreshold = Mathf.Cos(0.5f * attackDegree * Mathf.Deg2Rad);
+        Vector2 directionToTarget = (target.Position - transform.position).normalized;
+        float cos = Vector2.Dot(directionToTarget, lastDir);
+        if (cos >= attackThreshold)
+        {
+            return true;
+        }
+        return false;
     }
 }
