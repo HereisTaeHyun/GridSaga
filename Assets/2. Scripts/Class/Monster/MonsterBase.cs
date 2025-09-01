@@ -245,7 +245,8 @@ public class MonsterBase : MonoBehaviour, ICombat
         // 데미지는 음수 불가
         int safeDamage = Mathf.Max(0, damage);
 
-        currentHp -= safeDamage;
+        currentHp = (int)Mathf.Max(0f, currentHp - safeDamage);
+
         if (currentHp <= 0)
         {
             StartCoroutine(Die());

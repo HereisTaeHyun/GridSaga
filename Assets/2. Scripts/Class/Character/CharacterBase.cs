@@ -151,7 +151,8 @@ public class CharacterBase : MonoBehaviour, ICombat
         int safeDamage = Mathf.Max(0, damage);
 
         // hp 차감 후 0 이하면 사망
-        currentHp -= safeDamage;
+        currentHp = (int)Mathf.Max(0f, currentHp - safeDamage);
+
         if (currentHp <= 0)
         {
             StartCoroutine(Die());
