@@ -17,7 +17,7 @@ public class CharacterBase : MonoBehaviour, ICombat
         Die,
     }
 
-    public CharacterState characterState;
+    protected CharacterState characterState;
     protected int maxHp;
     protected int currentHp;
     protected int currentDefense;
@@ -72,7 +72,7 @@ public class CharacterBase : MonoBehaviour, ICombat
     protected bool isMove;
     protected Vector2 lastDir;
     
-    protected float attackRadius;
+    // 공격 범위 체크 변수
     protected float attackDegree;
     protected float attackThreshold;
 

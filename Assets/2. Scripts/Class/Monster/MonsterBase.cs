@@ -70,12 +70,19 @@ public class MonsterBase : MonoBehaviour, ICombat
     // 플레이어야 시야에 있는지 처리하기 위한 변수
     protected float sightRange;
     protected bool isPlayerInSight;
-    private LayerMask dattackableLayer;
-    private LayerMask obstacleLayer;
+    protected LayerMask attackableLayer;
+    protected LayerMask obstacleLayer;
     private RaycastHit2D[] rayHits = new RaycastHit2D[10];
     private Collider2D scanResult;
     private WaitForSeconds scanWait;
     protected float scanInterval = 0.25f;
+
+    // 움직임 체크 변수
+    protected Vector2 lastDir;
+
+    // 공격 범위 체크 변수
+    protected float attackDegree;
+    protected float attackThreshold;
 
 
 
@@ -96,8 +103,8 @@ public class MonsterBase : MonoBehaviour, ICombat
         isPassiveTriggered = false;
 
         isPlayerInSight = false;
-        dattackableLayer = LayerMask.GetMask("Character");
-        obstacleLayer = LayerMask.GetMask( "Wall");
+        attackableLayer = LayerMask.GetMask("Character");
+        obstacleLayer = LayerMask.GetMask("Wall");
         scanWait = new WaitForSeconds(scanInterval);
 
         anim = GetComponent<Animator>();
@@ -125,13 +132,15 @@ public class MonsterBase : MonoBehaviour, ICombat
             yield return scanWait;
         }
     }
-    
+
     // 사거리 이내이고 시야 내의 캐릭터를 설정
     protected virtual void FindTarget()
     {
-        scanResult = Physics2D.OverlapCircle(transform.position, sightRange, dattackableLayer);
+        scanResult = Physics2D.OverlapCircle(transform.position, sightRange, attackableLayer);
         if (scanResult == null)
         {
+            currentTarget = null;
+            anim.SetBool(isMoveHash, false);
             return;
         }
 
@@ -140,6 +149,11 @@ public class MonsterBase : MonoBehaviour, ICombat
         if (selected != null && isPlayerInSight)
         {
             currentTarget = selected;
+        }
+        else if (!isPlayerInSight)
+        {
+            currentTarget = null;
+            monsterState = MonsterState.Idle;
         }
     }
     
@@ -152,7 +166,7 @@ public class MonsterBase : MonoBehaviour, ICombat
         // 콜라이더 기준이 발 위치니 그에 맞추기
         Vector2 origin = FootPoint(transform);
         float distance = Vector2.Distance(origin, character.transform.position);
-        int count = Physics2D.RaycastNonAlloc(origin, directionNorm, rayHits, distance, dattackableLayer | obstacleLayer);
+        int count = Physics2D.RaycastNonAlloc(origin, directionNorm, rayHits, distance, attackableLayer | obstacleLayer);
         
         // ray에 닿은 존재가 있으며 첫 충돌이 Character라면 true
         if (count > 0)
@@ -186,6 +200,9 @@ public class MonsterBase : MonoBehaviour, ICombat
         anim.SetFloat(moveXHash, dir.x);
         anim.SetFloat(moveYHash, dir.y);
 
+        lastDir.x = dir.x;
+        lastDir.y = dir.y;
+
         if (distance > currentAttackRange)
         {
             anim.SetBool(isMoveHash, true);
@@ -193,12 +210,13 @@ public class MonsterBase : MonoBehaviour, ICombat
         }
         else if (distance <= currentAttackRange && monsterState != MonsterState.Attack)
         {
-            StartCoroutine(Attack(target));
+            anim.SetBool(isMoveHash, false);
+            StartCoroutine(Attack());
         }
     }
 
     // 공격
-    protected virtual IEnumerator Attack(ICombat target)
+    protected virtual IEnumerator Attack()
     {
         Debug.Log("Base attack start");
         monsterState = MonsterState.Attack;
@@ -221,17 +239,16 @@ public class MonsterBase : MonoBehaviour, ICombat
 
     }
 
-    // 데미지 입음
+    // 데미지 처리
     public virtual void GetDamage(ICombat target, int damage)
     {
         // 데미지는 음수 불가
         int safeDamage = Mathf.Max(0, damage);
 
-        // hp 차감 후 0 이하면 사망
         currentHp -= safeDamage;
         if (currentHp <= 0)
         {
-            monsterState = MonsterState.Die;
+            StartCoroutine(Die());
         }
     }
 

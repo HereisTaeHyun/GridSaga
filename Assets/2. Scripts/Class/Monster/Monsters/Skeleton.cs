@@ -11,6 +11,9 @@ public class Skeleton : MonsterBase
         attackEndTime = 0.8f;
         dieTime = 1.5f;
         sightRange = 15.0f;
+
+        attackDegree = 90.0f;
+        attackThreshold = Mathf.Cos(attackDegree * Mathf.Deg2Rad / 2.0f);
     }
 
     private void Awake()
@@ -25,61 +28,55 @@ public class Skeleton : MonsterBase
             return;
         }
 
-        if (currentTarget != null)
+        if (currentTarget == null || !currentTarget.gameObject.activeInHierarchy)
         {
-            Move(currentTarget);
-        }
-        else
-        {
+            currentTarget = null;
             anim.SetBool(isMoveHash, false);
+            return;
         }
+        Move(currentTarget);
     }
 
-    // 사거리 내의 적이면 정지 후 공격
-    protected override IEnumerator Attack(ICombat target)
+    protected override IEnumerator Attack()
     {
-        if (monsterState == MonsterState.Die)
+        if (monsterState == MonsterState.Die || monsterState == MonsterState.Move)
         {
             yield break;
         }
 
         monsterState = MonsterState.Attack;
-        anim.SetBool(isMoveHash, false);
-
-        // 공격 딜레이 적용
-        float wait = GetDelay(CurrentSpeed);
-        yield return new WaitForSeconds(wait);
-
-        int damage = UtilityManager.utility.CalculateDamage(this, target);
-
-        // 타겟이 존재하면 공격 아니면 Idle
-        if (currentTarget == null)
-        {
-            monsterState = MonsterState.Idle;
-            yield break;
-        }
 
         // 공격 적용
         anim.SetTrigger(attackHash);
         yield return new WaitForSeconds(attackActiveTime);
 
-        currentTarget.GetDamage(target, damage);
-        target.InvokeDamageDataEvent(damage);
+        // 공격 범위 내 적들에게 공격 적용
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, currentAttackRange, attackableLayer);
+        foreach (var collider in colliders)
+        {
+            var target = collider.GetComponent<ICombat>();
+
+            if (IsInAttackSectorDeg(target))
+            {
+                int damage = UtilityManager.utility.CalculateDamage(this, target);
+                target.GetDamage(target, damage);   
+            }
+        }
 
         yield return new WaitForSeconds(attackEndTime);
         monsterState = MonsterState.Idle;
     }
 
-    // 데미지 처리
-    public override void GetDamage(ICombat target, int damage)
+    // 공격 각도 계산 함수
+    private bool IsInAttackSectorDeg(ICombat target)
     {
-        // 데미지는 음수 불가
-        int safeDamage = Mathf.Max(0, damage);
-
-        currentHp -= safeDamage;
-        if (currentHp <= 0)
+        attackThreshold = Mathf.Cos(0.5f * attackDegree * Mathf.Deg2Rad);
+        Vector2 directionToTarget = (target.Position - transform.position).normalized;
+        float cos = Vector2.Dot(directionToTarget, lastDir);
+        if (cos >= attackThreshold)
         {
-            StartCoroutine(Die());
+            return true;
         }
+        return false;
     }
 }

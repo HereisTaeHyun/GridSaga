@@ -12,7 +12,6 @@ public class Warrior : CharacterBase
 
         dieTime = 1.5f;
 
-        attackRadius = 3.0f;
         attackDegree = 90.0f;
         attackThreshold = Mathf.Cos(attackDegree * Mathf.Deg2Rad / 2.0f);
     }
@@ -70,7 +69,7 @@ public class Warrior : CharacterBase
         yield return new WaitForSeconds(attackActiveTime);
 
         // 공격 범위 내 적들에게 공격 적용
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius, attackableLayer);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, currentAttackRange, attackableLayer);
         foreach (var collider in colliders)
         {
             var target = collider.GetComponent<ICombat>();

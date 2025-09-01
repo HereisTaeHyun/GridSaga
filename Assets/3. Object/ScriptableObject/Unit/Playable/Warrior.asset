@@ -20,6 +20,6 @@ MonoBehaviour:
   baseAttack: 10
   baseSpeed: 4
   baseCritRate: 10
-  baseAttackRange: 2
+  baseAttackRange: 3
   passiveSkillId: 0
   activeSkillId: 0
