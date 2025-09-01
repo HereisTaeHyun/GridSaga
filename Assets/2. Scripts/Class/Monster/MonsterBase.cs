@@ -58,9 +58,7 @@ public class MonsterBase : MonoBehaviour, ICombat
 
     // 공격 속도 제어
     // 스피드 1 = 0.25초의 딜레이 경감을 가짐
-    private readonly float delayBySpeed = 0.25f;
-    private readonly float minDelay = 0.25f;
-    private readonly float maxDelay = 2.5f;
+    protected bool canAttack;
 
     protected CharacterBase currentTarget;
     protected bool isPassiveTriggered;
@@ -101,6 +99,7 @@ public class MonsterBase : MonoBehaviour, ICombat
         monsterState = MonsterState.Idle;
         isDieTriggered = false;
         isPassiveTriggered = false;
+        canAttack = true;
 
         isPlayerInSight = false;
         attackableLayer = LayerMask.GetMask("Character");
@@ -220,12 +219,9 @@ public class MonsterBase : MonoBehaviour, ICombat
     {
         Debug.Log("Base attack start");
         monsterState = MonsterState.Attack;
-
-        float wait = GetDelay(CurrentSpeed);
-        yield return new WaitForSeconds(wait);
-
         Debug.Log("Base attack end");
         monsterState = MonsterState.Idle;
+        yield break;
     }
 
     // 스킬 사용
@@ -246,7 +242,7 @@ public class MonsterBase : MonoBehaviour, ICombat
         int safeDamage = Mathf.Max(0, damage);
 
         currentHp = (int)Mathf.Max(0f, currentHp - safeDamage);
-
+        Debug.Log($"{this} : {currentHp}");
         if (currentHp <= 0)
         {
             StartCoroutine(Die());
@@ -258,14 +254,6 @@ public class MonsterBase : MonoBehaviour, ICombat
         RefreshDamageData?.Invoke(damage);
     }
 
-
-    // 스피드에 따른 공격 딜레이 처리
-    protected float GetDelay(int speed)
-    {
-        speed = Mathf.Max(0, speed);
-        float delay = maxDelay - (speed * delayBySpeed);
-        return Mathf.Max(minDelay, delay);
-    }
 
     // 데미지를 입은 경우 애니메이션, UI 등 처리
     private void ApplyDamageFeedback(float damage)

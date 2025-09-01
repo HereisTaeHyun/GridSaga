@@ -7,7 +7,7 @@ public class Skeleton : MonsterBase
     {
         base.Init();
 
-        attackActiveTime = 0.25f;
+        attackActiveTime = 0.5f;
         attackEndTime = 0.8f;
         dieTime = 1.5f;
         sightRange = 15.0f;

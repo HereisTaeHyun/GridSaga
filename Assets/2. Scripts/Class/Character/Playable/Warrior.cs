@@ -63,6 +63,7 @@ public class Warrior : CharacterBase
         }
 
         characterState = CharacterState.Attack;
+        canAttack = false;
 
         // 공격 적용
         anim.SetTrigger(attackHash);
@@ -77,12 +78,13 @@ public class Warrior : CharacterBase
             if (IsInAttackSectorDeg(target))
             {
                 int damage = UtilityManager.utility.CalculateDamage(this, target);
-                target.GetDamage(target, damage);   
+                target.GetDamage(target, damage);
             }
         }
 
         yield return new WaitForSeconds(attackEndTime);
         characterState = CharacterState.Idle;
+        canAttack = true;
     }
 
     // 공격 각도 계산 함수

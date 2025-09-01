@@ -59,9 +59,7 @@ public class CharacterBase : MonoBehaviour, ICombat
 
     // 공격 속도 제어
     // 스피드 1 = 0.25초의 딜레이 경감을 가짐
-    private readonly float delayBySpeed = 0.25f;
-    private readonly float minDelay = 0.25f;
-    private readonly float maxDelay = 2.5f;
+    protected bool canAttack;
 
     protected bool isPassiveTriggered;
     public bool IsPassiveTriggered => isPassiveTriggered;
@@ -92,6 +90,7 @@ public class CharacterBase : MonoBehaviour, ICombat
         characterState = CharacterState.Idle;
         isDieTriggered = false;
         isPassiveTriggered = false;
+        canAttack = true;
 
         attackableLayer = LayerMask.GetMask("Monster");
         obstacleLayer = LayerMask.GetMask("Wall");
@@ -124,7 +123,10 @@ public class CharacterBase : MonoBehaviour, ICombat
 
     protected virtual void ActiveAttack()
     {
-        StartCoroutine(Attack());
+        if (canAttack)
+        {
+            StartCoroutine(Attack());
+        }
     }
 
     // 공격
@@ -152,7 +154,7 @@ public class CharacterBase : MonoBehaviour, ICombat
 
         // hp 차감 후 0 이하면 사망
         currentHp = (int)Mathf.Max(0f, currentHp - safeDamage);
-
+        Debug.Log($"{this} : {currentHp}");
         if (currentHp <= 0)
         {
             StartCoroutine(Die());
@@ -180,15 +182,6 @@ public class CharacterBase : MonoBehaviour, ICombat
             yield return new WaitForSeconds(dieTime);
             gameObject.SetActive(false);
         }
-    }
-
-    
-    // 스피드에 따른 공격 딜레이 처리
-    protected float GetDelay(int speed)
-    {
-        speed = Mathf.Max(0, speed);
-        float delay = maxDelay - (speed * delayBySpeed);
-        return Mathf.Max(minDelay, delay);
     }
 
     public void ChangeStat(StatKind statKind, int value)
