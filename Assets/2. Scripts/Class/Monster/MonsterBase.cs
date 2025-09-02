@@ -251,6 +251,7 @@ public class MonsterBase : MonoBehaviour, ICombat
         HpChanged?.Invoke(maxHp, currentHp);
         if (currentHp <= 0)
         {
+            StopAllCoroutines();
             StartCoroutine(Die());
         }
     }

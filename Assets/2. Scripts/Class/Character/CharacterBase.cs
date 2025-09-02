@@ -161,6 +161,7 @@ public class CharacterBase : MonoBehaviour, ICombat
 
         if (currentHp <= 0)
         {
+            StopAllCoroutines();
             StartCoroutine(Die());
         }
     }
