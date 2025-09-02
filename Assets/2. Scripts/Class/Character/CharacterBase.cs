@@ -154,16 +154,11 @@ public class CharacterBase : MonoBehaviour, ICombat
 
         // hp 차감 후 0 이하면 사망
         currentHp = (int)Mathf.Max(0f, currentHp - safeDamage);
-        Debug.Log($"{this} : {currentHp}");
+        RefreshDamageData?.Invoke(damage);
         if (currentHp <= 0)
         {
             StartCoroutine(Die());
         }
-    }
-
-    public void InvokeDamageDataEvent(float damage)
-    {
-        RefreshDamageData?.Invoke(damage);
     }
 
 

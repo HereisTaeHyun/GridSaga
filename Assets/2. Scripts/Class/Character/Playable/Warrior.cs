@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class Warrior : CharacterBase
 {
+    public event Action SendDamageToPassive;
+    
     protected override void Init()
     {
         base.Init();
@@ -98,5 +101,10 @@ public class Warrior : CharacterBase
             return true;
         }
         return false;
+    }
+
+    public override void UsePassiveSkill()
+    {
+        Debug.Log("PassiveOn");
     }
 }

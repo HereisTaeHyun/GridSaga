@@ -243,16 +243,11 @@ public class MonsterBase : MonoBehaviour, ICombat
         int safeDamage = Mathf.Max(0, damage);
 
         currentHp = (int)Mathf.Max(0f, currentHp - safeDamage);
-        Debug.Log($"{this} : {currentHp}");
+        RefreshDamageData?.Invoke(damage);
         if (currentHp <= 0)
         {
             StartCoroutine(Die());
         }
-    }
-
-    public void InvokeDamageDataEvent(float damage)
-    {
-        RefreshDamageData?.Invoke(damage);
     }
 
 
