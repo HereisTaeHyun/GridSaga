@@ -11,10 +11,9 @@ public interface ICombat
     float CurrentCritRate { get; }
     float CurrentAttackRange { get; }
     Vector3 Position { get; }
-    void InvokeDamageDataEvent(float damage);
     void UsePassiveSkill();
     void UseActiveSkill();
     void GetDamage(ICombat target, int damage);
     void ChangeStat(StatKind statKind, int value);
-    event Action<float> RefreshDamageData;
+    event Action<int, int> HpChanged;
 }

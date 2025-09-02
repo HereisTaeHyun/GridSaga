@@ -52,7 +52,10 @@ public class CharacterBase : MonoBehaviour, ICombat
     protected float attackEndTime;
     protected float dieTime;
     protected bool isDieTriggered;
-    public event Action<float> RefreshDamageData;
+
+    // 체력 변화 시 발생할 이벤트
+    // 순서대로 MaxHp, currentHp 순서
+    public event Action<int, int> HpChanged;
 
     protected LayerMask attackableLayer;
     protected LayerMask obstacleLayer;
@@ -103,14 +106,14 @@ public class CharacterBase : MonoBehaviour, ICombat
 
     void OnEnable()
     {
-        RefreshDamageData += ApplyDamageFeedback;
+        HpChanged += ApplyDamageFeedback;
 
         characterCtrl.ActivateAttack += ActiveAttack;
     }
 
     void OnDisable()
     {
-        RefreshDamageData -= ApplyDamageFeedback;
+        HpChanged -= ApplyDamageFeedback;
 
         characterCtrl.ActivateAttack -= ActiveAttack;
     }
@@ -154,7 +157,8 @@ public class CharacterBase : MonoBehaviour, ICombat
 
         // hp 차감 후 0 이하면 사망
         currentHp = (int)Mathf.Max(0f, currentHp - safeDamage);
-        RefreshDamageData?.Invoke(damage);
+        HpChanged?.Invoke(currentHp, maxHp);
+
         if (currentHp <= 0)
         {
             StartCoroutine(Die());
@@ -163,7 +167,7 @@ public class CharacterBase : MonoBehaviour, ICombat
 
 
     // 데미지를 입은 경우 애니메이션, UI 등 처리
-    private void ApplyDamageFeedback(float damage)
+    private void ApplyDamageFeedback(int maxHp, int currentHp)
     {
 
     }
@@ -177,6 +181,11 @@ public class CharacterBase : MonoBehaviour, ICombat
             yield return new WaitForSeconds(dieTime);
             gameObject.SetActive(false);
         }
+    }
+
+    public void InvokeDamageDataEvent()
+    {
+        HpChanged?.Invoke(maxHp, currentHp);
     }
 
     public void ChangeStat(StatKind statKind, int value)

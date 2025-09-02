@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Strength : SkillBase
 {
-    [SerializeField] StatKind statKind;
+    [SerializeField] private StatKind statKind;
 
     private int triggerHpPercent = 30;
     private int value = 2;
@@ -18,7 +18,7 @@ public class Strength : SkillBase
 
     void OnEnable()
     {
-
+        character.HpChanged += ListenEvent;
     }
 
     void OnDisable()
@@ -26,10 +26,15 @@ public class Strength : SkillBase
 
     }
 
-    // 피격 당한 상대의 hp가 30퍼센트 이하면 트리거
+    private void ListenEvent(int currentHp, int Maxhp)
+    {
+        SkillTrigger();
+    }
+
+    // 피격 당한 캐릭터의 hp가 30퍼센트 이하면 트리거
     protected override void SkillTrigger()
     {
-        if ((character.CurrentHp * 100f / character.MaxHp) <= triggerHpPercent)
+        if ((character.CurrentHp * 100.0f / character.MaxHp) <= triggerHpPercent)
         {
             character.UsePassiveSkill();
             character.ChangeStat(statKind, value);

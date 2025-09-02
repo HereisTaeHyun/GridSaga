@@ -54,7 +54,10 @@ public class MonsterBase : MonoBehaviour, ICombat
     protected float attackEndTime;
     protected float dieTime;
     protected bool isDieTriggered;
-    public event Action<float> RefreshDamageData;
+
+    // 체력 변화 시 발생할 이벤트
+    // 순서대로 MaxHp, currentHp 순서
+    public event Action<int, int> HpChanged;
 
     // 공격 속도 제어
     // 스피드 1 = 0.25초의 딜레이 경감을 가짐
@@ -113,12 +116,12 @@ public class MonsterBase : MonoBehaviour, ICombat
 
     void OnEnable()
     {
-        RefreshDamageData += ApplyDamageFeedback;
+        HpChanged += ApplyDamageFeedback;
     }
 
     void OnDisable()
     {
-        RefreshDamageData -= ApplyDamageFeedback;
+        HpChanged -= ApplyDamageFeedback;
     }
 
     // 사거리 이내이고 시야 내의 캐릭터를 설정
@@ -243,7 +246,7 @@ public class MonsterBase : MonoBehaviour, ICombat
         int safeDamage = Mathf.Max(0, damage);
 
         currentHp = (int)Mathf.Max(0f, currentHp - safeDamage);
-        RefreshDamageData?.Invoke(damage);
+        HpChanged?.Invoke(maxHp, currentHp);
         if (currentHp <= 0)
         {
             StartCoroutine(Die());
@@ -252,7 +255,7 @@ public class MonsterBase : MonoBehaviour, ICombat
 
 
     // 데미지를 입은 경우 애니메이션, UI 등 처리
-    private void ApplyDamageFeedback(float damage)
+    private void ApplyDamageFeedback(int maxHp, int currentHp)
     {
 
     }
@@ -266,6 +269,11 @@ public class MonsterBase : MonoBehaviour, ICombat
             yield return new WaitForSeconds(dieTime);
             gameObject.SetActive(false);
         }
+    }
+
+    public void InvokeDamageDataEvent()
+    {
+        HpChanged?.Invoke(maxHp, currentHp);
     }
 
     public void ChangeStat(StatKind statKind, int value)

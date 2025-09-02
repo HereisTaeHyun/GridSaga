@@ -3,9 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 public class Warrior : CharacterBase
-{
-    public event Action SendDamageToPassive;
-    
+{ 
     protected override void Init()
     {
         base.Init();
@@ -105,6 +103,11 @@ public class Warrior : CharacterBase
 
     public override void UsePassiveSkill()
     {
+        if (isPassiveTriggered)
+        {
+            return;
+        }
+        isPassiveTriggered = true;
         Debug.Log("PassiveOn");
     }
 }
