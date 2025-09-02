@@ -1,0 +1,817 @@
+fileFormatVersion: 2
+guid: 5eeb8ec6447d1d84ea4ed345cdd3e352
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5083629956569971728
+    second: Pergola_Chunk_Mid_02_0
+  - first:
+      213: -1328944486907119580
+    second: Pergola_Chunk_Mid_02_1
+  - first:
+      213: 6399162761033217549
+    second: Pergola_Chunk_Mid_02_2
+  - first:
+      213: 5830025024609111514
+    second: Pergola_Chunk_Mid_02_3
+  - first:
+      213: -3908742920615545073
+    second: Pergola_Chunk_Mid_02_4
+  - first:
+      213: 2550386821643947206
+    second: Pergola_Chunk_Mid_02_5
+  - first:
+      213: -6663793594284785639
+    second: Pergola_Chunk_Mid_02_6
+  - first:
+      213: 5752231201772768332
+    second: Pergola_Chunk_Mid_02_7
+  - first:
+      213: 8690310976321007265
+    second: Pergola_Chunk_Mid_02_8
+  - first:
+      213: 7408394150453483591
+    second: Pergola_Chunk_Mid_02_9
+  - first:
+      213: 5753738394469885757
+    second: Pergola_Chunk_Mid_02_10
+  - first:
+      213: 4812398179759740281
+    second: Pergola_Chunk_Mid_02_11
+  - first:
+      213: 9155105800537244331
+    second: Pergola_Chunk_Mid_02_12
+  - first:
+      213: -7789874046738384855
+    second: Pergola_Chunk_Mid_02_13
+  - first:
+      213: -552552497228052499
+    second: Pergola_Chunk_Mid_02_14
+  - first:
+      213: 8994992864364070761
+    second: Pergola_Chunk_Mid_02_15
+  - first:
+      213: 1991664949101047278
+    second: Pergola_Chunk_Mid_02_16
+  - first:
+      213: 6516164812148298283
+    second: Pergola_Chunk_Mid_02_17
+  - first:
+      213: -8382611567465739996
+    second: Pergola_Chunk_Mid_02_18
+  - first:
+      213: 9203754214270257296
+    second: Pergola_Chunk_Mid_02_19
+  - first:
+      213: 1380586972738724140
+    second: Pergola_Chunk_Mid_02_20
+  - first:
+      213: -6760909986268477552
+    second: Pergola_Chunk_Mid_02_21
+  - first:
+      213: 5968962919900001194
+    second: Pergola_Chunk_Mid_02_22
+  - first:
+      213: 5994308873136520585
+    second: Pergola_Chunk_Mid_02_23
+  - first:
+      213: -7920506593340644792
+    second: Pergola_Chunk_Mid_02_24
+  - first:
+      213: 5846141341991298215
+    second: Pergola_Chunk_Mid_02_25
+  - first:
+      213: 1486133807577778684
+    second: Pergola_Chunk_Mid_02_26
+  - first:
+      213: -126911865530122276
+    second: Pergola_Chunk_Mid_02_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 87
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01c33e2e28eac8640800000000000000
+      internalID: 5083629956569971728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_1
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 73
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 428ffabb704ae8de0800000000000000
+      internalID: -1328944486907119580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_2
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 59
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d06fa4f70a46ec850800000000000000
+      internalID: 6399162761033217549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_3
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 45
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: addc67ffed868e050800000000000000
+      internalID: 5830025024609111514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_4
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 31
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f07336ae50b51c9c0800000000000000
+      internalID: -3908742920615545073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_5
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 17
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ccccef3d4bc46320800000000000000
+      internalID: 2550386821643947206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_6
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 3
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 910c12448037583a0800000000000000
+      internalID: -6663793594284785639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_7
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 3
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4c85972dc704df40800000000000000
+      internalID: 5752231201772768332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_8
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 17
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1aeaa4b2acf2a9870800000000000000
+      internalID: 8690310976321007265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_9
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 31
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7489cdd7a37efc660800000000000000
+      internalID: 7408394150453483591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_10
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 45
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3767ecc59269df40800000000000000
+      internalID: 5753738394469885757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_11
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 59
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 975d056b5a219c240800000000000000
+      internalID: 4812398179759740281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_12
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 73
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba2042248387d0f70800000000000000
+      internalID: 9155105800537244331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_13
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 87
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 928bf17b3dec4e390800000000000000
+      internalID: -7789874046738384855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_14
+      rect:
+        serializedVersion: 2
+        x: 637
+        y: 87
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de787fa6e60f458f0800000000000000
+      internalID: -552552497228052499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_15
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 73
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96708954a52a4dc70800000000000000
+      internalID: 8994992864364070761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_16
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 59
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eeda3ca08b0d3ab10800000000000000
+      internalID: 1991664949101047278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_17
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 45
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b22dffd5f511e6a50800000000000000
+      internalID: 6516164812148298283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_18
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 31
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 429cf1f313bfaab80800000000000000
+      internalID: -8382611567465739996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_19
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 17
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 098459db1bd4abf70800000000000000
+      internalID: 9203754214270257296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_20
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 3
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c21af9b7984d82310800000000000000
+      internalID: 1380586972738724140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_21
+      rect:
+        serializedVersion: 2
+        x: 954
+        y: 3
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0978316303c6c22a0800000000000000
+      internalID: -6760909986268477552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_22
+      rect:
+        serializedVersion: 2
+        x: 982
+        y: 17
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa33e16962406d250800000000000000
+      internalID: 5968962919900001194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_23
+      rect:
+        serializedVersion: 2
+        x: 1010
+        y: 31
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98d36413920103350800000000000000
+      internalID: 5994308873136520585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_24
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 45
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 842aacec735b41290800000000000000
+      internalID: -7920506593340644792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_25
+      rect:
+        serializedVersion: 2
+        x: 1066
+        y: 59
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a4ed1c839aa12150800000000000000
+      internalID: 5846141341991298215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_26
+      rect:
+        serializedVersion: 2
+        x: 1094
+        y: 73
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf94f59f2decf9410800000000000000
+      internalID: 1486133807577778684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pergola_Chunk_Mid_02_27
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 87
+        width: 143
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdf7b49a45e1d3ef0800000000000000
+      internalID: -126911865530122276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
