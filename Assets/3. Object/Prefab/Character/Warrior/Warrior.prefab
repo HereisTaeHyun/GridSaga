@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1388911051436603353}
   - component: {fileID: 5074825177385120306}
   - component: {fileID: -6999149364703067022}
+  - component: {fileID: 9212010765673450516}
   m_Layer: 6
   m_Name: Warrior
   m_TagString: Character
@@ -190,5 +191,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterData: {fileID: 11400000, guid: 26af82e51aef5954dbd8f53df0ccf50e, type: 2}
   activeSkill: {fileID: 0}
-  passiveSkill: {fileID: 0}
-  characterState: 0
+  passiveSkill: {fileID: 9212010765673450516}
+--- !u!114 &9212010765673450516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2811252633809056702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4d789fcc8c82354382be1e436d6786b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillData: {fileID: 11400000, guid: c5e6daa95e6bec74c9052013c09aab17, type: 2}

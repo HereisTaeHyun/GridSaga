@@ -108,6 +108,8 @@ public class Warrior : CharacterBase
             return;
         }
         isPassiveTriggered = true;
+        anim.SetBool(isBuffHash, true);
+        anim.SetTrigger(usePassiveSkillHash);
         Debug.Log("PassiveOn");
     }
 }

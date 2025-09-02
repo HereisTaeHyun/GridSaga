@@ -15,5 +15,6 @@ MonoBehaviour:
   skillId: 0
   skillName: Berserk
   skillKind: 0
+  statKind: 2
   description: "\uCCB4\uB825\uC774 30% \uC774\uD558\uB85C \uAC10\uC18C\uD558\uB294
     \uACBD\uC6B0 Attack\uC5D0 2\uB97C \uCD94\uAC00\uD569\uB2C8\uB2E4"

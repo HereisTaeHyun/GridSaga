@@ -337,10 +337,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 139383552}
     m_Modifications:
-    - target: {fileID: -6999149364703067022, guid: da30cce384f576f438068dbb1b291a68, type: 3}
-      propertyPath: passiveSkill
-      value: 
-      objectReference: {fileID: 802190402}
     - target: {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
       propertyPath: m_Name
       value: Warrior
@@ -388,10 +384,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 802190402}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da30cce384f576f438068dbb1b291a68, type: 3}
 --- !u!4 &485853870 stripped
 Transform:
@@ -845,25 +838,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00c7d89de768be449956c80b89ab6520, type: 3}
---- !u!1 &802190396 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2811252633809056702, guid: da30cce384f576f438068dbb1b291a68, type: 3}
-  m_PrefabInstance: {fileID: 485853869}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &802190402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 802190396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4d789fcc8c82354382be1e436d6786b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillData: {fileID: 11400000, guid: c5e6daa95e6bec74c9052013c09aab17, type: 2}
-  statKind: 2
 --- !u!1 &1105631375
 GameObject:
   m_ObjectHideFlags: 0

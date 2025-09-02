@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Strength : SkillBase
 {
-    [SerializeField] private StatKind statKind;
-
     private int triggerHpPercent = 30;
     private int value = 2;
 
