@@ -187,11 +187,6 @@ public class CharacterBase : MonoBehaviour, ICombat
         }
     }
 
-    public void InvokeDamageDataEvent()
-    {
-        HpChanged?.Invoke(maxHp, currentHp);
-    }
-
     public void ChangeStat(StatKind statKind, int value)
     {
         switch (statKind)
