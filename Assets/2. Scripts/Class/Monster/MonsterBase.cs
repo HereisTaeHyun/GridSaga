@@ -79,6 +79,7 @@ public class MonsterBase : MonoBehaviour, ICombat
     protected float scanInterval = 0.25f;
 
     // 움직임 체크 변수
+     protected Rigidbody2D rb2D;
     protected Vector2 lastDir;
 
     // 공격 범위 체크 변수
@@ -109,6 +110,7 @@ public class MonsterBase : MonoBehaviour, ICombat
         obstacleLayer = LayerMask.GetMask("Wall");
         scanWait = new WaitForSeconds(scanInterval);
 
+        rb2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
         StartCoroutine(ScanPlayer());
@@ -265,6 +267,10 @@ public class MonsterBase : MonoBehaviour, ICombat
         {
             monsterState = MonsterState.Die;
             isDieTriggered = true;
+
+            rb2D.linearVelocity = Vector2.zero;
+            rb2D.simulated = false;
+
             anim.SetTrigger(dieHash);
             yield return new WaitForSeconds(dieTime);
             gameObject.SetActive(false);

@@ -24,10 +24,8 @@ public class Warrior : CharacterBase
 
     void FixedUpdate()
     {
-        if (characterState == CharacterState.Die)
-        {
-            return;
-        }
+        if (characterState == CharacterState.Die) return;
+
         Move();
     }
 

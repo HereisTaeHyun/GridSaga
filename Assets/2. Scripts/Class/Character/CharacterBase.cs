@@ -177,6 +177,10 @@ public class CharacterBase : MonoBehaviour, ICombat
         {
             characterState = CharacterState.Die;
             isDieTriggered = true;
+
+            rb2D.linearVelocity = Vector2.zero;
+            rb2D.simulated = false;
+
             anim.SetTrigger(dieHash);
             yield return new WaitForSeconds(dieTime);
             gameObject.SetActive(false);

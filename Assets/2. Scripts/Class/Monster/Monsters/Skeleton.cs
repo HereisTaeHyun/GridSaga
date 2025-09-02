@@ -23,10 +23,8 @@ public class Skeleton : MonsterBase
 
     void FixedUpdate()
     {
-        if (monsterState == MonsterState.Die)
-        {
-            return;
-        }
+        if (monsterState == MonsterState.Die) return;
+
 
         if (currentTarget == null || !currentTarget.gameObject.activeInHierarchy)
         {
