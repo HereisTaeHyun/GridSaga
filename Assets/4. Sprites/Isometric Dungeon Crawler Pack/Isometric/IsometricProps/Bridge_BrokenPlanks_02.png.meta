@@ -117,6 +117,32 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -309,7 +335,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Bridge_BrokenPlanks_02_0: -7214835731820505411
+      Bridge_BrokenPlanks_02_1: 2082908208530187383
+      Bridge_BrokenPlanks_02_2: -6184982183616002532
+      Bridge_BrokenPlanks_02_3: 3693325484648415104
+      Bridge_BrokenPlanks_02_4: -1887870910051483452
+      Bridge_BrokenPlanks_02_5: 46884314759254412
+      Bridge_BrokenPlanks_02_6: -5818909024923218985
+      Bridge_BrokenPlanks_02_7: -8418632525801285769
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

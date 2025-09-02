@@ -27,7 +27,7 @@ public class Skeleton : MonsterBase
         {
             return;
         }
-
+        Debug.Log($"{this} : {currentTarget}");
         if (currentTarget == null || !currentTarget.gameObject.activeInHierarchy)
         {
             currentTarget = null;

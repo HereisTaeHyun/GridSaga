@@ -177,6 +177,32 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -809,7 +835,35 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Pergola_Chunk_Mid_02_0: 5083629956569971728
+      Pergola_Chunk_Mid_02_1: -1328944486907119580
+      Pergola_Chunk_Mid_02_10: 5753738394469885757
+      Pergola_Chunk_Mid_02_11: 4812398179759740281
+      Pergola_Chunk_Mid_02_12: 9155105800537244331
+      Pergola_Chunk_Mid_02_13: -7789874046738384855
+      Pergola_Chunk_Mid_02_14: -552552497228052499
+      Pergola_Chunk_Mid_02_15: 8994992864364070761
+      Pergola_Chunk_Mid_02_16: 1991664949101047278
+      Pergola_Chunk_Mid_02_17: 6516164812148298283
+      Pergola_Chunk_Mid_02_18: -8382611567465739996
+      Pergola_Chunk_Mid_02_19: 9203754214270257296
+      Pergola_Chunk_Mid_02_2: 6399162761033217549
+      Pergola_Chunk_Mid_02_20: 1380586972738724140
+      Pergola_Chunk_Mid_02_21: -6760909986268477552
+      Pergola_Chunk_Mid_02_22: 5968962919900001194
+      Pergola_Chunk_Mid_02_23: 5994308873136520585
+      Pergola_Chunk_Mid_02_24: -7920506593340644792
+      Pergola_Chunk_Mid_02_25: 5846141341991298215
+      Pergola_Chunk_Mid_02_26: 1486133807577778684
+      Pergola_Chunk_Mid_02_27: -126911865530122276
+      Pergola_Chunk_Mid_02_3: 5830025024609111514
+      Pergola_Chunk_Mid_02_4: -3908742920615545073
+      Pergola_Chunk_Mid_02_5: 2550386821643947206
+      Pergola_Chunk_Mid_02_6: -6663793594284785639
+      Pergola_Chunk_Mid_02_7: 5752231201772768332
+      Pergola_Chunk_Mid_02_8: 8690310976321007265
+      Pergola_Chunk_Mid_02_9: 7408394150453483591
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

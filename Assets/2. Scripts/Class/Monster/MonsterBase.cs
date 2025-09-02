@@ -164,7 +164,8 @@ public class MonsterBase : MonoBehaviour, ICombat
 
         // 콜라이더 기준이 발 위치니 그에 맞추기
         Vector2 origin = FootPoint(transform);
-        float distance = Vector2.Distance(origin, character.transform.position);
+        Vector2 target = FootPoint(character.transform);
+        float distance = Vector2.Distance(origin, target);
         int count = Physics2D.RaycastNonAlloc(origin, directionNorm, rayHits, distance, attackableLayer | obstacleLayer);
         
         // ray에 닿은 존재가 있으며 첫 충돌이 Character라면 true
