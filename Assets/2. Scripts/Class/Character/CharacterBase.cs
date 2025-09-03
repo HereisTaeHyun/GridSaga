@@ -149,6 +149,11 @@ public class CharacterBase : MonoBehaviour, ICombat
 
     }
 
+    public virtual void OffPassiveSkill()
+    {
+
+    }
+
     // 데미지 입음
     public virtual void GetDamage(ICombat target, int damage)
     {

@@ -241,6 +241,11 @@ public class MonsterBase : MonoBehaviour, ICombat
 
     }
 
+    public virtual void OffPassiveSkill()
+    {
+
+    }
+
     // 데미지 처리
     public virtual void GetDamage(ICombat target, int damage)
     {

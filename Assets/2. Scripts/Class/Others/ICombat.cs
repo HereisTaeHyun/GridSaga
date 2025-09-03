@@ -12,6 +12,8 @@ public interface ICombat
     float CurrentAttackRange { get; }
     Vector3 Position { get; }
     void UsePassiveSkill();
+    void OffPassiveSkill();
+    bool IsPassiveTriggered { get; }
     void UseActiveSkill();
     void GetDamage(ICombat target, int damage);
     void ChangeStat(StatKind statKind, int value);

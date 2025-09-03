@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 public class Warrior : CharacterBase
-{ 
+{
     protected override void Init()
     {
         base.Init();
@@ -101,13 +101,14 @@ public class Warrior : CharacterBase
 
     public override void UsePassiveSkill()
     {
-        if (isPassiveTriggered)
-        {
-            return;
-        }
         isPassiveTriggered = true;
         anim.SetBool(isBuffHash, true);
         anim.SetTrigger(usePassiveSkillHash);
-        Debug.Log("PassiveOn");
+    }
+    
+    public override void OffPassiveSkill()
+    {
+        isPassiveTriggered = false;
+        anim.SetBool(isBuffHash, false);
     }
 }

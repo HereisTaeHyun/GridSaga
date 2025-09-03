@@ -29,13 +29,21 @@ public class Strength : SkillBase
         SkillTrigger();
     }
 
-    // 피격 당한 캐릭터의 hp가 30퍼센트 이하면 트리거
+    // 피격 당한 캐릭터의 hp가 30퍼센트 이하면 트리거, 상승하면 원복
     protected override void SkillTrigger()
     {
-        if ((character.CurrentHp * 100.0f / character.MaxHp) <= triggerHpPercent)
+        float hpPercent = character.CurrentHp * 100f / character.MaxHp;
+        bool isTrigger = hpPercent <= triggerHpPercent;
+
+        if (isTrigger && !character.IsPassiveTriggered)
         {
             character.UsePassiveSkill();
             character.ChangeStat(statKind, value);
+        }
+        else if (!isTrigger && character.IsPassiveTriggered)
+        {
+            character.OffPassiveSkill();
+            character.ChangeStat(statKind, -value);
         }
     }
 }
