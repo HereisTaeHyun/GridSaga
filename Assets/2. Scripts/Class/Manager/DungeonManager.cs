@@ -17,6 +17,8 @@ public class DungeonManager : MonoBehaviour
     //     7. 방에서 다시 나머지 3 방향에 복도가 있을 가능성을 계산한다.
     //        추가 복도가 1개 존재할 가능성은 80%, 2개 존재할 가능성은 60% 3개 존재할 가능성은 40%, 복도가 없이 그 방이 끝일 가능성은 20%이다. 
     //     8. 던전 어딘가에는 보스룸이 존재하며 보스룸까지는 무조건 도달 가능한 구조여야 한다.
+    //     9. 로직: BFS로 Start => Boss 그래프를 그리고 노드 간 연결을 수정하는 방식 고민 중
+    //     10. 방 크기나 복도는 랜덤하게 하지만 타일 하나가 4 x 4의 타일을 먹으니 4의 배수를 기준으로 잡아야 할듯
     public Tilemap ground;
     public Tilemap walls;
     public TileBase groundTile;
