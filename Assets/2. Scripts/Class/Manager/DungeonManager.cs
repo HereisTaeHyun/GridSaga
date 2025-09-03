@@ -21,7 +21,6 @@ public class DungeonManager : MonoBehaviour
     public Tilemap walls;
     public TileBase groundTile;
     public TileBase wallTile;
-    
 
     // 싱글톤 선언
     public static DungeonManager dungeonManager = null;

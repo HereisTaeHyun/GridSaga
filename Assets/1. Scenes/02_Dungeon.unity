@@ -1610,6 +1610,12 @@ MonoBehaviour:
   walls: {fileID: 1158845916}
   groundTile: {fileID: 11400000, guid: d51c0d8a9cca93d418eb8275bf9a4282, type: 2}
   wallTile: {fileID: 11400000, guid: 8a00cb265cfa5214ba94b1baf50a2955, type: 2}
+  seed: 12345
+  targetRooms: 54
+  roomTileSize: {x: 12, y: 8}
+  corridorLen: 6
+  corridorWidth: 3
+  extraEdgeProb: 0.25
 --- !u!1001 &2033979962
 PrefabInstance:
   m_ObjectHideFlags: 0
