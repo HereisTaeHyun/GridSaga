@@ -22,7 +22,7 @@ public class Strength : SkillBase
 
     void OnDisable()
     {
-
+        character.HpChanged -= ListenEvent;
     }
 
     private void ListenEvent(int currentHp, int Maxhp)
