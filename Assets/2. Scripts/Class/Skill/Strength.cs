@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Strength : SkillBase
 {
+    private StatKind statKind = StatKind.attack;
     private int triggerHpPercent = 30;
     private int value = 2;
 

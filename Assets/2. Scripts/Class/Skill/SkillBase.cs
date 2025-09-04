@@ -6,13 +6,11 @@ public class SkillBase : MonoBehaviour
     protected int skillId;
     protected string skillName;
     protected SkillKind skillKind;
-    protected StatKind statKind;
     protected string description;
 
     public int SkillId => skillId;
     public string SkillName => skillName;
     public SkillKind SkillKind => skillKind;
-    public StatKind StatKind => statKind;
     public string Description => description;
 
     protected ICombat character;
@@ -23,7 +21,6 @@ public class SkillBase : MonoBehaviour
         skillName = skillData.SkillName;
         skillKind = skillData.SkillKind;
         description = skillData.Description;
-        statKind = skillData.StatKind;
 
         character = GetComponent<ICombat>();
     }
