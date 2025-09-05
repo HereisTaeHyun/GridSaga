@@ -23,12 +23,12 @@ public class Strength : SkillBase
 
         if (isTrigger && !character.IsPassiveTriggered)
         {
-            character.IsPassiveTriggered = true;
+            character.IsPassiveTriggered = isTrigger;
             character.ChangeStat(statKind, value);
         }
         else if (!isTrigger && character.IsPassiveTriggered)
         {
-            character.IsPassiveTriggered = false;
+            character.IsPassiveTriggered = isTrigger;
             character.ChangeStat(statKind, -value);
         }
     }
