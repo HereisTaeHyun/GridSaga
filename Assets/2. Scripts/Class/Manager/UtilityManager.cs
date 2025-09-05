@@ -30,24 +30,24 @@ public class UtilityManager : MonoBehaviour
     public int CalculateDamage(ICombat attacker, ICombat target)
     {
         // 계산 필요 로직 정리
-        float atk = Mathf.Max(0f, attacker.CurrentAttack);
-        float def = Mathf.Max(0f, target.CurrentDefense);
+        float attack = Mathf.Max(0f, attacker.CurrentAttack);
+        float defense = Mathf.Max(0f, target.CurrentDefense);
         bool isCrit = CalculateIsCrit(attacker);
 
         // 크리티컬 여부에 따라 atk 분리
         if (isCrit)
         {
-            atk = attacker.CurrentAttack * 2;
+            attack = attacker.CurrentAttack * 2;
         }
         else
         {
-            atk = attacker.CurrentAttack;
+            attack = attacker.CurrentAttack;
         }
 
         // 방어도에 따른 차감
         float K = Mathf.Max(0.0001f, defenseTuningFactor);
-        float damageMultiplier = K / (def + K);
-        float rawDamage = atk * damageMultiplier;
+        float damageMultiplier = K / (defense + K);
+        float rawDamage = attack * damageMultiplier;
         int damage = Mathf.Max(1, Mathf.FloorToInt(rawDamage));
         return damage;
     }
