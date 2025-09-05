@@ -125,13 +125,18 @@ public class Warrior : CharacterBase
 
     public override void UsePassiveSkill()
     {
+        bool prevPassiveActive = IsPassiveTriggered;
         passiveSkill.SkillTrigger();
-        if (isPassiveTriggered)
+        bool currPassiveActive = IsPassiveTriggered;
+
+        if (currPassiveActive == prevPassiveActive) return;
+
+        if (currPassiveActive)
         {
             anim.SetBool(isBuffHash, true);
             anim.SetTrigger(usePassiveSkillHash);
         }
-        else if (!isPassiveTriggered)
+        else if (!currPassiveActive)
         {
             anim.SetBool(isBuffHash, false);
         }

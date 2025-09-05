@@ -21,15 +21,9 @@ public class Strength : SkillBase
         float hpPercent = character.CurrentHp * 100f / character.MaxHp;
         bool isTrigger = hpPercent <= triggerHpPercent;
 
-        if (isTrigger && !character.IsPassiveTriggered)
-        {
-            character.IsPassiveTriggered = isTrigger;
-            character.ChangeStat(statKind, value);
-        }
-        else if (!isTrigger && character.IsPassiveTriggered)
-        {
-            character.IsPassiveTriggered = isTrigger;
-            character.ChangeStat(statKind, -value);
-        }
+        if (isTrigger == character.IsPassiveTriggered) return;
+
+        character.IsPassiveTriggered = isTrigger;
+        character.ChangeStat(statKind, isTrigger ? value : -value);
     }
 }
