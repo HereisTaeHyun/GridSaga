@@ -110,14 +110,14 @@ public class CharacterBase : MonoBehaviour, ICombat
 
     }
 
-    void OnEnable()
+    protected virtual void OnEnable()
     {
         HpChanged += ApplyDamageFeedback;
 
         characterCtrl.ActivateAttack += ActiveAttack;
     }
 
-    void OnDisable()
+    protected virtual void OnDisable()
     {
         HpChanged -= ApplyDamageFeedback;
 
