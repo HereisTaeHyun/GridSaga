@@ -11,9 +11,9 @@ public interface ICombat
     float CurrentCritRate { get; }
     float CurrentAttackRange { get; }
     Vector3 Position { get; }
+    LayerMask AttackableLayer { get; }
     void UsePassiveSkill();
-    void OffPassiveSkill();
-    bool IsPassiveTriggered { get; }
+    bool IsPassiveTriggered { get; set; }
     void UseActiveSkill();
     void GetDamage(ICombat target, int damage);
     void ChangeStat(StatKind statKind, int value);

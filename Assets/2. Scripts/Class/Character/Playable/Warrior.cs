@@ -22,6 +22,16 @@ public class Warrior : CharacterBase
         Init();
     }
 
+    void OnEnable()
+    {
+        HpChanged += ListenEvent;
+    }
+
+    void OnDisable()
+    {
+        HpChanged -= ListenEvent;
+    }
+
     void FixedUpdate()
     {
         if (characterState == CharacterState.Die) return;
@@ -99,16 +109,29 @@ public class Warrior : CharacterBase
         return false;
     }
 
+    public override void UseActiveSkill()
+    {
+        anim.SetTrigger(useActiveSkillHash);
+        activeSkill.SkillTrigger();
+    }
+
+    // hp 변화에 따른 스킬이기에 이벤트에 등록하기 위해 필요
+    private void ListenEvent(int currentHp, int Maxhp)
+    {
+        UsePassiveSkill();
+    }
+
     public override void UsePassiveSkill()
     {
-        isPassiveTriggered = true;
-        anim.SetBool(isBuffHash, true);
-        anim.SetTrigger(usePassiveSkillHash);
-    }
-    
-    public override void OffPassiveSkill()
-    {
-        isPassiveTriggered = false;
-        anim.SetBool(isBuffHash, false);
+        passiveSkill.SkillTrigger();
+        if (isPassiveTriggered)
+        {
+            anim.SetBool(isBuffHash, true);
+            anim.SetTrigger(usePassiveSkillHash);
+        }
+        else if (!isPassiveTriggered)
+        {
+            anim.SetBool(isBuffHash, false);
+        }
     }
 }

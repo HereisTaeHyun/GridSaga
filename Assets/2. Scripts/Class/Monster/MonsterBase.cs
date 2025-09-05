@@ -65,7 +65,11 @@ public class MonsterBase : MonoBehaviour, ICombat
 
     protected CharacterBase currentTarget;
     protected bool isPassiveTriggered;
-    public bool IsPassiveTriggered => isPassiveTriggered;
+    public bool IsPassiveTriggered
+    {
+        get { return isPassiveTriggered; }
+        set { isPassiveTriggered = value; }
+    }
     public Vector3 Position => transform.position;
 
     // 플레이어야 시야에 있는지 처리하기 위한 변수
@@ -73,6 +77,7 @@ public class MonsterBase : MonoBehaviour, ICombat
     protected bool isPlayerInSight;
     protected LayerMask attackableLayer;
     protected LayerMask obstacleLayer;
+    public LayerMask AttackableLayer => attackableLayer;
     private RaycastHit2D[] rayHits = new RaycastHit2D[10];
     private Collider2D scanResult;
     private WaitForSeconds scanWait;
@@ -237,11 +242,6 @@ public class MonsterBase : MonoBehaviour, ICombat
     }
 
     public virtual void UsePassiveSkill()
-    {
-
-    }
-
-    public virtual void OffPassiveSkill()
     {
 
     }

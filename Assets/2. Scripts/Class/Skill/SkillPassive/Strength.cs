@@ -15,35 +15,20 @@ public class Strength : SkillBase
         Init();
     }
 
-    void OnEnable()
-    {
-        character.HpChanged += ListenEvent;
-    }
-
-    void OnDisable()
-    {
-        character.HpChanged -= ListenEvent;
-    }
-
-    private void ListenEvent(int currentHp, int Maxhp)
-    {
-        SkillTrigger();
-    }
-
     // 피격 당한 캐릭터의 hp가 30퍼센트 이하면 트리거, 상승하면 원복
-    protected override void SkillTrigger()
+    public override void SkillTrigger()
     {
         float hpPercent = character.CurrentHp * 100f / character.MaxHp;
         bool isTrigger = hpPercent <= triggerHpPercent;
 
         if (isTrigger && !character.IsPassiveTriggered)
         {
-            character.UsePassiveSkill();
+            character.IsPassiveTriggered = true;
             character.ChangeStat(statKind, value);
         }
         else if (!isTrigger && character.IsPassiveTriggered)
         {
-            character.OffPassiveSkill();
+            character.IsPassiveTriggered = false;
             character.ChangeStat(statKind, -value);
         }
     }

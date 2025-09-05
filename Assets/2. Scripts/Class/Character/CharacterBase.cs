@@ -60,12 +60,18 @@ public class CharacterBase : MonoBehaviour, ICombat
     protected LayerMask attackableLayer;
     protected LayerMask obstacleLayer;
 
+    public LayerMask AttackableLayer => attackableLayer;
+
     // 공격 속도 제어
     // 스피드 1 = 0.25초의 딜레이 경감을 가짐
     protected bool canAttack;
 
     protected bool isPassiveTriggered;
-    public bool IsPassiveTriggered => isPassiveTriggered;
+    public bool IsPassiveTriggered
+    {
+        get { return isPassiveTriggered; }
+        set { isPassiveTriggered = value; }
+    }
     public Vector3 Position => transform.position;
 
     protected CharacterCtrl characterCtrl;
@@ -145,11 +151,6 @@ public class CharacterBase : MonoBehaviour, ICombat
     }
 
     public virtual void UsePassiveSkill()
-    {
-
-    }
-
-    public virtual void OffPassiveSkill()
     {
 
     }
