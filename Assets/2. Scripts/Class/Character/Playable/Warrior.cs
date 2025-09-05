@@ -22,15 +22,15 @@ public class Warrior : CharacterBase
         Init();
     }
 
-    void OnEnable()
-    {
-        HpChanged += ListenEvent;
-    }
+    // void OnEnable()
+    // {
+    //     HpChanged += ListenEvent;
+    // }
 
-    void OnDisable()
-    {
-        HpChanged -= ListenEvent;
-    }
+    // void OnDisable()
+    // {
+    //     HpChanged -= ListenEvent;
+    // }
 
     void FixedUpdate()
     {
