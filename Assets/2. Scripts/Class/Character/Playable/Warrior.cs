@@ -66,7 +66,7 @@ public class Warrior : CharacterBase
         rb2D.linearVelocity = newVelocity;
     }
 
-    protected override IEnumerator Attack()
+    public override IEnumerator Attack()
     {
         if (characterState == CharacterState.Die || characterState == CharacterState.Move)
         {

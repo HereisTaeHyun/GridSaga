@@ -5,15 +5,16 @@ using UnityEngine.InputSystem;
 public class CharacterCtrl : MonoBehaviour
 {
     private CharacterInput inputActions;
+    private CharacterBase currentCharacter;
 
     private Vector2 move;
     public Vector2 Move => move;
 
-    public event Action ActivateAttack;
-
     void Awake()
     {
         inputActions = new CharacterInput();
+
+        currentCharacter = GetComponentInChildren<CharacterBase>();
     }
 
     void OnEnable()
@@ -23,6 +24,7 @@ public class CharacterCtrl : MonoBehaviour
         inputActions.CharacterAction.Move.performed += OnMove;
         inputActions.CharacterAction.Move.canceled += OnMove;
         inputActions.CharacterAction.Attack.performed += OnAttack;
+        // inputActions.CharacterAction.SkillActive.performed += 
     }
 
     void OnDisable()
@@ -41,6 +43,6 @@ public class CharacterCtrl : MonoBehaviour
 
     private void OnAttack(InputAction.CallbackContext context)
     {
-        ActivateAttack?.Invoke();
+        StartCoroutine(currentCharacter.Attack());
     }
 }

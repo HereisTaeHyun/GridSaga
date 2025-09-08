@@ -113,15 +113,11 @@ public class CharacterBase : MonoBehaviour, ICombat
     protected virtual void OnEnable()
     {
         HpChanged += ApplyDamageFeedback;
-
-        characterCtrl.ActivateAttack += ActiveAttack;
     }
 
     protected virtual void OnDisable()
     {
         HpChanged -= ApplyDamageFeedback;
-
-        characterCtrl.ActivateAttack -= ActiveAttack;
     }
 
     // 타겟을 향해 이동
@@ -139,7 +135,7 @@ public class CharacterBase : MonoBehaviour, ICombat
     }
 
     // 공격
-    protected virtual IEnumerator Attack()
+    public virtual IEnumerator Attack()
     {
         yield break;
     }

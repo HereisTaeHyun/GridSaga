@@ -44,6 +44,15 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkillActive"",
+                    ""type"": ""Button"",
+                    ""id"": ""3ddf246f-e0d7-4518-87fc-5fc88e06295b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -112,6 +121,17 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7025203c-9758-4cf4-b0ba-ca37d1916a8d"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkillActive"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -139,6 +159,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         m_CharacterAction = asset.FindActionMap("CharacterAction", throwIfNotFound: true);
         m_CharacterAction_Move = m_CharacterAction.FindAction("Move", throwIfNotFound: true);
         m_CharacterAction_Attack = m_CharacterAction.FindAction("Attack", throwIfNotFound: true);
+        m_CharacterAction_SkillActive = m_CharacterAction.FindAction("SkillActive", throwIfNotFound: true);
     }
 
     ~@CharacterInput()
@@ -207,12 +228,14 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     private List<ICharacterActionActions> m_CharacterActionActionsCallbackInterfaces = new List<ICharacterActionActions>();
     private readonly InputAction m_CharacterAction_Move;
     private readonly InputAction m_CharacterAction_Attack;
+    private readonly InputAction m_CharacterAction_SkillActive;
     public struct CharacterActionActions
     {
         private @CharacterInput m_Wrapper;
         public CharacterActionActions(@CharacterInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_CharacterAction_Move;
         public InputAction @Attack => m_Wrapper.m_CharacterAction_Attack;
+        public InputAction @SkillActive => m_Wrapper.m_CharacterAction_SkillActive;
         public InputActionMap Get() { return m_Wrapper.m_CharacterAction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -228,6 +251,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @SkillActive.started += instance.OnSkillActive;
+            @SkillActive.performed += instance.OnSkillActive;
+            @SkillActive.canceled += instance.OnSkillActive;
         }
 
         private void UnregisterCallbacks(ICharacterActionActions instance)
@@ -238,6 +264,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @SkillActive.started -= instance.OnSkillActive;
+            @SkillActive.performed -= instance.OnSkillActive;
+            @SkillActive.canceled -= instance.OnSkillActive;
         }
 
         public void RemoveCallbacks(ICharacterActionActions instance)
@@ -268,5 +297,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnSkillActive(InputAction.CallbackContext context);
     }
 }
