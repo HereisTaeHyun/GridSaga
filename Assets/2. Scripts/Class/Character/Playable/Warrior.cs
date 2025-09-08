@@ -49,17 +49,18 @@ public class Warrior : CharacterBase
     {
         isMove = characterCtrl.Move.magnitude > 0.0001f;
         anim.SetBool(isMoveHash, isMove);
-        
+
         if (isMove) characterState = CharacterState.Move;
         else characterState = CharacterState.Idle;
 
+        // 바라보는 방향 설장
         Vector2 aimDir = characterCtrl.AimDir;
         lastLookDir.x = aimDir.x;
         lastLookDir.y = aimDir.y;
-
         anim.SetFloat(lookXHash, lastLookDir.x);
         anim.SetFloat(lookYHash, lastLookDir.y);
 
+        // 움직임 설정
         Vector2 newVelocity = new Vector2(currentSpeed * characterCtrl.Move.x, currentSpeed * characterCtrl.Move.y);
         rb2D.linearVelocity = newVelocity;
     }
