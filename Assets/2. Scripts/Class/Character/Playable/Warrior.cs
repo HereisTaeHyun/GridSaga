@@ -49,22 +49,16 @@ public class Warrior : CharacterBase
     {
         isMove = characterCtrl.Move.magnitude > 0.0001f;
         anim.SetBool(isMoveHash, isMove);
+        
+        if (isMove) characterState = CharacterState.Move;
+        else characterState = CharacterState.Idle;
 
-        Vector2 dir = UtilityManager.utility.DirSet(characterCtrl.Move);
+        Vector2 aimDir = characterCtrl.AimDir;
+        lastLookDir.x = aimDir.x;
+        lastLookDir.y = aimDir.y;
 
-        if (isMove)
-        {
-            characterState = CharacterState.Move;
-            lastDir.x = dir.x;
-            lastDir.y = dir.y;
-        }
-        else
-        {
-            characterState = CharacterState.Idle;
-        }
-
-        anim.SetFloat(moveXHash, lastDir.x);
-        anim.SetFloat(moveYHash, lastDir.y);
+        anim.SetFloat(lookXHash, lastLookDir.x);
+        anim.SetFloat(lookYHash, lastLookDir.y);
 
         Vector2 newVelocity = new Vector2(currentSpeed * characterCtrl.Move.x, currentSpeed * characterCtrl.Move.y);
         rb2D.linearVelocity = newVelocity;
@@ -107,7 +101,7 @@ public class Warrior : CharacterBase
     {
         attackThreshold = Mathf.Cos(0.5f * attackDegree * Mathf.Deg2Rad);
         Vector2 directionToTarget = (target.Position - transform.position).normalized;
-        float cos = Vector2.Dot(directionToTarget, lastDir);
+        float cos = Vector2.Dot(directionToTarget, lastLookDir);
         if (cos >= attackThreshold)
         {
             return true;

@@ -34,9 +34,10 @@ public class CharacterBase : MonoBehaviour, ICombat
     public float CurrentAttackRange => currentAttackRange;
 
     protected Animator anim;
-    protected readonly int moveXHash = Animator.StringToHash("MoveX");
-    protected readonly int moveYHash = Animator.StringToHash("MoveY");
+    protected readonly int lookXHash = Animator.StringToHash("LookX");
+    protected readonly int lookYHash = Animator.StringToHash("LookY");
     protected readonly int isMoveHash = Animator.StringToHash("IsMove");
+    protected readonly int isBackwardHash = Animator.StringToHash("IsBackward");
     protected readonly int attackHash = Animator.StringToHash("Attack");
     protected readonly int usePassiveSkillHash = Animator.StringToHash("UsePassiveSkill");
     protected readonly int useActiveSkillHash = Animator.StringToHash("UseActiveSkill");
@@ -79,7 +80,7 @@ public class CharacterBase : MonoBehaviour, ICombat
     protected CharacterCtrl characterCtrl;
     protected Rigidbody2D rb2D;
     protected bool isMove;
-    protected Vector2 lastDir;
+    protected Vector2 lastLookDir;
     
     // 공격 범위 체크 변수
     protected float attackDegree;

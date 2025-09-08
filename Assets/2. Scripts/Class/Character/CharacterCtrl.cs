@@ -6,9 +6,11 @@ public class CharacterCtrl : MonoBehaviour
 {
     private CharacterInput inputActions;
     private CharacterBase currentCharacter;
+    private Vector2 aimDir;
 
     private Vector2 move;
     public Vector2 Move => move;
+    public Vector2 AimDir => aimDir;
 
     void Awake()
     {
@@ -37,6 +39,11 @@ public class CharacterCtrl : MonoBehaviour
         inputActions.CharacterAction.SkillActive.performed -= OnActiveSkill;
     }
 
+    void FixedUpdate()
+    {
+        Aim();
+    }
+
     private void OnMove(InputAction.CallbackContext context)
     {
         move = context.ReadValue<Vector2>();
@@ -50,5 +57,15 @@ public class CharacterCtrl : MonoBehaviour
     private void OnActiveSkill(InputAction.CallbackContext context)
     {
         currentCharacter.UseActiveSkill();
+    }
+
+    private void Aim()
+    {
+        Vector2 screen = inputActions.CharacterAction.Aim.ReadValue<Vector2>();
+        var cam = Camera.main;
+
+        Vector3 mouseScreen = Mouse.current.position.ReadValue();
+        Vector3 mouseWorld = cam.ScreenToWorldPoint(mouseScreen);
+        aimDir = mouseWorld - currentCharacter.transform.position;
     }
 }
