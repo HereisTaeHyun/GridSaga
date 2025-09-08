@@ -67,7 +67,7 @@ public class Warrior : CharacterBase
 
     protected override IEnumerator Attack()
     {
-        if (characterState == CharacterState.Die || characterState == CharacterState.Move)
+        if (characterState == CharacterState.Die)
         {
             yield break;
         }
