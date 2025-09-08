@@ -11,6 +11,10 @@ public class Warrior : CharacterBase
         attackActiveTime = 0.25f;
         attackEndTime = 0.8f;
 
+        activeSkillActiveTime = 0.25f;
+        activeSkillEndTime = 0.8f;
+        activeSkillCoolDonw = 5.0f;
+
         dieTime = 1.5f;
 
         attackDegree = 90.0f;
@@ -66,7 +70,7 @@ public class Warrior : CharacterBase
         rb2D.linearVelocity = newVelocity;
     }
 
-    public override IEnumerator Attack()
+    protected override IEnumerator Attack()
     {
         if (characterState == CharacterState.Die || characterState == CharacterState.Move)
         {
@@ -111,13 +115,28 @@ public class Warrior : CharacterBase
         return false;
     }
 
-    public override void UseActiveSkill()
+    // Warrior의 스킬은 범위 내 적 밀어내기
+    protected override IEnumerator ActiveSkill()
     {
+        StartCoroutine(ActiveSkillCoolDown());
         anim.SetTrigger(useActiveSkillHash);
-        activeSkill.SkillTrigger();
+
+        yield return new WaitForSeconds(activeSkillActiveTime);
+
+        // 공격 범위 내 적들에게 공격 적용 및 밀려나게 함
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, currentAttackRange, attackableLayer);
+        foreach (var collider in colliders)
+        {
+            var target = collider.GetComponent<ICombat>();
+
+            int damage = UtilityManager.utility.CalculateDamage(this, target);
+            target.GetDamage(target, damage);
+        }
+
+        yield return new WaitForSeconds(activeSkillEndTime);
     }
 
-    // hp 변화에 따른 스킬이기에 이벤트에 등록하기 위해 필요
+    // hp 변화에 따른 스킬이면 이벤트에 등록하기 위해 필요
     private void ListenEvent(int currentHp, int Maxhp)
     {
         UsePassiveSkill();

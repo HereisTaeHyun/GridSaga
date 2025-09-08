@@ -24,7 +24,7 @@ public class CharacterCtrl : MonoBehaviour
         inputActions.CharacterAction.Move.performed += OnMove;
         inputActions.CharacterAction.Move.canceled += OnMove;
         inputActions.CharacterAction.Attack.performed += OnAttack;
-        // inputActions.CharacterAction.SkillActive.performed += 
+        inputActions.CharacterAction.SkillActive.performed += OnActiveSkill;
     }
 
     void OnDisable()
@@ -34,6 +34,7 @@ public class CharacterCtrl : MonoBehaviour
         inputActions.CharacterAction.Move.performed -= OnMove;
         inputActions.CharacterAction.Move.canceled -= OnMove;
         inputActions.CharacterAction.Attack.performed -= OnAttack;
+        inputActions.CharacterAction.SkillActive.performed -= OnActiveSkill;
     }
 
     private void OnMove(InputAction.CallbackContext context)
@@ -43,6 +44,11 @@ public class CharacterCtrl : MonoBehaviour
 
     private void OnAttack(InputAction.CallbackContext context)
     {
-        StartCoroutine(currentCharacter.Attack());
+        currentCharacter.ActiveAttack();
+    }
+
+    private void OnActiveSkill(InputAction.CallbackContext context)
+    {
+        currentCharacter.UseActiveSkill();
     }
 }

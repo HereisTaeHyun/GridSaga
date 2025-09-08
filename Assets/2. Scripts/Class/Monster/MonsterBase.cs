@@ -54,14 +54,17 @@ public class MonsterBase : MonoBehaviour, ICombat
     protected float attackEndTime;
     protected float dieTime;
     protected bool isDieTriggered;
+    protected float activeSkillActiveTime;
+    protected float activeSkillEndTime;
+    protected float activeSkillCoolDonw;
 
     // 체력 변화 시 발생할 이벤트
     // 순서대로 MaxHp, currentHp 순서
     public event Action<int, int> HpChanged;
 
-    // 공격 속도 제어
-    // 스피드 1 = 0.25초의 딜레이 경감을 가짐
+    // 공격 제어
     protected bool canAttack;
+    protected bool canUseActiveSkill;
 
     protected CharacterBase currentTarget;
     protected bool isPassiveTriggered;
@@ -236,9 +239,25 @@ public class MonsterBase : MonoBehaviour, ICombat
     }
 
     // 스킬 사용
+    // 스킬 사용
     public virtual void UseActiveSkill()
     {
+        if (canUseActiveSkill)
+        {
+            StartCoroutine(ActiveSkill());
+        }
+    }
 
+    protected virtual IEnumerator ActiveSkill()
+    {
+        yield break;
+    }
+
+    protected virtual IEnumerator ActiveSkillCoolDown()
+    {
+        canUseActiveSkill = false;
+        yield return new WaitForSeconds(activeSkillCoolDonw);
+        canUseActiveSkill = true;
     }
 
     public virtual void UsePassiveSkill()
@@ -253,6 +272,7 @@ public class MonsterBase : MonoBehaviour, ICombat
         int safeDamage = Mathf.Max(0, damage);
 
         currentHp = (int)Mathf.Max(0f, currentHp - safeDamage);
+
         HpChanged?.Invoke(maxHp, currentHp);
         if (currentHp <= 0)
         {

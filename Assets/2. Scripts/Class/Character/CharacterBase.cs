@@ -6,7 +6,6 @@ public class CharacterBase : MonoBehaviour, ICombat
 {
     [SerializeField] protected CharacterSO characterData;
     public CharacterSO CharacterData => characterData;
-    [SerializeField] protected SkillBase activeSkill;
     [SerializeField] protected SkillBase passiveSkill;
 
     public enum CharacterState
@@ -52,6 +51,9 @@ public class CharacterBase : MonoBehaviour, ICombat
     protected float attackEndTime;
     protected float dieTime;
     protected bool isDieTriggered;
+    protected float activeSkillActiveTime;
+    protected float activeSkillEndTime;
+    protected float activeSkillCoolDonw;
 
     // 체력 변화 시 발생할 이벤트
     // 순서대로 MaxHp, currentHp 순서
@@ -62,9 +64,9 @@ public class CharacterBase : MonoBehaviour, ICombat
 
     public LayerMask AttackableLayer => attackableLayer;
 
-    // 공격 속도 제어
-    // 스피드 1 = 0.25초의 딜레이 경감을 가짐
+    // 공격 제어
     protected bool canAttack;
+    protected bool canUseActiveSkill;
 
     protected bool isPassiveTriggered;
     public bool IsPassiveTriggered
@@ -100,6 +102,7 @@ public class CharacterBase : MonoBehaviour, ICombat
         isDieTriggered = false;
         isPassiveTriggered = false;
         canAttack = true;
+        canUseActiveSkill = true;
 
         attackableLayer = LayerMask.GetMask("Monster");
         obstacleLayer = LayerMask.GetMask("Wall");
@@ -126,7 +129,8 @@ public class CharacterBase : MonoBehaviour, ICombat
 
     }
 
-    protected virtual void ActiveAttack()
+    // 공격 활성화 함수, 얘로 검사 안거치면 여러 Attack 코루틴 시행됨
+    public virtual void ActiveAttack()
     {
         if (canAttack)
         {
@@ -135,7 +139,7 @@ public class CharacterBase : MonoBehaviour, ICombat
     }
 
     // 공격
-    public virtual IEnumerator Attack()
+    protected virtual IEnumerator Attack()
     {
         yield break;
     }
@@ -143,7 +147,22 @@ public class CharacterBase : MonoBehaviour, ICombat
     // 스킬 사용
     public virtual void UseActiveSkill()
     {
+        if (canUseActiveSkill)
+        {
+            StartCoroutine(ActiveSkill());
+        }
+    }
 
+    protected virtual IEnumerator ActiveSkill()
+    {
+        yield break;
+    }
+
+    protected virtual IEnumerator ActiveSkillCoolDown()
+    {
+        canUseActiveSkill = false;
+        yield return new WaitForSeconds(activeSkillCoolDonw);
+        canUseActiveSkill = true;
     }
 
     public virtual void UsePassiveSkill()
