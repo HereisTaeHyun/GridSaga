@@ -63,6 +63,15 @@ public class Warrior : CharacterBase
         // 움직임 설정
         Vector2 newVelocity = new Vector2(currentSpeed * characterCtrl.Move.x, currentSpeed * characterCtrl.Move.y);
         rb2D.linearVelocity = newVelocity;
+
+        // 뒤로 움직이는지 설정
+        float dot = Vector2.Dot(characterCtrl.Move, lastLookDir.normalized);
+        float dotThreshold = -0.1f;
+        Debug.Log(dot);
+        // Debug.Log(characterCtrl.Move);
+        // Debug.Log(lastLookDir.normalized);
+        isMoveToBack = dot < dotThreshold;
+        anim.SetBool(isMoveToBackHash, isMoveToBack);
     }
 
     protected override IEnumerator Attack()
