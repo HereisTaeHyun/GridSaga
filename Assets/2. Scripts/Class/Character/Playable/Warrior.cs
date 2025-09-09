@@ -53,7 +53,7 @@ public class Warrior : CharacterBase
         if (isMove) characterState = CharacterState.Move;
         else characterState = CharacterState.Idle;
 
-        // 바라보는 방향 설장
+        // 바라보는 방향 설정
         Vector2 aimDir = characterCtrl.AimDir;
         lastLookDir.x = aimDir.x;
         lastLookDir.y = aimDir.y;
