@@ -67,9 +67,6 @@ public class Warrior : CharacterBase
         // 뒤로 움직이는지 설정
         float dot = Vector2.Dot(characterCtrl.Move, lastLookDir.normalized);
         float dotThreshold = -0.1f;
-        Debug.Log(dot);
-        // Debug.Log(characterCtrl.Move);
-        // Debug.Log(lastLookDir.normalized);
         isMoveToBack = dot < dotThreshold;
         anim.SetBool(isMoveToBackHash, isMoveToBack);
     }
