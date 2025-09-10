@@ -141,8 +141,16 @@ public class CharacterBase : MonoBehaviour, ICombat
         anim.SetFloat(lookXHash, lastLookDir.x);
         anim.SetFloat(lookYHash, lastLookDir.y);
 
+        // 움직임 각도 보정
+        Vector2 rawDegree = characterCtrl.Move;
+        Vector2 correctDegree;
+        if (rawDegree.x != 0f && rawDegree.y != 0f)
+            correctDegree = new Vector2(rawDegree.x, rawDegree.y * 0.5f);
+        else
+            correctDegree = rawDegree;
+
         // 움직임 설정
-        Vector2 newVelocity = new Vector2(currentSpeed * characterCtrl.Move.x, currentSpeed * characterCtrl.Move.y);
+        Vector2 newVelocity = new Vector2(currentSpeed * correctDegree.x, currentSpeed * correctDegree.y);
         rb2D.linearVelocity = newVelocity;
 
         // 뒤로 움직이는지 설정
