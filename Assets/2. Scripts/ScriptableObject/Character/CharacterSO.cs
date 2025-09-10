@@ -13,7 +13,6 @@ public class CharacterSO : ScriptableObject
     [SerializeField] private float baseCritRate;
     [SerializeField] private float baseAttackRange;
     [SerializeField] private int passiveSkillId;
-    [SerializeField] private int activeSkillId;
 
     public int CharacterId => characterId;
     public string CharacterName => characterName;
@@ -25,7 +24,6 @@ public class CharacterSO : ScriptableObject
     public float BaseCritRate => baseCritRate;
     public float BaseAttackRange => baseAttackRange;
     public int PassiveSkillId => passiveSkillId;
-    public int ActiveSkillId => activeSkillId;
 }
 
 
@@ -39,5 +37,4 @@ public class CharacterSO : ScriptableObject
 //   crit_rate decimal(5,2) [not null]       // 0–100
 
 //   passive_skill_id int [ref: > Skill.skill_id]
-//   active_skill_id  int [ref: > Skill.skill_id]
 // }

@@ -13,7 +13,7 @@ public class Warrior : CharacterBase
 
         activeSkillActiveTime = 0.25f;
         activeSkillEndTime = 0.8f;
-        activeSkillCoolDonw = 5.0f;
+        activeSkillCoolDown = 5.0f;
 
         dieTime = 1.5f;
 
@@ -43,32 +43,6 @@ public class Warrior : CharacterBase
         if (characterState == CharacterState.Die) return;
 
         Move();
-    }
-
-    protected override void Move()
-    {
-        isMove = characterCtrl.Move.magnitude > 0.0001f;
-        anim.SetBool(isMoveHash, isMove);
-
-        if (isMove) characterState = CharacterState.Move;
-        else characterState = CharacterState.Idle;
-
-        // 바라보는 방향 설정
-        Vector2 aimDir = characterCtrl.AimDir;
-        lastLookDir.x = aimDir.x;
-        lastLookDir.y = aimDir.y;
-        anim.SetFloat(lookXHash, lastLookDir.x);
-        anim.SetFloat(lookYHash, lastLookDir.y);
-
-        // 움직임 설정
-        Vector2 newVelocity = new Vector2(currentSpeed * characterCtrl.Move.x, currentSpeed * characterCtrl.Move.y);
-        rb2D.linearVelocity = newVelocity;
-
-        // 뒤로 움직이는지 설정
-        float dot = Vector2.Dot(characterCtrl.Move, lastLookDir.normalized);
-        float dotThreshold = -0.1f;
-        isMoveToBack = dot < dotThreshold;
-        anim.SetBool(isMoveToBackHash, isMoveToBack);
     }
 
     protected override IEnumerator Attack()

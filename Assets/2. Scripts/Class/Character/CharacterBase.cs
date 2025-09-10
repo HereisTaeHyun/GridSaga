@@ -54,7 +54,7 @@ public class CharacterBase : MonoBehaviour, ICombat
     protected bool isDieTriggered;
     protected float activeSkillActiveTime;
     protected float activeSkillEndTime;
-    protected float activeSkillCoolDonw;
+    protected float activeSkillCoolDown;
 
     // 체력 변화 시 발생할 이벤트
     // 순서대로 MaxHp, currentHp 순서
@@ -125,10 +125,31 @@ public class CharacterBase : MonoBehaviour, ICombat
         HpChanged -= ApplyDamageFeedback;
     }
 
-    // 타겟을 향해 이동
+    // 이동
     protected virtual void Move()
     {
+        isMove = characterCtrl.Move.magnitude > 0.0001f;
+        anim.SetBool(isMoveHash, isMove);
 
+        if (isMove) characterState = CharacterState.Move;
+        else characterState = CharacterState.Idle;
+
+        // 바라보는 방향 설정
+        Vector2 aimDir = characterCtrl.AimDir;
+        lastLookDir.x = aimDir.x;
+        lastLookDir.y = aimDir.y;
+        anim.SetFloat(lookXHash, lastLookDir.x);
+        anim.SetFloat(lookYHash, lastLookDir.y);
+
+        // 움직임 설정
+        Vector2 newVelocity = new Vector2(currentSpeed * characterCtrl.Move.x, currentSpeed * characterCtrl.Move.y);
+        rb2D.linearVelocity = newVelocity;
+
+        // 뒤로 움직이는지 설정
+        float dot = Vector2.Dot(characterCtrl.Move, lastLookDir.normalized);
+        float dotThreshold = -0.35f;
+        isMoveToBack = dot < dotThreshold;
+        anim.SetBool(isMoveToBackHash, isMoveToBack);
     }
 
     // 공격 활성화 함수, 얘로 검사 안거치면 여러 Attack 코루틴 시행됨
@@ -163,7 +184,7 @@ public class CharacterBase : MonoBehaviour, ICombat
     protected virtual IEnumerator ActiveSkillCoolDown()
     {
         canUseActiveSkill = false;
-        yield return new WaitForSeconds(activeSkillCoolDonw);
+        yield return new WaitForSeconds(activeSkillCoolDown);
         canUseActiveSkill = true;
     }
 
