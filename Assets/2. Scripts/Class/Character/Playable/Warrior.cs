@@ -136,4 +136,16 @@ public class Warrior : CharacterBase
             anim.SetBool(isBuffHash, false);
         }
     }
+
+    // 넉백 : 피격 당한 상대를 distance만큼 duration 동안 이동, 상대는 그 시간 동안 Idle에 움직임 막아둘 것
+    private IEnumerator KnockbackEnemy(Vector2 targetPos, float distance, float duration)
+    {
+        Vector2 KnockbackDir = UtilityManager.utility.DirSet((Vector2)transform.position - targetPos);
+        float moved = 0.0f;
+        while (moved < distance)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+        yield break;
+    }
 }
