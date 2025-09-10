@@ -125,6 +125,16 @@ public class CharacterBase : MonoBehaviour, ICombat
         HpChanged -= ApplyDamageFeedback;
     }
 
+    // 마우스 커서 방향 바라보기
+    protected void UpdateFacing()
+    {
+        Vector2 aimDir = characterCtrl.AimDir;
+        lastLookDir.x = aimDir.x;
+        lastLookDir.y = aimDir.y;
+        anim.SetFloat(lookXHash, lastLookDir.x);
+        anim.SetFloat(lookYHash, lastLookDir.y);
+    }
+
     // 이동
     protected virtual void Move()
     {
@@ -132,13 +142,6 @@ public class CharacterBase : MonoBehaviour, ICombat
         anim.SetBool(isMoveHash, isMove);
 
         characterState = isMove ? CharacterState.Move : CharacterState.Idle;
-
-        // 바라보는 방향 설정
-        Vector2 aimDir = characterCtrl.AimDir;
-        lastLookDir.x = aimDir.x;
-        lastLookDir.y = aimDir.y;
-        anim.SetFloat(lookXHash, lastLookDir.x);
-        anim.SetFloat(lookYHash, lastLookDir.y);
 
         // 움직임 각도 보정
         Vector2 rawDegree = characterCtrl.Move;

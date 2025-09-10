@@ -42,6 +42,7 @@ public class Warrior : CharacterBase
     {
         if (characterState == CharacterState.Die) return;
 
+        UpdateFacing();
         Move();
     }
 
