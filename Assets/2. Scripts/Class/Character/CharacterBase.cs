@@ -131,8 +131,7 @@ public class CharacterBase : MonoBehaviour, ICombat
         isMove = characterCtrl.Move.magnitude > 0.0001f;
         anim.SetBool(isMoveHash, isMove);
 
-        if (isMove) characterState = CharacterState.Move;
-        else characterState = CharacterState.Idle;
+        characterState = isMove ? CharacterState.Move : CharacterState.Idle;
 
         // 바라보는 방향 설정
         Vector2 aimDir = characterCtrl.AimDir;
@@ -145,7 +144,7 @@ public class CharacterBase : MonoBehaviour, ICombat
         Vector2 rawDegree = characterCtrl.Move;
         Vector2 correctDegree;
         if (rawDegree.x != 0f && rawDegree.y != 0f)
-            correctDegree = new Vector2(rawDegree.x, rawDegree.y * 0.5f);
+            correctDegree = new Vector2(rawDegree.x, rawDegree.y * 0.5f).normalized;
         else
             correctDegree = rawDegree;
 
